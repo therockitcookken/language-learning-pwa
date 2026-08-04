@@ -7,11 +7,10 @@ import {
   Volume2,
   Mic,
   CheckCircle2,
-  VolumeX,
-  Sparkles,
-  Info,
-  Layers,
   Activity,
+  RotateCw,
+  Sliders,
+  Sparkles,
 } from 'lucide-react';
 
 export function PronunciationView() {
@@ -21,6 +20,15 @@ export function PronunciationView() {
   const [selectedAsset, setSelectedAsset] = useState<any | null>(null);
   const [recording, setRecording] = useState(false);
   const [evaluation, setEvaluation] = useState<any | null>(null);
+
+  // Helper 1: Playback Speed Control
+  const [playbackSpeed, setPlaybackSpeed] = useState(1.0);
+
+  // Helper 2: Audio Loop Count
+  const [loopCount, setLoopCount] = useState(1);
+
+  // Helper 3: Minimal Pair Distinction Test State
+  const [pairScore, setPairScore] = useState<number | null>(null);
 
   const fetchAssets = async (language: string) => {
     try {
@@ -43,7 +51,11 @@ export function PronunciationView() {
   }, [subTab]);
 
   const handleSpeakSymbol = (symbol: string, langCode: 'zh-CN' | 'en-US' = 'zh-CN') => {
-    audioEngine.speak(symbol, langCode);
+    for (let i = 0; i < loopCount; i++) {
+      setTimeout(() => {
+        audioEngine.speak(symbol, langCode, playbackSpeed);
+      }, i * 1200);
+    }
   };
 
   const handleStartRecording = () => {
@@ -77,11 +89,11 @@ export function PronunciationView() {
             <span>🗣️</span> {t.pronunciation}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Luyện phát âm chuẩn Pinyin tiếng Trung & IPA tiếng Anh với quy tắc biến điệu và chấm điểm bằng giọng nói.
+            Luyện phát âm chuẩn Pinyin & IPA với biểu đồ đồ thị cao độ thanh điệu 5 bậc & bài tập phân biệt âm.
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
+        <div className="flex flex-wrap items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
           <button
             onClick={() => setSubTab('chinese')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
@@ -118,39 +130,94 @@ export function PronunciationView() {
       {(subTab === 'chinese' || subTab === 'english') && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Sound Matrix Grid */}
-          <div className="lg:col-span-2 bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
-                {subTab === 'chinese' ? 'Bảng Thanh Mẫu (Initials)' : 'Bảng Ký Tự Âm Tiết IPA'}
-              </h3>
-              <span className="text-[10px] text-orange-400 font-bold bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/30">
-                Bấm vào âm tiết để nghe phát âm
-              </span>
+          <div className="lg:col-span-2 space-y-4">
+            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+                  {subTab === 'chinese' ? 'Bảng Thanh Mẫu & Vận Mẫu' : 'Bảng Ký Tự IPA'}
+                </h3>
+
+                {/* Helper 1: Speed & Loop Controls */}
+                <div className="flex items-center gap-2 bg-slate-950 px-3 py-1 rounded-xl border border-slate-800 text-xs">
+                  <Sliders className="w-3.5 h-3.5 text-orange-400" />
+                  <span className="text-slate-400">Tốc độ:</span>
+                  {[0.75, 1.0, 1.25].map((spd) => (
+                    <button
+                      key={spd}
+                      onClick={() => setPlaybackSpeed(spd)}
+                      className={`px-1.5 py-0.5 rounded font-bold ${
+                        playbackSpeed === spd ? 'bg-orange-500 text-white' : 'text-slate-400'
+                      }`}
+                    >
+                      {spd}x
+                    </button>
+                  ))}
+                  <span className="text-slate-400 ml-2">Lặp:</span>
+                  {[1, 2, 3].map((lp) => (
+                    <button
+                      key={lp}
+                      onClick={() => setLoopCount(lp)}
+                      className={`px-1.5 py-0.5 rounded font-bold ${
+                        loopCount === lp ? 'bg-amber-500 text-white' : 'text-slate-400'
+                      }`}
+                    >
+                      {lp}x
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
+                {assets.map((item) => {
+                  const isSelected = selectedAsset?.id === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setSelectedAsset(item)}
+                      className={`flex flex-col items-center justify-center p-3.5 rounded-2xl border transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-gradient-to-br from-orange-500 to-amber-600 border-orange-400 text-white shadow-lg scale-105 font-bold'
+                          : 'bg-slate-800/80 border-slate-700/80 hover:border-orange-500/40 text-slate-200 hover:bg-slate-800'
+                      }`}
+                    >
+                      <span className="text-2xl font-black">{item.symbol}</span>
+                      <span className="text-[10px] opacity-80 uppercase mt-0.5">{item.type}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
-              {assets.map((item) => {
-                const isSelected = selectedAsset?.id === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setSelectedAsset(item)}
-                    className={`flex flex-col items-center justify-center p-3.5 rounded-2xl border transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-gradient-to-br from-orange-500 to-amber-600 border-orange-400 text-white shadow-lg scale-105 font-bold'
-                        : 'bg-slate-800/80 border-slate-700/80 hover:border-orange-500/40 text-slate-200 hover:bg-slate-800'
-                    }`}
-                  >
-                    <span className="text-2xl font-black">{item.symbol}</span>
-                    <span className="text-[10px] opacity-80 uppercase mt-0.5">{item.type}</span>
-                  </button>
-                );
-              })}
-            </div>
+            {/* Helper 2: Pitch Contour Curve Visualizer (Thanh điệu 55, 35, 214, 51) */}
+            {subTab === 'chinese' && (
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl">
+                <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+                  <Activity className="w-4 h-4" /> Đồ Thị Cao Độ 4 Thanh Điệu Pinyin (Tone Pitch Curves)
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
+                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <span className="font-bold text-white block">Thanh 1 (55)</span>
+                    <span className="text-[10px] text-emerald-400 font-mono">Cao - Bằng phẳng</span>
+                  </div>
+                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <span className="font-bold text-white block">Thanh 2 (35)</span>
+                    <span className="text-[10px] text-indigo-400 font-mono">Nâng giọng lên</span>
+                  </div>
+                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <span className="font-bold text-white block">Thanh 3 (214)</span>
+                    <span className="text-[10px] text-amber-400 font-mono">Hạ thấp rồi lên</span>
+                  </div>
+                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <span className="font-bold text-white block">Thanh 4 (51)</span>
+                    <span className="text-[10px] text-rose-400 font-mono">Giật giọng xuống</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Selected Sound Detail & Guide */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 flex flex-col justify-between shadow-xl">
+          {/* Right Column: Sound Detail & Minimal Pair Drill */}
+          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
             {selectedAsset && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -175,66 +242,36 @@ export function PronunciationView() {
 
                 <div className="space-y-2 text-xs">
                   <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                    <span className="font-bold text-slate-300 block mb-1">Khẩu hình & Mô tả:</span>
+                    <span className="font-bold text-slate-300 block mb-1">Mô tả phát âm:</span>
                     <p className="text-slate-300 leading-relaxed">{selectedAsset.descriptionVi}</p>
                   </div>
-
-                  {selectedAsset.airflowGuide && (
-                    <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                      <span className="font-bold text-amber-300 block mb-1">Hướng luồng hơi:</span>
-                      <p className="text-amber-200">{selectedAsset.airflowGuide}</p>
-                    </div>
-                  )}
                 </div>
+
+                {/* Helper 3: Minimal Pair Distinction Test */}
+                {selectedAsset.confusedWith && (
+                  <div className="bg-slate-950 p-4 rounded-xl border border-orange-500/30 space-y-2 text-xs">
+                    <span className="font-extrabold text-orange-400 block">
+                      🎯 Bài tập phân biệt âm dễ nhầm: [{selectedAsset.symbol}] vs [{selectedAsset.confusedWith}]
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleSpeakSymbol(selectedAsset.symbol)}
+                        className="px-3 py-1.5 bg-slate-800 text-slate-200 rounded-lg font-bold"
+                      >
+                        Nghe [{selectedAsset.symbol}]
+                      </button>
+                      <button
+                        onClick={() => handleSpeakSymbol(selectedAsset.confusedWith)}
+                        className="px-3 py-1.5 bg-slate-800 text-slate-200 rounded-lg font-bold"
+                      >
+                        Nghe [{selectedAsset.confusedWith}]
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
-        </div>
-      )}
-
-      {subTab === 'recorder' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-2xl mx-auto space-y-6 shadow-2xl text-center">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-black text-white">Phòng Luyện Ghi Âm & So Sánh Giọng Nói</h3>
-            <p className="text-xs text-slate-400">
-              Phát âm từ mẫu, ghi âm giọng nói của bạn và nhận phản hồi chi tiết về thanh điệu và luồng hơi.
-            </p>
-          </div>
-
-          <div className="p-6 bg-slate-950 rounded-2xl border border-slate-800 space-y-3">
-            <span className="text-xs text-slate-500 font-bold uppercase">Mẫu từ phát âm:</span>
-            <div className="text-4xl font-black text-white">安全 (ān quán)</div>
-            <button
-              onClick={() => handleSpeakSymbol('安全', 'zh-CN')}
-              className="px-4 py-2 bg-slate-800 hover:bg-orange-500 text-slate-200 hover:text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
-            >
-              🔊 Nghe giọng chuẩn mẫu
-            </button>
-          </div>
-
-          <button
-            onClick={handleStartRecording}
-            disabled={recording}
-            className={`w-full py-4 rounded-2xl font-extrabold text-sm transition-all cursor-pointer ${
-              recording
-                ? 'bg-rose-600 text-white animate-pulse shadow-rose-500/30'
-                : 'bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white shadow-lg shadow-orange-500/20'
-            }`}
-          >
-            {recording ? '🎙️ Đang ghi âm... Nhấn để hoàn thành' : '🎙️ Bắt đầu Ghi âm & Chấm điểm'}
-          </button>
-
-          {evaluation && (
-            <div className="bg-slate-950 p-5 rounded-2xl border border-emerald-500/40 text-left space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold text-emerald-400 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4" /> Điểm số phát âm của bạn:
-                </span>
-                <span className="text-2xl font-black text-amber-400">{evaluation.overallScore}/100</span>
-              </div>
-              <p className="text-xs text-slate-300 font-medium">{evaluation.feedbackVi}</p>
-            </div>
-          )}
         </div>
       )}
     </div>

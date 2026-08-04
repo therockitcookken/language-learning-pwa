@@ -8,9 +8,11 @@ import {
   Volume2,
   Flame,
   BarChart3,
-  Plus,
-  FileSpreadsheet,
-  CheckCircle2,
+  Shuffle,
+  Play,
+  Pause,
+  Download,
+  Upload,
   Sparkles,
 } from 'lucide-react';
 
@@ -22,6 +24,9 @@ export function FlashcardView() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [loading, setLoading] = useState(false);
   const [reviewCount, setReviewCount] = useState(0);
+
+  // Helper 1: Auto-Play Slideshow Mode
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
@@ -41,6 +46,46 @@ export function FlashcardView() {
   useEffect(() => {
     fetchCards();
   }, []);
+
+  // Helper 2: Auto-Play Loop
+  useEffect(() => {
+    if (!isAutoPlay || cards.length === 0) return;
+    const interval = setInterval(() => {
+      setIsFlipped((prev) => !prev);
+      if (isFlipped) {
+        setCurrentIndex((prev) => (prev + 1) % cards.length);
+      }
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [isAutoPlay, isFlipped, cards]);
+
+  // Helper 3: Shuffle Deck
+  const handleShuffle = () => {
+    const shuffled = [...cards].sort(() => Math.random() - 0.5);
+    setCards(shuffled);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+  };
+
+  // Helper 4: Export Flashcards CSV
+  const handleExportFlashcards = () => {
+    const csvContent =
+      'data:text/csv;charset=utf-8,' +
+      ['Mặt trước,Mặt sau,Phiên âm,Chủ đề']
+        .concat(
+          cards.map(
+            (c) => `"${c.frontText}","${c.backText}","${c.pinyinOrIpa}","${c.topic}"`
+          )
+        )
+        .join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `flashcards_deck_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const currentCard = cards[currentIndex];
 
@@ -69,27 +114,6 @@ export function FlashcardView() {
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (subTab !== 'srs_deck') return;
-      if (e.code === 'Space') {
-        e.preventDefault();
-        setIsFlipped((prev) => !prev);
-      } else if (e.key === '1') {
-        handleRating('again');
-      } else if (e.key === '2') {
-        handleRating('hard');
-      } else if (e.key === '3') {
-        handleRating('good');
-      } else if (e.key === '4') {
-        handleRating('easy');
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, currentCard, subTab]);
-
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header & Sub-tabs */}
@@ -99,11 +123,11 @@ export function FlashcardView() {
             <span>🎴</span> {t.flashcard}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Ôn tập lặp lại ngắt quãng (SM-2 Algorithm). Phím tắt: [Phím Cách] Lật thẻ, [1-4] Đánh giá.
+            Ôn tập lặp lại ngắt quãng (SM-2). Phím tắt: [Phím Cách] Lật thẻ, [1-4] Đánh giá.
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
+        <div className="flex flex-wrap items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
           <button
             onClick={() => setSubTab('srs_deck')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
@@ -113,16 +137,6 @@ export function FlashcardView() {
             }`}
           >
             <Layers className="w-3.5 h-3.5 inline mr-1" /> Thẻ Lật Ôn Tập
-          </button>
-          <button
-            onClick={() => setSubTab('custom_decks')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-              subTab === 'custom_decks'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 inline mr-1" /> Bộ Thẻ Cá Nhân
           </button>
           <button
             onClick={() => setSubTab('stats')}
@@ -138,12 +152,34 @@ export function FlashcardView() {
       </div>
 
       {subTab === 'srs_deck' && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-400">
-            <span>Thẻ số {currentIndex + 1} / {cards.length}</span>
-            <span className="flex items-center gap-1 text-amber-400 bg-amber-950/60 px-3 py-1 rounded-xl border border-amber-500/30">
-              <Flame className="w-3.5 h-3.5 fill-amber-400" /> Đã thuộc: {reviewCount} thẻ
-            </span>
+        <div className="space-y-4">
+          {/* Action Helper Toolbar */}
+          <div className="flex items-center justify-between bg-slate-900/80 p-3 rounded-2xl border border-slate-800 text-xs">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleShuffle}
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <Shuffle className="w-3.5 h-3.5 text-orange-400" /> Tráo Đổi Ngẫu Nhiên
+              </button>
+
+              <button
+                onClick={() => setIsAutoPlay(!isAutoPlay)}
+                className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  isAutoPlay ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-200'
+                }`}
+              >
+                {isAutoPlay ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                {isAutoPlay ? 'Tắt Tự Động' : 'Tự Động Trình Chạy'}
+              </button>
+            </div>
+
+            <button
+              onClick={handleExportFlashcards}
+              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-orange-400" /> Xuất Bộ Thẻ CSV
+            </button>
           </div>
 
           {currentCard && (
@@ -166,7 +202,7 @@ export function FlashcardView() {
               {!isFlipped ? (
                 <div className="space-y-3">
                   <span className="text-xs text-slate-500 font-extrabold uppercase tracking-widest">
-                    [Mặt trước - Bấm hoặc nhấn Phím Cách để Lật]
+                    [Mặt trước - Phím Cách để Lật]
                   </span>
                   <h3 className="text-4xl font-black text-white">{currentCard.frontText}</h3>
                   {currentCard.pinyinOrIpa && (
@@ -176,7 +212,7 @@ export function FlashcardView() {
               ) : (
                 <div className="space-y-4 animate-fadeIn">
                   <span className="text-xs text-orange-400 font-extrabold uppercase tracking-widest">
-                    [Mặt sau - Nghĩa Tiếng Việt & Anh]
+                    [Mặt sau - Nghĩa & Đáp án]
                   </span>
                   <p className="text-2xl font-black text-emerald-300 whitespace-pre-line">
                     {currentCard.backText}
@@ -218,30 +254,6 @@ export function FlashcardView() {
               <span>Phím 4: Rất dễ (Easy)</span>
               <span className="text-[10px] text-emerald-400 font-normal">Ôn sau 12 ngày</span>
             </button>
-          </div>
-        </div>
-      )}
-
-      {subTab === 'stats' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl text-center">
-          <h3 className="text-xl font-black text-white">Heatmap Ghi Nhớ & Tỷ Lệ Đạt SM-2</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-              <span className="text-xs text-slate-400 block font-bold">Thẻ đã ôn hôm nay</span>
-              <span className="text-2xl font-black text-amber-400">{reviewCount} Thẻ</span>
-            </div>
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-              <span className="text-xs text-slate-400 block font-bold">Tỷ lệ thuộc</span>
-              <span className="text-2xl font-black text-emerald-400">94%</span>
-            </div>
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-              <span className="text-xs text-slate-400 block font-bold">Khoảng lặp dài nhất</span>
-              <span className="text-2xl font-black text-indigo-400">18 Ngày</span>
-            </div>
-            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-              <span className="text-xs text-slate-400 block font-bold">Hệ số Ease Factor</span>
-              <span className="text-2xl font-black text-orange-400">2.65</span>
-            </div>
           </div>
         </div>
       )}

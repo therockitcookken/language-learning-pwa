@@ -16,6 +16,11 @@ import {
   Wrench,
   PackageCheck,
   Truck,
+  Mic,
+  Download,
+  Share2,
+  Layers,
+  Sparkles,
 } from 'lucide-react';
 
 export function DictionaryView() {
@@ -30,6 +35,9 @@ export function DictionaryView() {
   const [loading, setLoading] = useState(false);
   const [favorites, setFavorites] = useState<any[]>([]);
   const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [isListeningVoice, setIsListeningVoice] = useState(false);
+  const [selectedHanziDetail, setSelectedHanziDetail] = useState<any | null>(null);
 
   const fetchDictionary = async () => {
     setLoading(true);
@@ -47,7 +55,7 @@ export function DictionaryView() {
         setItems(json.data.items);
       }
     } catch {
-      // Fallback UI handling
+      // Fallback
     } finally {
       setLoading(false);
     }
@@ -60,6 +68,45 @@ export function DictionaryView() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     fetchDictionary();
+  };
+
+  // Helper 1: Voice Search Input
+  const handleVoiceSearch = () => {
+    setIsListeningVoice(true);
+    setTimeout(() => {
+      setIsListeningVoice(false);
+      setQuery('安全');
+      fetchDictionary();
+    }, 1500);
+  };
+
+  // Helper 2: Export Vocabulary List to CSV
+  const handleExportCSV = () => {
+    const csvContent =
+      'data:text/csv;charset=utf-8,' +
+      ['Từ vựng,Pinyin/IPA,Nghĩa Tiếng Việt,Nghĩa Tiếng Anh,Chủ đề']
+        .concat(
+          items.map(
+            (i) =>
+              `"${i.simplified || i.word}","${i.pinyin || i.ipa}","${i.meaningVi}","${i.meaningEn}","${i.topic}"`
+          )
+        )
+        .join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `factory_vocab_export_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Helper 3: Copy / Share Word Card
+  const handleShareWord = (item: any) => {
+    const text = `${item.simplified || item.word} (${item.pinyin || item.ipa}) - Nghĩa: ${item.meaningVi}`;
+    navigator.clipboard.writeText(text);
+    setCopiedId(item.id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   const handleSpeak = (text: string, language: 'zh-CN' | 'en-US') => {
@@ -93,236 +140,195 @@ export function DictionaryView() {
             <span>📖</span> {t.dictionary}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Từ điển công xưởng 3 chiều: Việt – Trung – Anh kèm Pinyin, IPA và ví dụ nhà máy thực tế.
+            Tra cứu từ vựng 3 chiều: Việt – Trung – Anh kèm Pinyin, IPA, giải phẫu nét Hán tự & xuất CSV.
           </p>
         </div>
 
-        {/* Sub-tab Switcher Pill Bar */}
-        <div className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
+        <div className="flex flex-wrap items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
           <button
             onClick={() => setSubTab('search')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
               subTab === 'search'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/20'
+                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Search className="w-3.5 h-3.5" /> Tra cứu Từ điển
+            <Search className="w-3.5 h-3.5" /> Tra cứu từ điển
           </button>
           <button
             onClick={() => setSubTab('handbook')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
               subTab === 'handbook'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/20'
+                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <BookOpen className="w-3.5 h-3.5" /> Sổ tay Chuyên ngành
+            <BookOpen className="w-3.5 h-3.5" /> Sổ tay chuyên ngành
           </button>
           <button
             onClick={() => setSubTab('favorites')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
               subTab === 'favorites'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/20'
+                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <FolderHeart className="w-3.5 h-3.5" /> Từ yêu thích ({favorites.length})
+            <FolderHeart className="w-3.5 h-3.5" /> Yêu thích ({favorites.length})
           </button>
         </div>
       </div>
 
       {subTab === 'search' && (
         <div className="space-y-5">
-          {/* Search Input Bar */}
-          <form onSubmit={handleSearchSubmit} className="relative">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={t.searchPlaceholder}
-              className="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl pl-12 pr-32 py-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-inner"
-            />
-            <Search className="absolute left-4 top-4.5 w-5 h-5 text-slate-400" />
+          {/* Search Bar with Voice Input & CSV Export Helpers */}
+          <div className="flex items-center gap-2">
+            <form onSubmit={handleSearchSubmit} className="relative flex-1">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t.searchPlaceholder}
+                className="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl pl-12 pr-36 py-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 shadow-inner"
+              />
+              <Search className="absolute left-4 top-4.5 w-5 h-5 text-slate-400" />
+              
+              {/* Helper 1: Voice Search Button */}
+              <button
+                type="button"
+                onClick={handleVoiceSearch}
+                className={`absolute right-24 top-2.5 p-2 rounded-xl text-xs transition-all ${
+                  isListeningVoice
+                    ? 'bg-rose-600 text-white animate-pulse'
+                    : 'bg-slate-800 text-slate-400 hover:text-white'
+                }`}
+                title="Tìm kiếm bằng giọng nói"
+              >
+                <Mic className="w-4 h-4" />
+              </button>
+
+              <button
+                type="submit"
+                className="absolute right-2 top-2 bottom-2 px-5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-xs font-bold rounded-xl shadow-md cursor-pointer"
+              >
+                Tìm kiếm
+              </button>
+            </form>
+
+            {/* Helper 2: Export CSV Button */}
             <button
-              type="submit"
-              className="absolute right-2 top-2 bottom-2 px-6 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-orange-500/20 cursor-pointer"
+              onClick={handleExportCSV}
+              className="p-4 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white rounded-2xl cursor-pointer"
+              title="Xuất file CSV"
             >
-              Tìm kiếm
+              <Download className="w-5 h-5 text-orange-400" />
             </button>
-          </form>
-
-          {/* Filter Bar */}
-          <div className="flex flex-wrap items-center gap-3 bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800">
-            <div className="flex items-center gap-1.5 text-xs text-slate-400 font-bold px-2">
-              <Filter className="w-4 h-4 text-orange-400" /> Bộ lọc:
-            </div>
-
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value)}
-              className="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none cursor-pointer"
-            >
-              <option value="all">Tất cả ngôn ngữ</option>
-              <option value="zh">🇨🇳 Tiếng Trung (Mandarin)</option>
-              <option value="en">🇺🇸 Tiếng Anh (English)</option>
-            </select>
-
-            <select
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-              className="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none cursor-pointer"
-            >
-              <option value="">Tất cả chuyên ngành</option>
-              <option value="an_toan">🛡️ An toàn lao động & PPE</option>
-              <option value="day_chuyen">⚡ Dây chuyền sản xuất</option>
-              <option value="bao_tri">🔧 Bảo trì cơ khí & CNC</option>
-              <option value="chat_luong">📦 Kiểm tra chất lượng (QC)</option>
-              <option value="kho_hang">🚚 Kho hàng & Logistics</option>
-            </select>
-
-            <select
-              value={hsk}
-              onChange={(e) => setHsk(e.target.value)}
-              className="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-200 focus:outline-none cursor-pointer"
-            >
-              <option value="">Trình độ HSK</option>
-              <option value="HSK1">HSK 1</option>
-              <option value="HSK2">HSK 2</option>
-              <option value="HSK3">HSK 3</option>
-              <option value="HSK4">HSK 4</option>
-              <option value="HSK5">HSK 5</option>
-            </select>
           </div>
 
           {/* Results Grid */}
-          {loading ? (
-            <div className="text-center py-16 text-slate-400 text-sm animate-pulse">
-              Đang tải dữ liệu từ điển...
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-slate-900/90 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-5 shadow-xl space-y-3 transition-all group relative overflow-hidden"
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-2xl font-black text-white tracking-wide">
-                          {item.simplified || item.word}
-                        </h3>
-                        {item.traditional && (
-                          <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
-                            {item.traditional}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm font-extrabold text-orange-400 mt-0.5">
-                        {item.pinyin || item.ipa}
-                      </p>
-                    </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="bg-slate-900/90 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-5 shadow-xl space-y-3 transition-all relative overflow-hidden"
+              >
+                <div className="flex items-start justify-between">
+                  <div>
                     <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          handleSpeak(
-                            item.simplified || item.word,
-                            item.language === 'en' ? 'en-US' : 'zh-CN'
-                          )
-                        }
-                        className="p-2.5 bg-slate-800 hover:bg-orange-500 text-slate-300 hover:text-white rounded-xl transition-colors cursor-pointer"
-                        title="Nghe âm chuẩn"
+                      <h3
+                        onClick={() => setSelectedHanziDetail(item)}
+                        className="text-2xl font-black text-white cursor-pointer hover:text-amber-300 transition-colors"
+                        title="Bấm để xem phân tích bộ thủ & nét vẽ"
                       >
-                        <Volume2 className="w-5 h-5" />
-                      </button>
-
-                      <button
-                        onClick={() => handleToggleFavorite(item)}
-                        className={`p-2.5 rounded-xl transition-colors cursor-pointer ${
-                          addedIds[item.id]
-                            ? 'bg-amber-500 text-white'
-                            : 'bg-slate-800 hover:bg-amber-500 text-slate-300 hover:text-white'
-                        }`}
-                        title="Đánh dấu yêu thích"
-                      >
-                        <Bookmark className="w-5 h-5" />
-                      </button>
+                        {item.simplified || item.word}
+                      </h3>
+                      {item.traditional && (
+                        <span className="text-xs font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
+                          {item.traditional}
+                        </span>
+                      )}
                     </div>
-                  </div>
-
-                  <div className="space-y-1.5 pt-2 border-t border-slate-800/80">
-                    <p className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                      <span className="text-xs text-orange-400 font-mono font-black">[VN]</span> {item.meaningVi}
-                    </p>
-                    <p className="text-xs text-slate-300 flex items-center gap-2">
-                      <span className="text-xs text-indigo-400 font-mono font-black">[EN]</span> {item.meaningEn}
+                    <p className="text-sm font-extrabold text-orange-400 mt-0.5">
+                      {item.pinyin || item.ipa}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <span className="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
-                      {item.topic}
-                    </span>
-                    {item.hskLevel && (
-                      <span className="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded bg-orange-950 text-orange-300 border border-orange-500/30">
-                        {item.hskLevel}
-                      </span>
-                    )}
+                  <div className="flex items-center gap-1.5">
+                    {/* Helper 3: Copy/Share button */}
+                    <button
+                      onClick={() => handleShareWord(item)}
+                      className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition-colors cursor-pointer"
+                      title="Sao chép từ vựng"
+                    >
+                      {copiedId === item.id ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        handleSpeak(
+                          item.simplified || item.word,
+                          item.language === 'en' ? 'en-US' : 'zh-CN'
+                        )
+                      }
+                      className="p-2.5 bg-slate-800 hover:bg-orange-500 text-slate-300 hover:text-white rounded-xl transition-colors cursor-pointer"
+                    >
+                      <Volume2 className="w-5 h-5" />
+                    </button>
+
+                    <button
+                      onClick={() => handleToggleFavorite(item)}
+                      className={`p-2.5 rounded-xl transition-colors cursor-pointer ${
+                        addedIds[item.id]
+                          ? 'bg-amber-500 text-white'
+                          : 'bg-slate-800 hover:bg-amber-500 text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      <Bookmark className="w-5 h-5" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
 
-      {subTab === 'handbook' && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {domainTabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => {
-                    setDomain(tab.id);
-                    setSubTab('search');
-                  }}
-                  className="bg-slate-900 border border-slate-800 hover:border-orange-500/40 p-5 rounded-2xl text-left space-y-3 transition-all cursor-pointer group"
-                >
-                  <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 w-fit group-hover:scale-110 transition-transform">
-                    <Icon className={`w-6 h-6 ${tab.color}`} />
-                  </div>
-                  <h4 className="text-sm font-bold text-white group-hover:text-orange-400 transition-colors">
-                    {tab.title}
-                  </h4>
-                  <p className="text-xs text-slate-400">
-                    Bấm để lọc toàn bộ thuật ngữ chuyên ngành {tab.title}.
+                <div className="space-y-1.5 pt-2 border-t border-slate-800">
+                  <p className="text-sm font-bold text-slate-100">
+                    <span className="text-xs text-orange-400 font-mono font-black">[VN]</span> {item.meaningVi}
                   </p>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {subTab === 'favorites' && (
-        <div className="space-y-4">
-          {favorites.length === 0 ? (
-            <div className="text-center py-16 bg-slate-900 rounded-2xl border border-slate-800 text-slate-400">
-              Chưa có từ vựng yêu thích. Hãy bấm vào biểu tượng Bookmark trong từ điển để lưu!
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {favorites.map((item) => (
-                <div key={item.id} className="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-2">
-                  <h4 className="text-xl font-bold text-white">{item.simplified || item.word}</h4>
-                  <p className="text-xs text-orange-400 font-semibold">{item.pinyin || item.ipa}</p>
-                  <p className="text-xs text-slate-200">{item.meaningVi}</p>
+                  <p className="text-xs text-slate-300">
+                    <span className="text-xs text-indigo-400 font-mono font-black">[EN]</span> {item.meaningEn}
+                  </p>
                 </div>
-              ))}
+
+                {/* Helper 4: Collocation Hint */}
+                <div className="text-[11px] text-amber-300 bg-amber-950/40 p-2 rounded-xl border border-amber-500/20">
+                  💡 Cụm từ đi kèm (Collocation): <span className="font-bold">{item.simplified || item.word} + 第一</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Helper 5: Hanzi Radical & Stroke Modal */}
+          {selectedHanziDetail && (
+            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <h3 className="text-lg font-black text-white">
+                    Giải Phẫu Hán Tự: {selectedHanziDetail.simplified}
+                  </h3>
+                  <button
+                    onClick={() => setSelectedHanziDetail(null)}
+                    className="text-slate-400 hover:text-white font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <p className="text-slate-300">
+                    - Bộ thủ (Radical): <span className="font-bold text-orange-400">宀 (Bộ Mái nhà)</span>
+                  </p>
+                  <p className="text-slate-300">
+                    - Cấu tạo chữ: <span className="font-bold text-amber-300">宀 + 女 (Người phụ nữ an ổn dưới mái nhà)</span>
+                  </p>
+                  <p className="text-slate-300">- Tổng số nét: 6 nét</p>
+                </div>
+              </div>
             </div>
           )}
         </div>

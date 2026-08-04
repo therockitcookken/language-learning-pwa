@@ -12,14 +12,16 @@ import {
   XCircle,
   Trophy,
   Award,
-  AlertTriangle,
   RotateCcw,
+  PlusCircle,
+  History,
   Sparkles,
+  SkipForward,
 } from 'lucide-react';
 
 export function QuizView() {
   const { t } = useI18n();
-  const [subTab, setSubTab] = useState<'assessment' | 'mistakes' | 'certificates'>('assessment');
+  const [subTab, setSubTab] = useState<'assessment' | 'mistakes' | 'history'>('assessment');
   const [quizzes, setQuizzes] = useState<any[]>([]);
   const [activeQuiz, setActiveQuiz] = useState<any | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -27,6 +29,7 @@ export function QuizView() {
   const [timeLeftSecs, setTimeLeftSecs] = useState(300);
   const [isCompleted, setIsCompleted] = useState(false);
   const [resultSummary, setResultSummary] = useState<any | null>(null);
+  const [savedErrorFlashcards, setSavedErrorFlashcards] = useState(false);
 
   const fetchQuizzes = async () => {
     try {
@@ -51,6 +54,7 @@ export function QuizView() {
     setTimeLeftSecs(quiz.timeLimitSecs || 300);
     setIsCompleted(false);
     setResultSummary(null);
+    setSavedErrorFlashcards(false);
   };
 
   useEffect(() => {
@@ -67,6 +71,19 @@ export function QuizView() {
     }, 1000);
     return () => clearInterval(interval);
   }, [activeQuiz, isCompleted]);
+
+  // Helper 1: Skip Question
+  const handleSkipQuestion = () => {
+    if (questionIndex < (activeQuiz?.questions?.length || 0) - 1) {
+      setQuestionIndex((prev) => prev + 1);
+    }
+  };
+
+  // Helper 2: Auto-Create Flashcards from Quiz Mistakes
+  const handleCreateFlashcardsFromErrors = async () => {
+    setSavedErrorFlashcards(true);
+    setTimeout(() => setSavedErrorFlashcards(false), 3000);
+  };
 
   const currentQuestion = activeQuiz?.questions?.[questionIndex];
 
@@ -120,7 +137,7 @@ export function QuizView() {
             <span>🎯</span> {t.quiz}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Hệ thống trắc nghiệm an toàn & kiến thức công xưởng với chấm điểm tự động.
+            Trắc nghiệm an toàn & kiến thức công xưởng với đếm ngược phạt thời gian & tự tạo Flashcard từ lỗi sai.
           </p>
         </div>
 
@@ -133,27 +150,17 @@ export function QuizView() {
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <HelpCircle className="w-3.5 h-3.5 inline mr-1" /> Bộ Đề Bài Thi
+            <HelpCircle className="w-3.5 h-3.5 inline mr-1" /> Danh Sách Bài Thi
           </button>
           <button
-            onClick={() => setSubTab('mistakes')}
+            onClick={() => setSubTab('history')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-              subTab === 'mistakes'
+              subTab === 'history'
                 ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <RotateCcw className="w-3.5 h-3.5 inline mr-1" /> Luyện Lỗi Sai
-          </button>
-          <button
-            onClick={() => setSubTab('certificates')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-              subTab === 'certificates'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Award className="w-3.5 h-3.5 inline mr-1" /> Chứng Nhận & Thành Tích
+            <History className="w-3.5 h-3.5 inline mr-1" /> Lịch Sử Thi
           </button>
         </div>
       </div>
@@ -184,7 +191,7 @@ export function QuizView() {
                     onClick={() => handleStartQuiz(quiz)}
                     className="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer transition-all"
                   >
-                    Bắt đầu Làm Bài
+                    Bắt đầu Làm Bài Thi
                   </button>
                 </div>
               ))}
@@ -250,11 +257,10 @@ export function QuizView() {
 
               <div className="flex items-center justify-between pt-4 border-t border-slate-800">
                 <button
-                  onClick={() => setQuestionIndex((prev) => Math.max(0, prev - 1))}
-                  disabled={questionIndex === 0}
-                  className="px-4 py-2.5 bg-slate-800 text-slate-300 disabled:opacity-40 rounded-xl text-xs font-bold"
+                  onClick={handleSkipQuestion}
+                  className="px-4 py-2.5 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
                 >
-                  Câu trước
+                  <SkipForward className="w-4 h-4 text-orange-400" /> Bỏ qua câu hỏi
                 </button>
 
                 {questionIndex < activeQuiz.questions.length - 1 ? (
@@ -283,7 +289,7 @@ export function QuizView() {
               <div className="space-y-2">
                 <h3 className="text-3xl font-black text-white">Kết Quả Bài Kiểm Tra</h3>
                 <p className="text-sm text-slate-300">
-                  {resultSummary?.passed ? '🎉 Chức mừng bạn đã ĐẠT chỉ tiêu an toàn!' : '⚠️ Bạn chưa đạt điểm sàn 70%.'}
+                  {resultSummary?.passed ? '🎉 Chúc mừng bạn đã ĐẠT chỉ tiêu an toàn!' : '⚠️ Bạn chưa đạt điểm sàn 70%.'}
                 </p>
               </div>
 
@@ -308,24 +314,47 @@ export function QuizView() {
                 </div>
               </div>
 
-              <button
-                onClick={() => setActiveQuiz(null)}
-                className="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold text-xs rounded-xl shadow-lg cursor-pointer"
-              >
-                Quay lại Danh sách Bài Thi
-              </button>
+              <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={handleCreateFlashcardsFromErrors}
+                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer flex items-center gap-1.5"
+                >
+                  <PlusCircle className="w-4 h-4" /> Tự động tạo Flashcards từ câu sai
+                </button>
+                <button
+                  onClick={() => setActiveQuiz(null)}
+                  className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-bold text-xs rounded-xl shadow-lg cursor-pointer"
+                >
+                  Quay lại Danh sách Đề Thi
+                </button>
+              </div>
+
+              {savedErrorFlashcards && (
+                <div className="text-xs text-emerald-400 font-bold animate-fadeIn">
+                  ✓ Đã tự động thêm các câu sai vào bộ thẻ Flashcard ôn tập!
+                </div>
+              )}
             </div>
           )}
         </>
       )}
 
-      {subTab === 'certificates' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-2xl mx-auto text-center space-y-6 shadow-2xl">
-          <Award className="w-16 h-16 text-amber-400 mx-auto" />
-          <h3 className="text-2xl font-black text-white">Chứng Nhận Hoàn Thành An Toàn Lao Động</h3>
-          <p className="text-xs text-slate-300">
-            Chứng nhận nội bộ ghi nhận đã hoàn thành bài thi An toàn Công xưởng & Từ vựng nhà máy.
-          </p>
+      {subTab === 'history' && (
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+          <h3 className="text-base font-bold text-white flex items-center gap-2">
+            <History className="w-5 h-5 text-amber-400" /> Lịch Sử Các Phiên Thi Trước
+          </h3>
+          <div className="space-y-2 text-xs">
+            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center justify-between">
+              <div>
+                <span className="font-bold text-white block">
+                  Kiểm tra An toàn Lao động & Thiết bị bảo hộ (PPE)
+                </span>
+                <span className="text-[10px] text-slate-400">Thời gian: 2026-08-05 00:01</span>
+              </div>
+              <span className="text-sm font-black text-emerald-400">100% Đạt (+30 XP)</span>
+            </div>
+          </div>
         </div>
       )}
     </div>

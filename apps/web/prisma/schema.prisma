@@ -1,0 +1,367 @@
+// Prisma schema for Factory Language Learning PWA
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  GUEST
+  LEARNER
+  EDITOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum TargetLanguage {
+  CHINESE
+  ENGLISH
+  BOTH
+}
+
+enum HskLevel {
+  HSK1
+  HSK2
+  HSK3
+  HSK4
+  HSK5
+  HSK6
+}
+
+enum CefrLevel {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum ContentStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id            String          @id @default(uuid())
+  email         String?         @unique
+  username      String?         @unique
+  passwordHash  String?
+  fullName      String?
+  role          Role            @default(LEARNER)
+  isGuest       Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  preference    UserPreference?
+  sessions      Session[]
+  reviewSchedules ReviewSchedule[]
+  quizAttempts  QuizAttempt[]
+  progressEvents ProgressEvent[]
+  favorites     Favorite[]
+  personalNotes PersonalNote[]
+  auditLogs     AuditLog[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserPreference {
+  id               String         @id @default(uuid())
+  userId           String         @unique
+  interfaceLang    String         @default("vi") // vi, zh-CN, zh-TW, en
+  targetLanguage   TargetLanguage @default(BOTH)
+  factoryDomain    String         @default("general")
+  dailyGoalMinutes Int            @default(15)
+  soundSpeed       Float          @default(1.0)
+  autoPlayAudio    Boolean        @default(true)
+  reducedMotion    Boolean        @default(false)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VocabularyEntry {
+  id               String        @id @default(uuid())
+  language         String        // "zh" or "en"
+  simplified       String?       // Simplified Chinese
+  traditional      String?       // Traditional Chinese
+  word             String        // English headword or main entry
+  pinyin           String?       // Tone marked Pinyin e.g. "ān quán"
+  pinyinNumeric    String?       // Numbered Pinyin e.g. "an1 quan2"
+  ipa              String?       // English IPA e.g. "/ˈseɪf.ti/"
+  partOfSpeech     String        // noun, verb, adj, etc.
+  meaningVi        String        // Meaning in Vietnamese
+  meaningEn        String        // Meaning in English
+  meaningZh        String?       // Meaning in Chinese
+  audioUrl         String?
+  radical          String?       // Chinese radical
+  hskLevel         HskLevel?
+  cefrLevel        CefrLevel?
+  difficulty       Difficulty    @default(BEGINNER)
+  topic            String        // e.g. "Safety", "Assembly", "Tools"
+  factoryDomain    String        // e.g. "an_toan", "day_chuyen", "bao_tri", "chat_luong"
+  usageNotes       String?
+  commonErrors     String?
+  status           ContentStatus @default(PUBLISHED)
+  version          Int           @default(1)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  senses           VocabularySense[]
+  examples         ExampleSentence[]
+  flashcards       Flashcard[]
+  favorites        Favorite[]
+  personalNotes    PersonalNote[]
+
+  @@index([word])
+  @@index([pinyin])
+  @@index([pinyinNumeric])
+  @@index([language])
+  @@index([factoryDomain])
+  @@index([topic])
+}
+
+model VocabularySense {
+  id           String          @id @default(uuid())
+  entryId      String
+  definitionVi String
+  definitionEn String
+  definitionZh String?
+  context      String?
+  entry        VocabularyEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+}
+
+model ExampleSentence {
+  id           String          @id @default(uuid())
+  entryId      String?
+  dialogueId   String?
+  sentenceZh   String?
+  pinyin       String?
+  sentenceEn   String?
+  sentenceVi   String
+  audioUrl     String?
+  factoryContext String?
+  entry        VocabularyEntry? @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  dialogue     WorkplaceDialogue? @relation(fields: [dialogueId], references: [id], onDelete: Cascade)
+}
+
+model PronunciationAsset {
+  id           String     @id @default(uuid())
+  language     String     // "zh" or "en"
+  symbol       String     // e.g. "b", "p", "m", "f" or "/æ/", "/i:/"
+  type         String     // "initial", "final", "tone", "vowel", "consonant"
+  descriptionVi String
+  mouthShapeImg String?
+  tonguePosImg  String?
+  airflowGuide String?
+  sampleAudio  String?
+  confusedWith String?
+}
+
+model GrammarLesson {
+  id             String        @id @default(uuid())
+  language       String        // "zh" or "en"
+  title          String
+  titleVi        String
+  titleEn        String
+  titleZh        String?
+  level          String        // HSK1-6 or A1-C2
+  topic          String
+  factoryDomain  String
+  formula        String
+  explanationVi  String
+  explanationEn  String
+  correctExample String
+  wrongExample   String
+  commonMistakes String?
+  comparisonNotes String?
+  factoryScenario String?
+  status         ContentStatus @default(PUBLISHED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  pathLessons    PathLesson[]
+  flashcards     Flashcard[]
+}
+
+model WorkplaceDialogue {
+  id             String            @id @default(uuid())
+  titleVi        String
+  titleZh        String?
+  titleEn        String?
+  category       String            // e.g. "An toàn", "Bảo trì", "Báo cáo sự cố"
+  factoryDomain  String
+  level          Difficulty        @default(BEGINNER)
+  audioUrl       String?
+  createdAt      DateTime          @default(now())
+  sentences      ExampleSentence[]
+}
+
+model LearningPath {
+  id           String       @id @default(uuid())
+  title        String
+  description  String
+  language     String       // "zh", "en", "both"
+  factoryDomain String
+  icon         String?
+  orderIndex   Int          @default(0)
+  createdAt    DateTime     @default(now())
+
+  lessons      PathLesson[]
+}
+
+model PathLesson {
+  id           String          @id @default(uuid())
+  pathId       String
+  title        String
+  type         String          // "vocabulary", "grammar", "dialogue", "quiz"
+  referenceId  String?
+  orderIndex   Int
+  path         LearningPath    @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  grammar      GrammarLesson?  @relation(fields: [referenceId], references: [id])
+}
+
+model Flashcard {
+  id              String            @id @default(uuid())
+  vocabularyId    String?
+  grammarId       String?
+  frontText       String
+  backText        String
+  pinyinOrIpa     String?
+  audioUrl        String?
+  imageUrl        String?
+  mnemonic        String?
+  topic           String
+  factoryDomain   String
+  createdAt       DateTime          @default(now())
+
+  vocabulary      VocabularyEntry?  @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+  grammar         GrammarLesson?    @relation(fields: [grammarId], references: [id], onDelete: Cascade)
+  reviewSchedules ReviewSchedule[]
+}
+
+model ReviewSchedule {
+  id           String    @id @default(uuid())
+  userId       String
+  flashcardId  String
+  interval     Int       @default(1)    // Days
+  repetitions  Int       @default(0)
+  easeFactor   Float     @default(2.5)
+  dueDate      DateTime  @default(now())
+  lastReviewed DateTime?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcard    Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, flashcardId])
+}
+
+model Quiz {
+  id            String         @id @default(uuid())
+  title         String
+  description   String?
+  language      String         // "zh", "en", "both"
+  category      String         // "General", "Safety", "CNC", etc.
+  difficulty    Difficulty     @default(BEGINNER)
+  timeLimitSecs Int?           @default(300)
+  questions     QuizQuestion[]
+  attempts      QuizAttempt[]
+}
+
+model QuizQuestion {
+  id             String   @id @default(uuid())
+  quizId         String
+  questionType   String   // "select_meaning", "listen_pick", "fill_blank", "sentence_order", "pair_matching", etc.
+  prompt         String
+  audioUrl       String?
+  imageUrl       String?
+  optionsJson    String   // JSON array of strings or option objects
+  correctAnswer  String   // Correct option string or JSON index
+  explanationVi  String
+  explanationEn  String?
+  factoryContext String?
+  quiz           Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model QuizAttempt {
+  id             String   @id @default(uuid())
+  userId         String
+  quizId         String
+  score          Int
+  totalQuestions Int
+  timeSpentSecs  Int
+  answersJson    String   // JSON user responses
+  completedAt    DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz           Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model ProgressEvent {
+  id          String   @id @default(uuid())
+  userId      String
+  eventType   String   // "lesson_completed", "quiz_passed", "flashcard_reviewed", "streak_updated"
+  xpEarned    Int      @default(0)
+  metadata    String?  // JSON additional details
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id           String           @id @default(uuid())
+  userId       String
+  vocabularyId String
+  createdAt    DateTime         @default(now())
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vocabulary   VocabularyEntry  @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, vocabularyId])
+}
+
+model PersonalNote {
+  id           String          @id @default(uuid())
+  userId       String
+  vocabularyId String
+  noteContent  String
+  tags         String?         // Comma-separated tags
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vocabulary   VocabularyEntry @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+}
+
+model ContentImport {
+  id           String   @id @default(uuid())
+  sourceName   String
+  license      String
+  checksum     String
+  totalItems   Int
+  validItems   Int
+  errorLog     String?  // JSON array of errors
+  importedAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String   // "CREATE", "UPDATE", "DELETE", "IMPORT", "EXPORT"
+  entity    String   // "VocabularyEntry", "GrammarLesson", etc.
+  entityId  String?
+  details   String?  // JSON string
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+}

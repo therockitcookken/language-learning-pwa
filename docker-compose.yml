@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: factory_lang_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:./dev.db
+      - NODE_ENV=production
+      - JWT_SECRET=factory-lang-learning-production-secret-key-2026
+    restart: always

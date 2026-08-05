@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-08-04T20:44:59.606Z",
+  "totalPinyinRecords": 8,
+  "totalIPARecords": 3,
+  "duplicatesCount": 0,
+  "invalidPinyinCount": 0,
+  "invalidIPACount": 0,
+  "missingDescriptionCount": 0,
+  "missingExamplesCount": 0,
+  "unverifiedRecordsCount": 0,
+  "passed": true
+}

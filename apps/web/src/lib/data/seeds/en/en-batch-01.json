@@ -1,0 +1,154 @@
+[
+  {
+    "id": "en-g-01",
+    "language": "en",
+    "titleVi": "Câu mệnh lệnh trực tiếp trong hướng dẫn sinh hoạt & chỉ đường",
+    "titleEn": "Imperatives for Daily Instructions & Travel Directions",
+    "level": "A1",
+    "topic": "travel",
+    "factoryDomain": "du_lich",
+    "formula": "Base Verb + Object + Prepositional Phrase / Adverb",
+    "breakdownAnalysis": "Imperative Base Verb (Turn/Add/Take) + Object (Left/Salt/Bus) + Location/Direction Modifier",
+    "explanationVi": "Sử dụng động từ nguyên mẫu không 'to' đứng đầu câu để đưa ra lời chỉ đường du lịch, hướng dẫn nấu ăn hoặc lời dặn dò sinh hoạt hằng ngày.",
+    "communicativeFunction": "Đưa ra lời chỉ đường giao thông, hướng dẫn công thức nấu ăn, lời nhắc nhở sinh hoạt gia đình và bạn bè.",
+    "usageConditions": "Dùng trong biển chỉ dẫn giao thông, sách hướng dẫn nấu ăn, chỉ đường du lịch và dặn dò sinh hoạt.",
+    "forbiddenCases": "Không dùng dạng V-ing hoặc thêm 'to' trước động từ ở đầu câu mệnh lệnh.",
+    "exceptions": "Trong lời mời hoặc đề nghị lịch sự có thể thêm 'Please' ở đầu câu hoặc cuối câu.",
+    "sentencePosition": "Động từ nguyên mẫu đứng ở vị trí đầu tiên của câu.",
+    "registerStyle": "Trực tiếp, tự nhiên trong giao tiếp hằng ngày và hướng dẫn du lịch.",
+    "correctExamples": [
+      { "en": "Turn left at the next traffic light to reach the museum.", "ipa": "/tɜːrn left æt ðə nekst ˈtræfɪk laɪt tuː riːtʃ ðə mjuˈziːəm/", "vi": "Rẽ trái tại đèn giao thông tiếp theo để đến bảo tàng." },
+      { "en": "Add a teaspoon of olive oil to the salad.", "ipa": "/æd ə ˈtiːspuːn əv ˈɑːlɪv ɔɪl tuː ðə ˈsæləd/", "vi": "Thêm một thìa cà phê dầu ô liu vào món salad." },
+      { "en": "Take bus number 5 to get to the city library.", "ipa": "/teɪk bʌs ˈnʌmbər faɪv tuː ɡet tuː ðə ˈsɪti ˈlaɪbreri/", "vi": "Bắt tuyến xe buýt số 5 để đi đến thư viện thành phố." },
+      { "en": "Please close the window before going to bed.", "ipa": "/pliːz kloʊz ðə ˈwɪndoʊ bɪˈfɔːr ˈɡoʊɪŋ tuː bed/", "vi": "Xin vui lòng đóng cửa sổ trước khi đi ngủ." },
+      { "en": "Mix the ingredients thoroughly in a large bowl.", "ipa": "/mɪks ðə ɪnˈɡriːdiənts ˈθɜːrəli ɪn ə lɑːrdʒ boʊl/", "vi": "Trộn đều các nguyên liệu trong một cái bát lớn." }
+    ],
+    "factoryExamples": [
+      { "en": "Keep the refrigerator door closed after taking drinks.", "ipa": "/kiːp ðə rɪˈfrɪdʒəreɪtər dɔːr kloʊzd ˈæftər ˈteɪkɪŋ drɪŋks/", "vi": "Giữ cửa tủ lạnh đóng lại sau khi lấy đồ uống." },
+      { "en": "Enjoy your stay at our hotel!", "ipa": "/ɪnˈdʒɔɪ jʊər steɪ æt aʊər hoʊˈtel/", "vi": "Chúc bạn có khoảng thời gian tuyệt vời tại khách sạn chúng tôi!" }
+    ],
+    "wrongExamples": [
+      {
+        "wrongEn": "Turning left at the next traffic light to reach the museum.",
+        "viFix": "Chữa sai: Dùng động từ nguyên mẫu 'Turn', không dùng dạng V-ing 'Turning'.",
+        "rootCause": "Nhầm lẫn giữa danh động từ V-ing và động từ nguyên mẫu mệnh lệnh."
+      },
+      {
+        "wrongEn": "To add a teaspoon of olive oil.",
+        "viFix": "Chữa sai: Bỏ từ 'To' ở đầu câu hướng dẫn.",
+        "rootCause": "Thêm từ 'To' thừa trước động từ nguyên mẫu."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Dùng dạng V-ing ở đầu câu hướng dẫn chỉ đường / nấu ăn.",
+      "Thêm từ 'To' trước động từ nguyên mẫu mệnh lệnh.",
+      "Thêm chủ ngữ 'You' không cần thiết trong biển chỉ dẫn du lịch."
+    ],
+    "confusingStructures": [
+      { "name": "Imperative (Base Verb)", "meaning": "Mệnh lệnh chỉ đường/hướng dẫn trực tiếp: Turn left." },
+      { "name": "Polite Request (Please + V)", "meaning": "Yêu cầu lịch sự: Please turn left." }
+    ],
+    "comparisonTable": "Direct Imperative (Turn left) vs Polite Request (Please turn left).",
+    "workplaceDialogue": {
+      "title": "Asking for Travel Directions on the Street",
+      "turns": [
+        { "speaker": "Tourist", "textEn": "Excuse me, how can I find the train station?", "ipa": "/ɪkˈskjuːz miː haʊ kæn aɪ faɪnd ðə treɪn ˈsteɪʃn/", "translationVi": "Xin lỗi, làm sao tôi tìm được ga tàu?" },
+        { "speaker": "Local Resident", "textEn": "Walk straight for two blocks, then turn right.", "ipa": "/wɔːk streɪt fɔːr tuː blɑːks ðen tɜːrn raɪt/", "translationVi": "Đi thẳng hai dãy nhà, sau đó rẽ phải." }
+      ]
+    },
+    "coreVocabulary": ["Turn", "Traffic light", "Add", "Recipe", "Directions", "Straight"],
+    "quickCheck": [
+      { "question": "What verb form starts a direct imperative sentence?", "options": ["Base form (V1)", "V-ing form", "Past Participle (V3)"], "answer": "Base form (V1)" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Select the correct imperative travel instruction:",
+        "options": ["Turn left at the next traffic light.", "Turning left at the traffic light.", "To turn left at the next light."],
+        "correctIndex": 0,
+        "explanation": "Option 1 is correct because it starts with the bare base verb 'Turn'."
+      }
+    ],
+    "relatedLessons": ["en-g-02", "en-g-03"],
+    "flashcardData": { "front": "Base Verb + Object", "back": "Imperative instructions for travel directions & recipes" },
+    "audioText": "Turn left at the next traffic light to reach the museum.",
+    "searchKeywords": "imperative, travel directions, recipes, daily instructions, base verb",
+    "filterMetadata": { "level": "A1", "topic": "travel", "domain": "du_lich" }
+  },
+  {
+    "id": "en-g-02",
+    "language": "en",
+    "titleVi": "Thì Hiện tại hoàn thành trong chia sẻ trải nghiệm & thành tựu cá nhân",
+    "titleEn": "Present Perfect Tense for Personal Experiences & Achievements",
+    "level": "A2",
+    "topic": "travel",
+    "factoryDomain": "trai_nghiem",
+    "formula": "Subject + have / has + Past Participle (V3) + Object",
+    "breakdownAnalysis": "Subject (I/She/We) + Auxiliary (have/has) + Main Verb V3 (visited/learned/read) + Object",
+    "explanationVi": "Dùng để chia sẻ trải nghiệm du lịch, thành tựu học tập hoặc những việc đã từng/chưa từng làm trong cuộc đời mà kết quả còn đọng lại ở hiện tại.",
+    "communicativeFunction": "Trò chuyện giao lưu bạn bè, chia sẻ kinh nghiệm du lịch, giới thiệu sở thích và thành tựu cá nhân.",
+    "usageConditions": "Khi không đề cập đến mốc thời gian quá khứ cụ thể (thường đi kèm already, ever, never, just, yet).",
+    "forbiddenCases": "Không dùng Present Perfect khi câu có thời gian quá khứ xác định như yesterday, last year, in 2020 (dùng Past Simple).",
+    "exceptions": "Với các động từ chỉ trạng thái sống/học (live, study) kéo dài đi kèm 'for' hoặc 'since'.",
+    "sentencePosition": "Trợ động từ 'have/has' đứng sau chủ ngữ và trước động từ phân từ hai V3.",
+    "registerStyle": "Giao tiếp tự nhiên, thân mật khi trò chuyện đời sống và kết bạn.",
+    "correctExamples": [
+      { "en": "I have visited Tokyo three times with my family.", "ipa": "/aɪ hæv ˈvɪzɪtɪd ˈtoʊkioʊ θriː taɪmz wɪð maɪ ˈfæməli/", "vi": "Tôi đã đến thăm Tokyo ba lần cùng với gia đình." },
+      { "en": "She has just finished reading a fascinating novel.", "ipa": "/ʃiː hæz dʒʌst ˈfɪnɪʃt ˈriːdɪŋ ə ˈfæsɪneɪtɪŋ ˈnɑːvl/", "vi": "Cô ấy vừa đọc xong một cuốn tiểu thuyết rất cuốn hút." },
+      { "en": "We have lived in this city since 2018.", "ipa": "/wiː hæv lɪvd ɪn ðɪs ˈsɪti sɪns ˈtwenti ˈeɪtiːn/", "vi": "Chúng tôi đã sống ở thành phố này từ năm 2018." },
+      { "en": "Have you ever tried authentic Italian pizza?", "ipa": "/hæv juː ˈevər traɪd ɔːˈθentɪk ɪˈtæliən ˈpiːtsə/", "vi": "Bạn đã bao giờ thử bánh pizza Ý chính gốc chưa?" },
+      { "en": "My brother has not learned how to swim yet.", "ipa": "/maɪ ˈbrʌðər hæz nɑːt lɜːrnd haʊ tuː swɪm jet/", "vi": "Anh trai tôi vẫn chưa học bơi." }
+    ],
+    "factoryExamples": [
+      { "en": "They have already booked their flight tickets to Paris.", "ipa": "/ðeɪ hæv ɔːlˈredi bʊkt ðer flaɪt ˈtɪkɪts tuː ˈpærɪs/", "vi": "Họ đã đặt xong vé máy bay đi Paris rồi." },
+      { "en": "I have known my best friend for over ten years.", "ipa": "/aɪ hæv noʊn maɪ best frend fɔːr ˈoʊvər ten jɪərz/", "vi": "Tôi đã quen biết người bạn thân nhất của mình hơn mười năm rồi." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongEn": "I have visited Tokyo last year.",
+        "viFix": "Chữa sai: Đổi 'have visited' thành Past Simple 'visited' vì có từ chỉ thời gian quá khứ xác định 'last year'.",
+        "rootCause": "Nhầm lẫn giữa Present Perfect và Past Simple khi có mốc thời gian quá khứ xác định."
+      },
+      {
+        "wrongEn": "She has finish her homework.",
+        "viFix": "Chữa sai: Đổi động từ 'finish' thành dạng V3 'finished'.",
+        "rootCause": "Dùng sai động từ nguyên mẫu thay vì V3 sau have/has."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Dùng Present Perfect đi kèm thời gian quá khứ như yesterday, last week.",
+      "Quên đổi động từ về dạng V3/Past Participle sau have/has.",
+      "Dùng sai trợ động từ 'have' thay vì 'has' cho chủ ngữ ngôi thứ 3 số ít."
+    ],
+    "confusingStructures": [
+      { "name": "Present Perfect (have/has + V3)", "meaning": "Chia sẻ trải nghiệm sống / thành tựu không rõ thời điểm cụ thể." },
+      { "name": "Past Simple (V2)", "meaning": "Kể lại sự việc đã kết thúc tại mốc thời gian cụ thể trong quá khứ." }
+    ],
+    "comparisonTable": "Present Perfect (Life experience / No past date) vs Past Simple (Specific past date).",
+    "workplaceDialogue": {
+      "title": "Chatting About Travel Experiences Over Coffee",
+      "turns": [
+        { "speaker": "Anna", "textEn": "Have you ever traveled abroad during summer break?", "ipa": "/hæv juː ˈevər ˈtrævld əˈbrɔːd dʊrɪŋ ˈsʌmər breɪk/", "translationVi": "Bạn đã bao giờ đi du lịch nước ngoài vào kỳ nghỉ hè chưa?" },
+        { "speaker": "Ben", "textEn": "Yes! I have visited Japan and South Korea.", "ipa": "/jes aɪ hæv ˈvɪzɪtɪd dʒəˈpæn ænd saʊθ kəˈriːə/", "translationVi": "Có rồi! Tớ đã từng ghé thăm Nhật Bản và Hàn Quốc." }
+      ]
+    },
+    "coreVocabulary": ["have visited", "has finished", "lived", "ever", "booked"],
+    "quickCheck": [
+      { "question": "Trợ động từ nào đi với chủ ngữ 'My brother'?", "options": ["has", "have", "are"], "answer": "has" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Select the correct sentence for sharing life experiences:",
+        "options": ["I have visited Tokyo three times.", "I have visited Tokyo last year.", "I have visit Tokyo."],
+        "correctIndex": 0,
+        "explanation": "Option 1 is correct because Present Perfect is used to express life experiences without a specific past timestamp."
+      }
+    ],
+    "relatedLessons": ["en-g-01", "en-g-03"],
+    "flashcardData": { "front": "Subject + have/has + V3", "back": "Sharing travel experiences & personal achievements" },
+    "audioText": "I have visited Tokyo three times with my family.",
+    "searchKeywords": "present perfect, travel experience, life achievements, ever, never",
+    "filterMetadata": { "level": "A2", "topic": "travel", "domain": "trai_nghiem" }
+  }
+]

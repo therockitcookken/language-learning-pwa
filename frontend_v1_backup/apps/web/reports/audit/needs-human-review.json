@@ -1,0 +1,170 @@
+[
+  {
+    "recordIds": [
+      "e7b40394-34df-435c-9d9f-b3692cef980f",
+      "6716041f-e3f6-47ee-97ae-7826ff25f6ef"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学气: Học tập khí nén",
+      "学块: Học tập khối nẹp"
+    ],
+    "similarityScore": 0.88,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "7dded947-cee8-4a4c-bdba-839b67acae83",
+      "302a2dc0-0b08-45d5-960a-2292446fe3a2"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学位: Học tập vị trí",
+      "学价: Học tập giá trị"
+    ],
+    "similarityScore": 0.87,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "4f273fcf-e018-4005-bb9d-6e6cd1ac64b5",
+      "b1a37384-5301-4842-9693-c81e583ccac9"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学线: Học tập tuyến đường",
+      "学路: Học tập tuyến đường"
+    ],
+    "similarityScore": 1,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "c86e1a78-d9f9-4d47-bc29-c7f5c6e51486",
+      "c9c89265-0b12-4148-98ac-d4ade9184754"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学所: Học tập cơ sở",
+      "学值: Học tập chỉ số"
+    ],
+    "similarityScore": 0.86,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "1ce211de-3ac6-4fa6-8972-08a1888d9b97",
+      "b2481522-c3bd-428f-a5a0-4e00f3d98768"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学桌: Học tập bàn làm việc",
+      "学台: Học tập bàn làm việc"
+    ],
+    "similarityScore": 1,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "50e59f92-8c8d-4a57-9728-618a27e33154",
+      "c9c89265-0b12-4148-98ac-d4ade9184754"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学瓶: Học tập chai lọ",
+      "学值: Học tập chỉ số"
+    ],
+    "similarityScore": 0.87,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "03a8ffd8-72e1-4a7c-946d-d5aeb91c87cb",
+      "94c4f381-0348-460e-bfe0-01031c515f7d"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学芯: Học tập lõi máy",
+      "学壳: Học tập vỏ máy"
+    ],
+    "similarityScore": 0.87,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "94c4f381-0348-460e-bfe0-01031c515f7d",
+      "4447cfd2-000c-47dc-a3de-b2f7994f4240"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学壳: Học tập vỏ máy",
+      "学座: Học tập đế máy"
+    ],
+    "similarityScore": 0.86,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "94c4f381-0348-460e-bfe0-01031c515f7d",
+      "545f637e-0fb8-4598-8190-e4270668f2d1"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学壳: Học tập vỏ máy",
+      "学籍: Học tập sổ tay"
+    ],
+    "similarityScore": 0.86,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "e2f773bd-72a3-41a3-9445-65e4a9db9f37",
+      "6716041f-e3f6-47ee-97ae-7826ff25f6ef"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "学扣: Học tập khóa nẹp",
+      "学块: Học tập khối nẹp"
+    ],
+    "similarityScore": 0.94,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "18179a54-5419-4cbc-887f-6395fa9683e3",
+      "4b930391-c426-4b23-a698-13a2b2ef5903"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "考图: Khảo sát sơ đồ",
+      "考所: Khảo sát cơ sở"
+    ],
+    "similarityScore": 0.86,
+    "suggestedAction": "Set needsReview = true for human verification"
+  },
+  {
+    "recordIds": [
+      "9775dd08-960d-4066-a431-bce799b00a26",
+      "b371811a-1303-4b1d-8964-b67aaf8ac50b"
+    ],
+    "field": "meaningVi",
+    "errorType": "HIGH_SEMANTIC_SIMILARITY_NEEDS_REVIEW",
+    "currentValues": [
+      "考线: Khảo sát tuyến đường",
+      "考路: Khảo sát tuyến đường"
+    ],
+    "similarityScore": 1,
+    "suggestedAction": "Set needsReview = true for human verification"
+  }
+]

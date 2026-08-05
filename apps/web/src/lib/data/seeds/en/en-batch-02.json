@@ -1,0 +1,78 @@
+[
+  {
+    "id": "en-g-03",
+    "language": "en",
+    "titleVi": "Thể bị động (Passive Voice) trong thông báo công cộng & nhà hàng khách sạn",
+    "titleEn": "Passive Voice for Public Announcements & Hospitality Services",
+    "level": "B1",
+    "topic": "daily-life",
+    "factoryDomain": "dich_vu",
+    "formula": "Subject (Object of action) + be + Past Participle (V3) + (by Agent)",
+    "breakdownAnalysis": "Subject (Flight #204/Breakfast) + Auxiliary (is/are/was/were/has been) + V3 Verb (delayed/served/cleaned) + Modifier",
+    "explanationVi": "Dùng trong thông báo giao thông công cộng, quy định dịch vụ nhà hàng/khách sạn và tường thuật sự kiện khi trọng tâm hướng vào sự việc/đồ vật chứ không phải người thực hiện.",
+    "communicativeFunction": "Đọc và hiểu thông báo tại sân bay, ga tàu, quy định dịch vụ khách sạn và tin tức đời sống.",
+    "usageConditions": "Bắt buộc dùng khi người thực hiện hành động là công cộng, không quan trọng hoặc hiển nhiên.",
+    "forbiddenCases": "Không dùng thể bị động với các nội động từ không nhận tân ngữ (appear, happen, occur, exist).",
+    "exceptions": "Có thể dùng dạng bị động không ngôi trong tin tức: 'It is reported that...' hoặc 'It is believed that...'",
+    "sentencePosition": "Động từ 'be' đứng sau chủ ngữ (vật bị tác động) và ngay trước động từ chính dạng V3.",
+    "registerStyle": "Trang trọng, lịch sự trong thông báo hàng không, dịch vụ du lịch và tin tức.",
+    "correctExamples": [
+      { "en": "Flight VN123 has been delayed due to heavy rain.", "ipa": "/flaɪt viː-en wʌn tuː θriː hæz biːn dɪˈleɪd duː tuː ˈhevi reɪn/", "vi": "Chuyến bay VN123 đã bị hoãn do mưa lớn." },
+      { "en": "Breakfast is served every morning from 7 AM to 10 AM.", "ipa": "/ˈbrekfəst ɪz sɜːrvd ˈevri ˈmɔːrnɪŋ frəm sevən eɪ em tuː ten eɪ em/", "vi": "Bữa sáng được phục vụ mỗi sáng từ 7 giờ đến 10 giờ." },
+      { "en": "The museum was built in the 19th century.", "ipa": "/ðə mjuˈziːəm wʌz bɪlt ɪn ðə ˌnaɪnˈtiːnθ ˈsentʃəri/", "vi": "Bảo tàng đã được xây dựng vào thế kỷ 19." },
+      { "en": "Your luggage will be delivered directly to your hotel room.", "ipa": "/jʊər ˈlʌɡɪdʒ wɪl biː dɪˈlɪvərd dəˈrektli tuː jʊər hoʊˈtel ruːm/", "vi": "Hành lý của bạn sẽ được chuyển thẳng đến phòng khách sạn." },
+      { "en": "All hotel rooms are cleaned daily by our housekeeping staff.", "ipa": "/ɔːl hoʊˈtel ruːmz ɑːr kliːnd ˈdeɪli baɪ aʊər ˈhaʊskiːpɪŋ stæf/", "vi": "Tất cả các phòng khách sạn đều được dọn dẹp hằng ngày bởi nhân viên vệ sinh." }
+    ],
+    "factoryExamples": [
+      { "en": "More than 500 tickets were sold for the concert within ten minutes.", "ipa": "/mɔːr ðæn faɪv ˈhʌndrəd ˈtɪkɪts wɜːr soʊld fɔːr ðə ˈkɑːnsərt wɪˈðɪn ten ˈmɪnɪts/", "vi": "Hơn 500 vé đã được bán hết cho buổi hòa nhạc chỉ trong 10 phút." },
+      { "en": "The main park gate is locked after 9 PM for security.", "ipa": "/ðə meɪn pɑːrk ɡeɪt ɪz lɑːkt ˈæftər naɪn piː em fɔːr sɪˈkjʊrəti/", "vi": "Cổng chính công viên được khóa lại sau 9 giờ tối vì lý do an ninh." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongEn": "The accident was happened at the intersection.",
+        "viFix": "Chữa sai: Đổi thành 'The accident happened at the intersection' (Nội động từ 'happen' không dùng bị động).",
+        "rootCause": "Dùng bị động cho nội động từ happen/occur."
+      },
+      {
+        "wrongEn": "Breakfast is serve from 7 AM.",
+        "viFix": "Chữa sai: Đổi động từ 'serve' thành dạng Past Participle V3 'served'.",
+        "rootCause": "Dùng động từ nguyên mẫu thay vì V3 sau is/are."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Dùng bị động cho các nội động từ như happen, occur, appear.",
+      "Quên biến đổi động từ chính về dạng V3/Past Participle.",
+      "Quên trợ động từ 'be' (is/are/was/were/been) trong câu bị động."
+    ],
+    "confusingStructures": [
+      { "name": "Passive Voice (Object + be + V3)", "meaning": "Nhấn mạnh vào thông báo/dịch vụ được cung cấp." },
+      { "name": "Active Voice (Subject + V + Object)", "meaning": "Nhấn mạnh vào người thực hiện hành động." }
+    ],
+    "comparisonTable": "Passive Voice (Focus on service/announcement) vs Active Voice (Focus on agent/person).",
+    "workplaceDialogue": {
+      "title": "Airport Announcement for Flight Delay",
+      "turns": [
+        { "speaker": "Airport Staff", "textEn": "Attention passengers: Flight VN123 has been delayed by 30 minutes.", "ipa": "/əˈtenʃn ˈpæsəndʒərz flaɪt viː-en wʌn tuː θriː hæz biːn dɪˈleɪd baɪ ˈθɜːrti ˈmɪnɪts/", "translationVi": "Xin hành khách chú ý: Chuyến bay VN123 đã bị hoãn 30 phút." },
+        { "speaker": "Passenger", "textEn": "Oh, thank you for the announcement.", "ipa": "/oʊ θæŋk juː fɔːr ðə əˈnaʊnsmənt/", "translationVi": "Ồ, cảm ơn thông báo của bạn." }
+      ]
+    },
+    "coreVocabulary": ["has been delayed", "is served", "was built", "delivered", "cleaned"],
+    "quickCheck": [
+      { "question": "Nội động từ nào KHÔNG ĐƯỢC dùng ở dạng bị động?", "options": ["happen", "serve", "clean"], "answer": "happen" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Select the correct passive voice sentence for airport announcements:",
+        "options": ["Flight VN123 has been delayed due to heavy rain.", "Flight VN123 has delayed due to rain.", "The accident was happened at 3 PM."],
+        "correctIndex": 0,
+        "explanation": "Option 1 is correct: Subject + has been + V3 (delayed)."
+      }
+    ],
+    "relatedLessons": ["en-g-01", "en-g-02"],
+    "flashcardData": { "front": "Subject + be + V3", "back": "Passive Voice for public announcements & hospitality services" },
+    "audioText": "Flight VN123 has been delayed due to heavy rain.",
+    "searchKeywords": "passive voice, airport announcement, hotel services, daily life, travel",
+    "filterMetadata": { "level": "B1", "topic": "daily-life", "domain": "dich_vu" }
+  }
+]

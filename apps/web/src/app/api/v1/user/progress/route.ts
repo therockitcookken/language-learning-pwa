@@ -5,10 +5,14 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     let userId = searchParams.get('userId');
+    let isGuest = false;
+    let userRole = 'LEARNER';
 
     if (!userId) {
       const guest = await db.user.findFirst({ where: { isGuest: true } });
       userId = guest?.id || null;
+      isGuest = true;
+      userRole = 'GUEST';
     }
 
     if (!userId) {
@@ -20,6 +24,8 @@ export async function GET(req: Request) {
           wordsLearned: 45,
           quizzesPassed: 6,
           dailyGoalPercent: 75,
+          isGuest: true,
+          userRole: 'GUEST'
         },
       });
     }
@@ -41,17 +47,51 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       data: {
-        xp: totalXp + 150,
+        xp: totalXp,
         level,
-        streak: 5,
+        streak: 5, // Mocked for now, normally computed from last active date
         wordsLearned: reviews + 35,
         quizzesPassed: quizAttempts + 4,
         dailyGoalPercent: 80,
+        isGuest,
+        userRole,
       },
     });
   } catch (error) {
     return NextResponse.json(
       { error: { code: 'PROGRESS_ERROR', message: 'Lỗi tải thống kê tiến độ.' } },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    let userId = null;
+    
+    // Find guest user if no auth token is provided (mock auth)
+    const guest = await db.user.findFirst({ where: { isGuest: true } });
+    userId = guest?.id || null;
+
+    if (!userId) {
+      return NextResponse.json({ success: true, message: 'Saved to local storage (No Guest DB)' });
+    }
+
+    if (body.action === 'ADD_XP' && body.amount) {
+      await db.progressEvent.create({
+        data: {
+          userId,
+          eventType: 'xp_added_manually',
+          xpEarned: body.amount,
+        }
+      });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json(
+      { error: { code: 'PROGRESS_UPDATE_ERROR', message: 'Lỗi cập nhật tiến độ.' } },
       { status: 500 }
     );
   }

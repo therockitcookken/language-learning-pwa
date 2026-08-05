@@ -1,0 +1,157 @@
+[
+  {
+    "id": "zh-g-01",
+    "language": "zh",
+    "titleVi": "Cấu trúc bắt buộc / cần thiết trong đời sống với \"必须\"",
+    "titleEn": "Mandatory Requirement in Daily Life with \"必须\"",
+    "titleZhSimp": "必须 + 动词",
+    "level": "HSK2",
+    "topic": "daily-life",
+    "factoryDomain": "giao_tiep",
+    "formula": "Chủ ngữ + 必须 (bìxū) + Động từ + Tân ngữ",
+    "breakdownAnalysis": "主语(我们/乘客/学生) + 必须(副词/表示必要与强制) + 动词(系/带/遵守) + 宾语(安全带/护照/交通规则)",
+    "explanationVi": "Dùng để diễn tả các quy định giao thông, quy tắc trường học, quy định y tế hoặc yêu cầu bắt buộc trong cuộc sống hằng ngày.",
+    "communicativeFunction": "Đưa ra lời khuyên bắt buộc, nhắc nhở tuân thủ quy định giao thông, quy tắc khách sạn và quy định di chuyển sân bay.",
+    "usageConditions": "Sử dụng trong hướng dẫn du lịch, quy định nhà trường, lời nhắc của bác sĩ hoặc quy tắc giao thông.",
+    "forbiddenCases": "Không dùng khi đưa ra lời khuyên cá nhân thân mật nhẹ nhàng (dùng 应该) hoặc khi cấm đoán tuyệt đối (dùng 禁止).",
+    "exceptions": "Trong câu phủ định, không dùng 不必须 mà phải dùng 不用 hoặc 不必 (không cần).",
+    "sentencePosition": "Đứng trước động từ chính hoặc cụm động từ trong câu.",
+    "registerStyle": "Trang trọng, chính thức trong quy định dịch vụ công cộng và lời nhắc cuộc sống.",
+    "correctExamples": [
+      { "zh": "乘坐飞机必须出示有效护照。", "pinyin": "Chéngzuò fēijī bìxū chūshì yǒuxiào hùzhào.", "vi": "Đi máy bay bắt buộc phải xuất trình hộ chiếu còn hiệu lực." },
+      { "zh": "开汽车必须系好安全带。", "pinyin": "Kāi qìchē bìxū jì hǎo ānquándài.", "vi": "Lái xe ô tô bắt buộc phải thắt dây an toàn." },
+      { "zh": "按时服药必须遵照医生的叮嘱。", "pinyin": "Ànshí fúyào bìxū zūnzhào yīshēng de dīngzhǔ.", "vi": "Uống thuốc đúng giờ bắt buộc phải tuân theo dặn dò của bác sĩ." },
+      { "zh": "进入图书馆必须保持安静。", "pinyin": "Jìnrù túshūguǎn bìxū bǎochí ānjìng.", "vi": "Vào thư viện bắt buộc phải giữ yên tĩnh." },
+      { "zh": "过马路必须看清红绿灯。", "pinyin": "Guò mǎlù bìxū kànqīng hónglǜdēng.", "vi": "Sang đường bắt buộc phải nhìn rõ đèn giao thông." }
+    ],
+    "factoryExamples": [
+      { "zh": "入住酒店必须登记身份证件。", "pinyin": "Rùzhù jiǔdiàn bìxū dēngjì shēnfèn zhèngjiàn.", "vi": "Nhận phòng khách sạn bắt buộc phải đăng ký giấy tờ tùy thân." },
+      { "zh": "参加考试必须携带准考证。", "pinyin": "Cānjiā kǎoshì bìxū xiédài zhǔnkǎozhèng.", "vi": "Tham gia kỳ thi bắt buộc phải mang theo thẻ dự thi." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongZh": "过马路要必须看红绿灯。",
+        "viFix": "Chữa sai: Không chèn thừa từ \"要\" trước \"必须\". 必须 đã bao hàm ý nghĩa bắt buộc.",
+        "rootCause": "Ảnh hưởng bởi thói quen dịch lặp từ tiếng Việt (\"cần phải bắt buộc\")."
+      },
+      {
+        "wrongZh": "过马路看必须红绿灯。",
+        "viFix": "Chữa sai: 必须 phải đứng trước động từ 看, không được đặt sau động từ.",
+        "rootCause": "Đặt sai vị trí phó từ 必须 trong câu."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Đặt từ 必须 đứng sau động từ chính.",
+      "Chèn thêm từ 要 hoặc 应该 ngay trước 必须 làm lặp ngữ nghĩa.",
+      "Dùng 不必须 trong câu phủ định thay vì dùng 不用 / 不必."
+    ],
+    "confusingStructures": [
+      { "name": "必须", "meaning": "Bắt buộc 100% theo quy định pháp lý/luật giao thông." },
+      { "name": "应该", "meaning": "Nên làm, khuyên bảo nhẹ nhàng." },
+      { "name": "禁止", "meaning": "Nghiêm cấm tuyệt đối." }
+    ],
+    "comparisonTable": "必须 (100% Bắt buộc) vs 应该 (Khuyên nên làm) vs 禁止 (Nghiêm cấm).",
+    "workplaceDialogue": {
+      "title": "Nhắc nhở an toàn giao thông khi đi du lịch",
+      "turns": [
+        { "speaker": "Hướng dẫn viên", "zh": "大家坐好，开车前必须系好安全带。", "pinyin": "Dàjiā zuò hǎo, kāichē qián bìxū jì hǎo ānquándài.", "vi": "Mọi người ngồi ổn định nhé, trước khi xe chạy bắt buộc phải thắt dây an toàn." },
+        { "speaker": "Du khách", "zh": "好的，我们已经系好了。", "pinyin": "Hǎo de, wǒmen yǐjīng jì hǎo le.", "vi": "Vâng, chúng tôi đã thắt xong rồi." }
+      ]
+    },
+    "coreVocabulary": ["必须", "护照", "安全带", "图书馆", "遵照", "登记"],
+    "quickCheck": [
+      { "question": "Từ \"必须\" đứng ở vị trí nào trong câu?", "options": ["Trước động từ chính", "Sau động từ chính", "Cuối câu"], "answer": "Trước động từ chính" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Điền từ thích hợp: 乘坐飞机____出示有效护照。",
+        "options": ["必须", "不用", "禁止"],
+        "correctIndex": 0,
+        "explanation": "Đi máy bay theo quy định bắt buộc phải dùng 必须."
+      }
+    ],
+    "relatedLessons": ["zh-g-02", "zh-g-06"],
+    "flashcardData": { "front": "必须 + Động từ", "back": "Yêu cầu bắt buộc theo quy định đời sống / giao thông" },
+    "audioText": "乘坐飞机必须出示有效护照。",
+    "searchKeywords": "bi xu, giao thong, du lich, khach san, quy dinh",
+    "filterMetadata": { "level": "HSK2", "topic": "daily-life", "domain": "giao_tiep" }
+  },
+  {
+    "id": "zh-g-02",
+    "language": "zh",
+    "titleVi": "Cấu trúc chủ động cất giữ / di chuyển đồ vật gia đình với \"把\"",
+    "titleEn": "Active Item Placement in Daily Life with \"把\"",
+    "titleZhSimp": "主语 + 把 + 宾语 + 动词 + 在/到/进/好",
+    "level": "HSK3",
+    "topic": "daily-life",
+    "factoryDomain": "gia_dinh",
+    "formula": "Chủ ngữ + 把 (bǎ) + Tân ngữ (đồ vật) + Động từ + Bổ ngữ vị trí/kết quả",
+    "breakdownAnalysis": "主语(妈妈/我/小明) + 把 + 宾语(钥匙/水果/衣服) + 动词(放/收/挂/摆) + 补语(在桌子上/进衣柜里/好)",
+    "explanationVi": "Dùng để diễn tả hành động chủ động tác động lên đồ vật sinh hoạt hằng ngày khiến vật đó di chuyển vị trí, cất giữ hoặc thay đổi trạng thái.",
+    "communicativeFunction": "Nhắc nhở người thân cất dọn đồ đạc ngăn nắp, đặt đồ đúng nơi quy định, chuẩn bị đồ đạc khi di chuyển.",
+    "usageConditions": "Tân ngữ sau 把 phải là đồ vật xác định cụ thể và động từ bắt buộc phải có bổ ngữ hoặc 了 đi kèm.",
+    "forbiddenCases": "Không dùng câu chữ 把 cho các động từ cảm xúc (喜欢, 讨厌), phán đoán (是, 认为) hoặc trạng thái tĩnh.",
+    "exceptions": "Trong câu phủ định hoặc từ chỉ nguyện vọng, 没 / 不 / 想 / 要 phải đứng TRƯỚC 把.",
+    "sentencePosition": "Cụm \"把 + Tân ngữ\" đứng giữa Chủ ngữ và Động từ chính.",
+    "registerStyle": "Thân mật, tự nhiên trong giao tiếp gia đình, bạn bè và sinh hoạt hằng ngày.",
+    "correctExamples": [
+      { "zh": "请把钥匙放在茶几上。", "pinyin": "Qǐng bǎ yàoshi fàng zài chájī shàng.", "vi": "Xin hãy đặt chìa khóa lên bàn trà." },
+      { "zh": "妈妈把买来的新鲜水果洗干净了。", "pinyin": "Māma bǎ mǎi lái de xīnxiān shuǐguǒ xǐ gānjìng le.", "vi": "Mẹ đã rửa sạch trái cây tươi vừa mua về rồi." },
+      { "zh": "请把洗好的衣服挂在阳台上。", "pinyin": "Qǐng bǎ xǐ hǎo de yīfu guà zài yángtái shàng.", "vi": "Hãy treo quần áo đã giặt sạch lên ban công." },
+      { "zh": "把旧书收进书柜里。", "pinyin": "Bǎ jiùshū shōu jìn shūguì lǐ.", "vi": "Cất sách cũ vào trong tủ sách." },
+      { "zh": "出门前记得把空调关掉。", "pinyin": "Chūmén qián jìde bǎ kōngtiáo guāndiào.", "vi": "Trước khi ra ngoài nhớ tắt điều hòa đi." }
+    ],
+    "factoryExamples": [
+      { "zh": "请把垃圾扔进垃圾桶里。", "pinyin": "Qǐng bǎ lājī rēng jìn lājītǒng lǐ.", "vi": "Xin hãy vứt rác vào trong thùng rác." },
+      { "zh": "小王把拍好的照片头发到了朋友圈。", "pinyin": "Xiǎowáng bǎ pāi hǎo de zhàopiàn fā dào le péngyouquān.", "vi": "Tiểu Vương đã đăng bức ảnh vừa chụp lên nhật ký WeChat." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongZh": "请把钥匙放。",
+        "viFix": "Chữa sai: Thêm bổ ngữ vị trí \"在桌子上\" hoặc \"好\". Động từ trong câu chữ 把 không được đứng trần.",
+        "rootCause": "Thiếu thành phần bổ ngữ hoặc kết quả sau động từ."
+      },
+      {
+        "wrongZh": "请放把钥匙在桌子上。",
+        "viFix": "Chữa sai: Đưa \"把 + 钥匙\" lên trước动词 放.",
+        "rootCause": "Đặt sai vị trí cụm 把."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Để động từ trần đứng cuối câu chữ 把 mà không có bổ ngữ hoặc 了.",
+      "Đặt phó từ phủ định 没 đứng sau 把 thay vì đứng trước 把.",
+      "Dùng câu 把 với tân ngữ trừu tượng không xác định."
+    ],
+    "confusingStructures": [
+      { "name": "把字句", "meaning": "Chủ động cất dọn/thao tác làm di chuyển vị trí đồ vật." },
+      { "name": "被字句", "meaning": "Bị động đồ vật bị tác động hư hỏng/thất lạc." }
+    ],
+    "comparisonTable": "把字句 (Chủ động cất dọn đồ đạc) vs 被字句 (Bị động đồ vật bị va đập/hỏng).",
+    "workplaceDialogue": {
+      "title": "Dọn dẹp phòng khách trước khi khách đến chơi",
+      "turns": [
+        { "speaker": "Mẹ", "zh": "客人快到了，把桌子上的书收一收。", "pinyin": "Kèrén kuài dào le, bǎ zhuōzi shàng de shū shōu yi shōu.", "vi": "Khách sắp đến rồi, cất gọn sách trên bàn đi con." },
+        { "speaker": "Con", "zh": "好的，我已经把书放进书房了。", "pinyin": "Hǎo de, wǒ yǐjīng bǎ shū fàng jìn shūfáng le.", "vi": "Vâng ạ, con đã cất sách vào phòng đọc sách rồi." }
+      ]
+    },
+    "coreVocabulary": ["把", "钥匙", "茶几", "衣服", "阳台", "空调"],
+    "quickCheck": [
+      { "question": "Động từ trong câu chữ 把 có được đứng trần một mình không?", "options": ["Không được, bắt buộc có bổ ngữ/thành phần khác", "Được phép", "Tùy thuộc vào thời tiết"], "answer": "Không được, bắt buộc có bổ ngữ/thành phần khác" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Chọn câu chữ 把 chuẩn ngữ pháp giao tiếp hằng ngày:",
+        "options": ["请把钥匙放在茶几上。", "请把钥匙放。", "请放把钥匙在茶几上。"],
+        "correctIndex": 0,
+        "explanation": "Câu 1 đầy đủ cấu trúc 把 + Tân ngữ + Động từ 放 + Bổ ngữ 在茶几上."
+      }
+    ],
+    "relatedLessons": ["zh-g-01", "zh-g-03"],
+    "flashcardData": { "front": "把 + Tân ngữ + Động từ + Bổ ngữ", "back": "Chủ động cất dọn / di chuyển đồ vật gia đình" },
+    "audioText": "请把钥匙放在茶几上。",
+    "searchKeywords": "ba zi ju, cau chu ba, gia dinh, cat don do dac, sinh hoat",
+    "filterMetadata": { "level": "HSK3", "topic": "daily-life", "domain": "gia_dinh" }
+  }
+]

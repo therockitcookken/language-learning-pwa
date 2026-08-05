@@ -1,0 +1,156 @@
+[
+  {
+    "id": "zh-g-03",
+    "language": "zh",
+    "titleVi": "Cấu trúc câu bị động \"被\" trong sinh hoạt & đời sống",
+    "titleEn": "Passive Voice with \"被\" for Personal Life Events",
+    "titleZhSimp": "主语 + 被 + 施事者 + 动词 + 结果补语",
+    "level": "HSK3",
+    "topic": "daily-life",
+    "factoryDomain": "doi_song",
+    "formula": "Tân ngữ chịu tác động + 被 (bèi) + Tác nhân + Động từ + 坏/掉/走 (bổ ngữ)",
+    "breakdownAnalysis": "主语(手机/自行车/钱包) + 被 + 施事者(雨水/小偷/大风) + 动词(淋湿/偷走/刮跑) + 补语(了/坏)",
+    "explanationVi": "Dùng khi nói về việc cá nhân hoặc đồ vật bị sự cố ngoại cảnh, người khác tác động dẫn đến thất lạc, hỏng hóc hoặc bị ảnh hưởng.",
+    "communicativeFunction": "Chia sẻ sự cố cá nhân, tường thuật sự việc đã xảy ra với bạn bè, mượn sự trợ giúp khi gặp sự cố.",
+    "usageConditions": "Bắt buộc có động từ mang tính gây tác động và câu phải có bổ ngữ kết quả hoặc 了.",
+    "forbiddenCases": "Không dùng câu bị động 被 cho các việc vui vẻ thành công thuần túy không có sắc thái bị ảnh hưởng.",
+    "exceptions": "Trong khẩu ngữ giao tiếp đời sống có thể thay 被 bằng 让 hoặc 叫.",
+    "sentencePosition": "Cụm \"被 + Tác nhân\" đứng giữa Tân ngữ chịu tác động và Động từ chính.",
+    "registerStyle": "Khẩu ngữ đời sống, tâm sự bạn bè, tường thuật kỷ niệm hoặc báo mất đồ.",
+    "correctExamples": [
+      { "zh": "我的新自行车被小偷看中了。", "pinyin": "Wǒ de xīn zìxíngchē bèi xiǎotōu kànzhòng le.", "vi": "Chiếc xe đạp mới của tôi đã bị kẻ trộm nhắm tới." },
+      { "zh": "放在桌子上的代码文件被风吹走了。", "pinyin": "Fàng zài zhuōzi shàng de dàimǎ wénjiàn bèi fēng chuīzǒu le.", "vi": "Tài liệu đặt trên bàn đã bị gió thổi bay mất." },
+      { "zh": "我的手机被雨水淋坏了。", "pinyin": "Wǒ de shǒujī bèi yǔshuǐ línhuài le.", "vi": "Điện thoại của tôi đã bị nước mưa làm hỏng." },
+      { "zh": "小狗被雷声吓得躲了起来。", "pinyin": "Xiǎogǒu bèi léishēng xià de duǒ le qǐlái.", "vi": "Chú chó nhỏ bị tiếng sấm làm cho giật mình trốn mất." },
+      { "zh": "他的衣服被墨水弄脏了。", "pinyin": "Tā de yīfu bèi mòshuǐ nòngzāng le.", "vi": "Quần áo của anh ấy bị mực làm bẩn mất rồi." }
+    ],
+    "factoryExamples": [
+      { "zh": "我不小心被门框碰了一下头。", "pinyin": "Wǒ bù xiǎoxīn bèi ménkuàng pèng le yíxià tóu.", "vi": "Tôi không cẩn thận bị va đầu vào khung cửa." },
+      { "zh": "冰淇淋被小明吃光了。", "pinyin": "Bīngqílín bèi xiǎomíng chīguāng le.", "vi": "Kem đã bị Tiểu Minh ăn sạch mất rồi." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongZh": "自行车淋坏被雨水了。",
+        "viFix": "Chữa sai: 被 + Tác nhân phải đứng trước động từ chính 淋坏.",
+        "rootCause": "Đặt sai vị trí trợ từ bị động 被."
+      },
+      {
+        "wrongZh": "我的手机被雨水淋。",
+        "viFix": "Chữa sai: Câu bị động 被 bắt buộc phải có bổ ngữ 坏/湿 hoặc 了 sau động từ.",
+        "rootCause": "Thiếu bổ ngữ kết quả sau động từ."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Đặt trợ từ 被 đứng sau động từ chính.",
+      "Quên bổ ngữ kết quả 坏 / 脏 / 走 sau động từ trong câu bị động.",
+      "Đặt phó từ phủ định 没 đứng sau 被 thay vì đứng trước 被."
+    ],
+    "confusingStructures": [
+      { "name": "被字句", "meaning": "Bị tác động ngoại cảnh ảnh hưởng hỏng hóc/thất lạc." },
+      { "name": "把字句", "meaning": "Chủ động dọn dẹp cất giữ đồ đạc." }
+    ],
+    "comparisonTable": "Câu bị động 被 (Bị sự cố ngoại cảnh) vs Câu chữ 把 (Chủ động dọn dẹp đồ đạc).",
+    "workplaceDialogue": {
+      "title": "Tường thuật sự cố mắc mưa khi đi học",
+      "turns": [
+        { "speaker": "Bạn học", "zh": "你衣服怎么全湿了？", "pinyin": "Nǐ yīfu zěnme quán shī le?", "vi": "Sao quần áo bạn ướt hết thế này?" },
+        { "speaker": "Sinh viên", "zh": "刚才路上没带伞，被大雨淋湿了。", "pinyin": "Gāngcái lùshàng méi dài sǎn, bèi dàyǔ línshī le.", "vi": "Vừa nãy trên đường không mang ô, bị trận mưa to làm ướt sũng rồi." }
+      ]
+    },
+    "coreVocabulary": ["被", "自行车", "淋坏", "吹走", "弄脏", "躲起来"],
+    "quickCheck": [
+      { "question": "Trợ từ bị động \"被\" đứng ở đâu trong câu?", "options": ["Trước tác nhân gây ra tác động", "Sau động từ chính", "Cuối câu"], "answer": "Trước tác nhân gây ra tác động" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Chọn câu bị động \"被\" viết đúng ngữ pháp đời sống:",
+        "options": ["我的手机被雨水淋坏了。", "我的手机淋坏被雨水了。", "我的手机被雨水淋。"],
+        "correctIndex": 0,
+        "explanation": "Câu 1 đúng cấu trúc Tân ngữ + 被 + Tác nhân + Động từ + Bổ ngữ 坏 + 了."
+      }
+    ],
+    "relatedLessons": ["zh-g-02", "zh-g-04"],
+    "flashcardData": { "front": "主语 + 被 + 施事者 + 动词 + 坏/湿", "back": "Báo cáo đồ vật cá nhân bị tác động sự cố" },
+    "audioText": "我的手机被雨水淋坏了。",
+    "searchKeywords": "bei zi ju, cau bi dong, doi song, su co ca nhan, truyen thong",
+    "filterMetadata": { "level": "HSK3", "topic": "daily-life", "domain": "doi_song" }
+  },
+  {
+    "id": "zh-g-04",
+    "language": "zh",
+    "titleVi": "Cấu trúc câu so sánh giá cả, thời tiết & điểm số với \"比\"",
+    "titleEn": "Comparative Structure with \"比\" for Prices, Weather & Scores",
+    "titleZhSimp": "A + 比 + B + 形容词 / 动词 + 得 + 多 / 具体的数量",
+    "level": "HSK2",
+    "topic": "shopping",
+    "factoryDomain": "mua_sam",
+    "formula": "Đối tượng A + 比 (bǐ) + Đối tượng B + Tính từ + (Chênh lệch / 多了)",
+    "breakdownAnalysis": "A(今天/这件衣服/我的成绩) + 比 + B(昨天/那件/上次) + 性质(热/便宜/好) + 数量(三度/五十块/很多)",
+    "explanationVi": "Dùng để so sánh thời tiết, giá cả mua sắm, điểm số học tập hoặc chiều cao/tuổi tác giữa hai đối tượng.",
+    "communicativeFunction": "Trải nghiệm mua sắm, so sánh món đồ rẻ/đắt, thảo luận thời tiết du lịch và kết quả học tập.",
+    "usageConditions": "Hai đối tượng A và B phải thuộc cùng thuộc tính để so sánh.",
+    "forbiddenCases": "Không thêm phó từ 很, 非常, 十分 trước tính từ đứng sau 比.",
+    "exceptions": "Nếu biểu thị chênh lệch lớn dùng 得多 hoặc 多了 đứng sau tính từ, chênh lệch ít dùng 一点儿.",
+    "sentencePosition": "Từ 比 đứng giữa đối tượng A và đối tượng B.",
+    "registerStyle": "Giao tiếp tự nhiên khi mua sắm, ăn uống, đi du lịch và trò chuyện bạn bè.",
+    "correctExamples": [
+      { "zh": "今天的温度比昨天高三度。", "pinyin": "Jīntiān de wēndù bǐ zuótiān gāo sān dù.", "vi": "Nhiệt độ hôm nay cao hơn hôm qua 3 độ." },
+      { "zh": "这件蓝色的衬衫比那件便宜五十块。", "pinyin": "Zhè jiàn lánsè de chènshān bǐ nà jiàn piányi wǔshí kuài.", "vi": "Chiếc áo sơ mi màu xanh này rẻ hơn chiếc kia 50 tệ." },
+      { "zh": "妹妹跑得比我快得多。", "pinyin": "Mèimei pǎo de bǐ wǒ kuài de duō.", "vi": "Em gái chạy nhanh hơn tôi rất nhiều." },
+      { "zh": "坐高铁比坐普通火车省时间。", "pinyin": "Zuò gāotiě bǐ zuò pǔtōng huǒchē shěng shíjiān.", "vi": "Đi tàu cao tốc tiết kiệm thời gian hơn đi tàu thường." },
+      { "zh": "他这次汉语考试成绩比上次提高了十分。", "pinyin": "Tā zhè cì hànyǔ kǎoshì chéngjì bǐ shàng cì tígāo le shí fēn.", "vi": "Điểm thi tiếng Trung lần này của anh ấy tăng 10 điểm so với lần trước." }
+    ],
+    "factoryExamples": [
+      { "zh": "这家餐馆菜的口味比隔壁好得多。", "pinyin": "Zhè jiā cānguǎn cài de kǒuwèi bǐ gébì hǎo de duō.", "vi": "Khẩu vị món ăn tiệm này ngon hơn tiệm bên cạnh nhiều." },
+      { "zh": "北京的夏天比我的家乡热一些。", "pinyin": "Běijīng de xiàtiān bǐ wǒ de jiāxiāng rè yìxiē.", "vi": "Mùa hè ở Bắc Kinh nóng hơn quê tôi một chút." }
+    ],
+    "wrongExamples": [
+      {
+        "wrongZh": "今天比昨天很高。",
+        "viFix": "Chữa sai: Bỏ từ \"很\". Sau từ 比 chỉ dùng tính từ trần hoặc kết hợp với 得多 / 多了.",
+        "rootCause": "Thêm phó từ mức độ 很 lặp nghĩa trong câu so sánh 比."
+      },
+      {
+        "wrongZh": "今天热比昨天。",
+        "viFix": "Chữa sai: Đưa từ 比 lên trước đối tượng B (昨天).",
+        "rootCause": "Đặt sai vị trí từ 比 trong câu."
+      }
+    ],
+    "commonLearnerErrors": [
+      "Thêm 很 hoặc 非常 trước tính từ sau 比.",
+      "Đặt tính từ đứng trước từ 比.",
+      "Nhầm lẫn giữa so sánh kém 没有 và so sánh hơn 比."
+    ],
+    "confusingStructures": [
+      { "name": "A比B+Tính từ", "meaning": "A hơn B về thuộc tính." },
+      { "name": "A没有B+Tính từ", "meaning": "A không bằng B (kém hơn)." }
+    ],
+    "comparisonTable": "A比B+Tính từ (A hơn B) vs A没有B+Tính từ (A kém B).",
+    "workplaceDialogue": {
+      "title": "So sánh mua sắm quần áo khi đi shopping",
+      "turns": [
+        { "speaker": "Khách hàng", "zh": "这黑色大衣和红色大衣哪件更划算？", "pinyin": "Zhè hēisè dàyī hé hóngsè dàyī nǎ jiàn gèng huásuàn?", "vi": "Chiếc áo khoác đen và áo khoác đỏ này chiếc nào hời hơn?" },
+        { "speaker": "Nhân viên", "zh": "黑色的在打折，比红色的便宜一百块。", "pinyin": "Hēisè de zài dǎzhé, bǐ hóngsè de piányi yì bǎi kuài.", "vi": "Chiếc màu đen đang giảm giá, rẻ hơn chiếc màu đỏ 100 tệ." }
+      ]
+    },
+    "coreVocabulary": ["比", "温度", "便宜", "划算", "打折", "成绩"],
+    "quickCheck": [
+      { "question": "Có được dùng phó từ \"很\" trước tính từ trong câu so sánh \"比\" không?", "options": ["Tuyệt đối không được", "Được phép thoải mái", "Chỉ dùng trong văn viết"], "answer": "Tuyệt đối không được" }
+    ],
+    "fullQuiz": [
+      {
+        "id": "q1",
+        "question": "Chọn câu so sánh mua sắm đúng ngữ pháp:",
+        "options": ["蓝衬衫比红衬衫便宜五十块。", "蓝衬衫比红衬衫很便宜。", "蓝衬衫便宜比红衬衫。"],
+        "correctIndex": 0,
+        "explanation": "Câu 1 đúng công thức A + 比 + B + Tính từ + Số lượng chênh lệch."
+      }
+    ],
+    "relatedLessons": ["zh-g-01", "zh-g-03"],
+    "flashcardData": { "front": "A + 比 + B + Tính từ + (Chênh lệch)", "back": "So sánh thời tiết, giá cả mua sắm, điểm số" },
+    "audioText": "蓝衬衫比红衬衫便宜五十块。",
+    "searchKeywords": "cau so sanh bi, gia ca, mua sam, thoi tiet, diem so",
+    "filterMetadata": { "level": "HSK2", "topic": "shopping", "domain": "mua_sam" }
+  }
+]

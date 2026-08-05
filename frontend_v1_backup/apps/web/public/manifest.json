@@ -1,0 +1,16 @@
+{
+  "name": "Factory Language Learning - Tiếng Trung & Tiếng Anh Công Xưởng",
+  "short_name": "FactoryLang",
+  "description": "Ứng dụng PWA học tiếng Trung & tiếng Anh chuyên sâu cho công nhân & kỹ thuật viên nhà máy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030712",
+  "theme_color": "#030712",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

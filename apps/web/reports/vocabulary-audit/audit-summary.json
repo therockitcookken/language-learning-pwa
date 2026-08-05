@@ -1,0 +1,10 @@
+{
+  "totalRecordsAudited": 69,
+  "exactDuplicatesCount": 0,
+  "suspiciousGeneratedWordsCount": 0,
+  "repeatedPrefixPatternsCount": 0,
+  "repeatedTranslationTemplatesCount": 0,
+  "placeholderContentCount": 0,
+  "invalidPinyinCount": 0,
+  "auditTimestamp": "2026-08-04T20:25:48.020Z"
+}

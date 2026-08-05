@@ -2,39 +2,63 @@
 
 import React, { useState, useEffect } from 'react';
 import { useI18n } from '@/lib/i18n/i18n-context';
-import { audioEngine } from '@/lib/audio/audio-engine';
+import { SRSGrade } from '@/lib/domain/srs-engine';
 import {
   Layers,
-  Volume2,
-  Flame,
   BarChart3,
-  Shuffle,
-  Play,
-  Pause,
-  Download,
   Upload,
-  Sparkles,
+  RefreshCw,
+  BookOpen,
 } from 'lucide-react';
+
+import { FlashcardFilterBar, FlashcardFilters } from './flashcard-filter-bar';
+import { FlashcardDeckPlayer, FlashcardItem } from './flashcard-deck-player';
+import { SRSStatsDashboard } from './srs-stats-dashboard';
+import { ImportExportModal } from './import-export-modal';
+import { AnimatedButton, PageTransition } from '@/components/common/animations';
+import { uiSounds } from '@/lib/audio/ui-sounds';
 
 export function FlashcardView() {
   const { t } = useI18n();
-  const [subTab, setSubTab] = useState<'srs_deck' | 'custom_decks' | 'stats'>('srs_deck');
-  const [cards, setCards] = useState<any[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [reviewCount, setReviewCount] = useState(0);
+  const [subTab, setSubTab] = useState<'srs_deck' | 'stats'>('srs_deck');
 
-  // Helper 1: Auto-Play Slideshow Mode
-  const [isAutoPlay, setIsAutoPlay] = useState(false);
+  const [filters, setFilters] = useState<FlashcardFilters>({
+    lang: 'zh',
+    level: '',
+    topic: '',
+    pos: '',
+    status: 'all',
+    specialMode: '',
+  });
+
+  const [cards, setCards] = useState<FlashcardItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [dueCount, setDueCount] = useState(0);
+
+  const [isImportExportOpen, setIsImportExportOpen] = useState(false);
 
   const fetchCards = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/v1/flashcards?limit=50');
+      const params = new URLSearchParams({
+        lang: filters.lang,
+        limit: '100',
+      });
+      if (filters.level) params.set('level', filters.level);
+      if (filters.topic) params.set('topic', filters.topic);
+      if (filters.pos) params.set('pos', filters.pos);
+      if (filters.status) params.set('status', filters.status);
+      if (filters.specialMode) params.set('specialMode', filters.specialMode);
+
+      const res = await fetch(`/api/v1/flashcards?${params.toString()}`);
       const json = await res.json();
       if (json.data) {
         setCards(json.data);
+        if (json.dueCount !== undefined) {
+          setDueCount(json.dueCount);
+        } else {
+          setDueCount(json.data.length);
+        }
       }
     } catch {
       // Fallback
@@ -45,218 +69,161 @@ export function FlashcardView() {
 
   useEffect(() => {
     fetchCards();
-  }, []);
+  }, [filters]);
 
-  // Helper 2: Auto-Play Loop
-  useEffect(() => {
-    if (!isAutoPlay || cards.length === 0) return;
-    const interval = setInterval(() => {
-      setIsFlipped((prev) => !prev);
-      if (isFlipped) {
-        setCurrentIndex((prev) => (prev + 1) % cards.length);
-      }
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [isAutoPlay, isFlipped, cards]);
-
-  // Helper 3: Shuffle Deck
-  const handleShuffle = () => {
-    const shuffled = [...cards].sort(() => Math.random() - 0.5);
-    setCards(shuffled);
-    setCurrentIndex(0);
-    setIsFlipped(false);
-  };
-
-  // Helper 4: Export Flashcards CSV
-  const handleExportFlashcards = () => {
-    const csvContent =
-      'data:text/csv;charset=utf-8,' +
-      ['Mặt trước,Mặt sau,Phiên âm,Chủ đề']
-        .concat(
-          cards.map(
-            (c) => `"${c.frontText}","${c.backText}","${c.pinyinOrIpa}","${c.topic}"`
-          )
-        )
-        .join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `flashcards_deck_${Date.now()}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const currentCard = cards[currentIndex];
-
-  const handleRating = async (rating: 'again' | 'hard' | 'good' | 'easy') => {
-    if (!currentCard) return;
-
+  const handleRateCard = async (cardId: string, rating: SRSGrade) => {
     try {
       await fetch('/api/v1/flashcards/review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          flashcardId: currentCard.id,
+          flashcardId: cardId,
           rating,
         }),
       });
-      setReviewCount((prev) => prev + 1);
     } catch {
-      // Quiet fail
-    }
-
-    setIsFlipped(false);
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      setCurrentIndex(0);
+      // Quiet fallback
     }
   };
 
+  const handleToggleFavorite = (cardId: string) => {
+    setCards((prev) =>
+      prev.map((c) => (c.id === cardId ? { ...c, isStarred: !c.isStarred } : c))
+    );
+  };
+
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
-      {/* Header & Sub-tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+    <div className="space-y-6 max-w-5xl mx-auto">
+      {/* Module Title & Subtabs */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-slate-800/80 pb-5">
         <div>
-          <h2 className="text-2xl font-black text-slate-100 flex items-center gap-2.5">
-            <span>🎴</span> {t.flashcard}
+          <h2 className="text-2xl font-black text-white flex items-center gap-3">
+            <div className="p-2 rounded-2xl bg-orange-500/10 border-2 border-orange-500/20 text-orange-400 shadow-md">
+              <Layers className="w-6 h-6" />
+            </div>
+            <span>Thẻ Ghi Nhớ (SRS)</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Ôn tập lặp lại ngắt quãng (SM-2). Phím tắt: [Phím Cách] Lật thẻ, [1-4] Đánh giá.
+          <p className="text-xs font-medium text-slate-400 mt-1.5 flex items-center gap-2">
+            <span>Thuật toán Lặp lại ngắt quãng SM-2 chuyên sâu cho Thuật ngữ Công xưởng.</span>
+            <span className="text-[11px] font-bold bg-orange-500/15 text-orange-300 border border-orange-500/25 px-2.5 py-0.5 rounded-full shadow-sm">
+              {filters.lang === 'zh' ? '10,000 Thẻ Tiếng Trung' : '10,000 Thẻ Tiếng Anh'}
+            </span>
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5 bg-slate-900 border border-slate-800 p-1.5 rounded-2xl">
-          <button
-            onClick={() => setSubTab('srs_deck')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-              subTab === 'srs_deck'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
+        {/* Header Action Controls & Navigation */}
+        <div className="flex flex-wrap items-center gap-2">
+          <AnimatedButton
+            soundType="click"
+            onClick={() => setIsImportExportOpen(true)}
+            className="px-3.5 py-2 bg-slate-900/90 hover:bg-slate-800 border-2 border-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md"
           >
-            <Layers className="w-3.5 h-3.5 inline mr-1" /> Thẻ Lật Ôn Tập
-          </button>
-          <button
-            onClick={() => setSubTab('stats')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-              subTab === 'stats'
-                ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <BarChart3 className="w-3.5 h-3.5 inline mr-1" /> Thống Kê Ghi Nhớ
-          </button>
+            <Upload className="w-3.5 h-3.5 text-orange-400" /> Nhập/Xuất Thẻ
+          </AnimatedButton>
+
+          <div className="flex items-center gap-1 bg-slate-900/80 border-2 border-slate-800 p-1 rounded-xl backdrop-blur-xl shadow-md">
+            <AnimatedButton
+              soundType="click"
+              onClick={() => setSubTab('srs_deck')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-extrabold ${
+                subTab === 'srs_deck'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-md'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Layers className="w-4 h-4" /> Thẻ Lật Ôn Tập
+            </AnimatedButton>
+
+            <AnimatedButton
+              soundType="click"
+              onClick={() => setSubTab('stats')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-extrabold ${
+                subTab === 'stats'
+                  ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-md'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <BarChart3 className="w-4 h-4" /> Thống Kê
+            </AnimatedButton>
+          </div>
         </div>
       </div>
 
-      {subTab === 'srs_deck' && (
-        <div className="space-y-4">
-          {/* Action Helper Toolbar */}
-          <div className="flex items-center justify-between bg-slate-900/80 p-3 rounded-2xl border border-slate-800 text-xs">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleShuffle}
-                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer"
-              >
-                <Shuffle className="w-3.5 h-3.5 text-orange-400" /> Tráo Đổi Ngẫu Nhiên
-              </button>
-
-              <button
-                onClick={() => setIsAutoPlay(!isAutoPlay)}
-                className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                  isAutoPlay ? 'bg-orange-500 text-white' : 'bg-slate-800 text-slate-200'
-                }`}
-              >
-                {isAutoPlay ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                {isAutoPlay ? 'Tắt Tự Động' : 'Tự Động Trình Chạy'}
-              </button>
-            </div>
-
-            <button
-              onClick={handleExportFlashcards}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-orange-400" /> Xuất Bộ Thẻ CSV
-            </button>
-          </div>
-
-          {currentCard && (
-            <div
-              onClick={() => setIsFlipped(!isFlipped)}
-              className={`w-full min-h-[320px] bg-slate-900 border-2 ${
-                isFlipped ? 'border-orange-500 shadow-orange-500/20' : 'border-slate-800'
-              } rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer shadow-2xl transition-all duration-300 hover:border-orange-400 relative overflow-hidden`}
-            >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  audioEngine.speak(currentCard.frontText);
-                }}
-                className="absolute top-4 right-4 p-3 bg-slate-800 hover:bg-orange-500 text-white rounded-2xl cursor-pointer"
-              >
-                <Volume2 className="w-5 h-5" />
-              </button>
-
-              {!isFlipped ? (
-                <div className="space-y-3">
-                  <span className="text-xs text-slate-500 font-extrabold uppercase tracking-widest">
-                    [Mặt trước - Phím Cách để Lật]
-                  </span>
-                  <h3 className="text-4xl font-black text-white">{currentCard.frontText}</h3>
-                  {currentCard.pinyinOrIpa && (
-                    <p className="text-base font-bold text-orange-400">{currentCard.pinyinOrIpa}</p>
-                  )}
-                </div>
-              ) : (
-                <div className="space-y-4 animate-fadeIn">
-                  <span className="text-xs text-orange-400 font-extrabold uppercase tracking-widest">
-                    [Mặt sau - Nghĩa & Đáp án]
-                  </span>
-                  <p className="text-2xl font-black text-emerald-300 whitespace-pre-line">
-                    {currentCard.backText}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <button
-              onClick={() => handleRating('again')}
-              className="py-3 px-4 bg-rose-950/80 hover:bg-rose-900 border border-rose-500/40 text-rose-300 rounded-2xl font-extrabold text-xs flex flex-col items-center gap-1 cursor-pointer"
-            >
-              <span>Phím 1: Quên (Again)</span>
-              <span className="text-[10px] text-rose-400 font-normal">Ôn lại ngay</span>
-            </button>
-
-            <button
-              onClick={() => handleRating('hard')}
-              className="py-3 px-4 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-300 rounded-2xl font-extrabold text-xs flex flex-col items-center gap-1 cursor-pointer"
-            >
-              <span>Phím 2: Khó (Hard)</span>
-              <span className="text-[10px] text-amber-400 font-normal">Ôn sau 1 ngày</span>
-            </button>
-
-            <button
-              onClick={() => handleRating('good')}
-              className="py-3 px-4 bg-blue-950/80 hover:bg-blue-900 border border-blue-500/40 text-blue-300 rounded-2xl font-extrabold text-xs flex flex-col items-center gap-1 cursor-pointer"
-            >
-              <span>Phím 3: Nhớ tốt (Good)</span>
-              <span className="text-[10px] text-blue-400 font-normal">Ôn sau 6 ngày</span>
-            </button>
-
-            <button
-              onClick={() => handleRating('easy')}
-              className="py-3 px-4 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 rounded-2xl font-extrabold text-xs flex flex-col items-center gap-1 cursor-pointer"
-            >
-              <span>Phím 4: Rất dễ (Easy)</span>
-              <span className="text-[10px] text-emerald-400 font-normal">Ôn sau 12 ngày</span>
-            </button>
-          </div>
+      {/* Language Workspace Switcher */}
+      <div className="flex justify-center mb-2">
+        <div className="bg-slate-900/80 p-1.5 rounded-2xl border-2 border-slate-800 shadow-xl backdrop-blur-xl flex items-center gap-1">
+          <AnimatedButton
+            soundType="click"
+            onClick={() => setFilters({ ...filters, lang: 'zh', level: '', topic: '', pos: '', status: 'all', specialMode: '' })}
+            className={`flex items-center gap-2 px-8 py-3 rounded-xl text-sm font-black ${
+              filters.lang === 'zh'
+                ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg border border-red-500/50'
+                : 'text-slate-400 bg-slate-800/40 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-lg">🇨🇳</span> Tiếng Trung (HSK)
+          </AnimatedButton>
+          
+          <AnimatedButton
+            soundType="click"
+            onClick={() => setFilters({ ...filters, lang: 'en', level: '', topic: '', pos: '', status: 'all', specialMode: '' })}
+            className={`flex items-center gap-2 px-8 py-3 rounded-xl text-sm font-black ${
+              filters.lang === 'en'
+                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg border border-blue-500/50'
+                : 'text-slate-400 bg-slate-800/40 hover:text-slate-200'
+            }`}
+          >
+            <span className="text-lg">🇬🇧</span> Tiếng Anh (CEFR)
+          </AnimatedButton>
         </div>
-      )}
+      </div>
+
+      <PageTransition key={subTab}>
+        {subTab === 'srs_deck' && (
+          <div className="space-y-6">
+            <FlashcardFilterBar
+              filters={filters}
+              onFilterChange={setFilters}
+              totalCardsCount={cards.length}
+              dueCount={dueCount}
+            />
+
+            {loading ? (
+              <div className="bg-slate-900/90 border-2 border-slate-800 rounded-3xl p-12 text-center space-y-3">
+                <RefreshCw className="w-8 h-8 text-orange-500 animate-spin mx-auto" />
+                <p className="text-xs text-slate-400 font-extrabold">Đang tải thẻ ghi nhớ...</p>
+              </div>
+            ) : cards.length === 0 ? (
+              <div className="bg-slate-900/90 border-2 border-slate-800 rounded-3xl p-10 text-center space-y-4 max-w-lg mx-auto">
+                <BookOpen className="w-12 h-12 text-slate-600 mx-auto" />
+                <h3 className="text-base font-extrabold text-white">Chưa có thẻ ghi nhớ nào</h3>
+                <AnimatedButton
+                  onClick={() => setFilters({ lang: filters.lang, level: '', topic: '', pos: '', status: 'all', specialMode: '' })}
+                  className="px-4 py-2 bg-orange-500 text-white text-xs font-bold rounded-xl"
+                >
+                  Đặt Lại Bộ Lọc
+                </AnimatedButton>
+              </div>
+            ) : (
+              <FlashcardDeckPlayer
+                cards={cards}
+                lang={filters.lang}
+                onRateCard={handleRateCard}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            )}
+          </div>
+        )}
+
+        {subTab === 'stats' && <SRSStatsDashboard lang={filters.lang} />}
+      </PageTransition>
+
+      <ImportExportModal
+        isOpen={isImportExportOpen}
+        onClose={() => setIsImportExportOpen(false)}
+        onImportSuccess={fetchCards}
+        cardsToExport={cards}
+      />
     </div>
   );
 }

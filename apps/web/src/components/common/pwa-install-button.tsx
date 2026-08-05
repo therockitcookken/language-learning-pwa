@@ -64,7 +64,7 @@ export function PwaInstallButton() {
 
   return (
     <AnimatedButton
-      soundType="success"
+      soundType="click"
       onClick={handleInstallClick}
       className="hidden sm:flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all border border-emerald-400/30"
     >

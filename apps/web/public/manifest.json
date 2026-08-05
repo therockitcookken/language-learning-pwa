@@ -17,7 +17,7 @@
     },
     {
       "src": "/icon-512x512.png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"
     }
@@ -25,13 +25,13 @@
   "screenshots": [
     {
       "src": "/screenshot1.png",
-      "sizes": "1920x1080",
+      "sizes": "1024x532",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
       "src": "/screenshot2.png",
-      "sizes": "1920x1080",
+      "sizes": "1024x523",
       "type": "image/png",
       "form_factor": "wide"
     }

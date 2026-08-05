@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.vercel.webchitwo78.twa",
+    "sha256_cert_fingerprints": [
+      "7B:6C:13:3A:5A:31:5F:AD:CB:35:7D:49:89:FB:BF:D6:9B:FF:F2:36:19:6D:30:0B:64:A7:C7:97:5C:82:54:02"
+    ]
+  }
+}]

@@ -5,6 +5,7 @@ import { useI18n, LanguageCode } from '@/lib/i18n/i18n-context';
 import { useUserProgress } from '@/lib/contexts/user-progress-context';
 import { ShieldCheck, Flame, Zap, UserCheck, Globe, Sparkles, Cpu } from 'lucide-react';
 import { NumberCounter } from '@/components/common/animations';
+import { PwaInstallButton } from '@/components/common/pwa-install-button';
 
 export function Header() {
   const { language, setLanguage, t } = useI18n();
@@ -61,6 +62,9 @@ export function Header() {
             <span className="font-black tracking-wide">{progress.streak} {t.streakDays}</span>
           </div>
 
+          {/* Custom PWA Install Button */}
+          <PwaInstallButton />
+
           {/* User / Guest Badge */}
           <div className="hidden md:flex items-center gap-1.5 bg-slate-900/80 border border-slate-700/60 px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 shadow-lg backdrop-blur-md">
             {progress.isGuest ? (
@@ -95,3 +99,4 @@ export function Header() {
     </header>
   );
 }
+

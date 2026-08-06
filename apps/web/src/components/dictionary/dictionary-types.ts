@@ -59,6 +59,7 @@ export interface VocabularyItem {
   topic?: string;
   factoryDomain?: string;
   usageNotes?: string;
+  imageUrl?: string | null;
   examples?: Array<{
     id: string;
     sentenceZh?: string;

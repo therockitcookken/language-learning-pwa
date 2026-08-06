@@ -94,6 +94,14 @@ export function BilingualVocabularyCard({
           </div>
         </div>
 
+        {/* Image (if available) */}
+        {item.imageUrl && (
+          <div className="w-full h-28 mb-4 rounded-xl overflow-hidden border border-slate-700/50 shadow-inner">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={item.imageUrl} alt={item.meaningVi} className="w-full h-full object-cover" loading="lazy" />
+          </div>
+        )}
+
         {/* Central Vietnamese Term */}
         <div className="mb-4 bg-slate-950/60 border border-slate-800/60 p-3.5 rounded-2xl text-center shadow-inner">
           <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">NGHĨA THUẬT NGỮ TIẾNG VIỆT</div>

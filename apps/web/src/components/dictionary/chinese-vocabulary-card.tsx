@@ -56,20 +56,26 @@ export function ChineseVocabularyCard({
       <div>
         {/* Top bar: Selection Checkbox & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
             {onToggleSelect && (
               <input
                 type="checkbox"
                 checked={isSelected}
                 onChange={onToggleSelect}
-                className="mt-2 w-4 h-4 accent-orange-500 rounded cursor-pointer"
+                className="mt-2 w-4 h-4 accent-orange-500 rounded cursor-pointer shrink-0"
               />
             )}
-            <div>
+            <div className="flex-1 min-w-0">
+              {item.imageUrl && (
+                <div className="w-full h-28 mb-3 rounded-xl overflow-hidden border border-slate-700/50 shadow-inner">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.imageUrl} alt={item.word} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <h3
                   onClick={() => onOpenPreview(item)}
-                  className="text-3xl font-black text-white cursor-pointer hover:text-orange-400 transition-colors tracking-wide font-sans"
+                  className="text-3xl font-black text-white cursor-pointer hover:text-orange-400 transition-colors tracking-wide font-sans truncate break-words"
                 >
                   {item.simplified || item.word}
                 </h3>
@@ -109,7 +115,7 @@ export function ChineseVocabularyCard({
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2 self-start">
+          <div className="flex flex-col gap-2 self-start shrink-0">
             <button
               onClick={() => onSpeak(item.simplified || item.word, 'zh-CN')}
               className="p-2.5 rounded-2xl bg-orange-500/15 text-orange-400 border border-orange-500/30 hover:bg-orange-500 hover:text-white transition-all shadow-md cursor-pointer group"

@@ -43,20 +43,26 @@ export function EnglishVocabularyCard({
       <div>
         {/* Top Bar */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
             {onToggleSelect && (
               <input
                 type="checkbox"
                 checked={isSelected}
                 onChange={onToggleSelect}
-                className="mt-2 w-4 h-4 accent-blue-500 rounded cursor-pointer"
+                className="mt-2 w-4 h-4 accent-blue-500 rounded cursor-pointer shrink-0"
               />
             )}
-            <div>
+            <div className="flex-1 min-w-0">
+              {item.imageUrl && (
+                <div className="w-full h-28 mb-3 rounded-xl overflow-hidden border border-slate-700/50 shadow-inner">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.imageUrl} alt={item.word} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <h3
                   onClick={() => onOpenPreview(item)}
-                  className="text-3xl font-black text-white cursor-pointer hover:text-blue-400 transition-colors tracking-tight"
+                  className="text-3xl font-black text-white cursor-pointer hover:text-blue-400 transition-colors tracking-tight truncate break-words"
                 >
                   {item.word}
                 </h3>
@@ -81,7 +87,7 @@ export function EnglishVocabularyCard({
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2 self-start">
+          <div className="flex flex-col gap-2 self-start shrink-0">
             <button
               type="button"
               onClick={() => onSpeak(item.word, 'en-US')}

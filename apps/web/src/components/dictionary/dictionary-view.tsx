@@ -298,10 +298,10 @@ export function DictionaryView() {
               {query || domain || hsk || cefr
                 ? `${paginationInfo.total.toLocaleString()} Từ Vựng`
                 : activeWorkspace === 'zh'
-                ? '10,000 Từ Vựng Tiếng Trung'
+                ? '3,000 Từ Vựng Tiếng Trung'
                 : activeWorkspace === 'en'
-                ? '10,000 Từ Vựng Tiếng Anh'
-                : '20,000 Từ Vựng Song Ngữ'}
+                ? '3,000 Từ Vựng Tiếng Anh'
+                : '6,000 Từ Vựng Song Ngữ'}
             </span>
           </p>
         </div>
@@ -339,10 +339,10 @@ export function DictionaryView() {
           query || domain || hsk || cefr
             ? paginationInfo.total
             : activeWorkspace === 'zh'
-            ? Math.max(paginationInfo.total, 10000)
+            ? Math.max(paginationInfo.total, 3000)
             : activeWorkspace === 'en'
-            ? Math.max(paginationInfo.total, 10000)
-            : Math.max(paginationInfo.total, 20000)
+            ? Math.max(paginationInfo.total, 3000)
+            : Math.max(paginationInfo.total, 6000)
         }
         learnedCount={
           activeWorkspace === 'zh'
@@ -365,9 +365,9 @@ export function DictionaryView() {
           setHsk('');
           setCefr('');
         }}
-        zhCount={10000}
-        enCount={10000}
-        bilingualCount={20000}
+        zhCount={3000}
+        enCount={3000}
+        bilingualCount={6000}
       />
 
       {/* 2. Search Command Center */}
@@ -424,10 +424,10 @@ export function DictionaryView() {
           query || domain || hsk || cefr
             ? paginationInfo.total
             : activeWorkspace === 'zh'
-            ? Math.max(paginationInfo.total, 10000)
+            ? Math.max(paginationInfo.total, 3000)
             : activeWorkspace === 'en'
-            ? Math.max(paginationInfo.total, 10000)
-            : Math.max(paginationInfo.total, 20000)
+            ? Math.max(paginationInfo.total, 3000)
+            : Math.max(paginationInfo.total, 6000)
         }
       />
 

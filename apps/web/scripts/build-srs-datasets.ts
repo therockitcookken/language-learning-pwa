@@ -194,61 +194,46 @@ const zhSuffixes = [
   { zh: '源', py: 'yuán', vi: 'nguồn' },
 ];
 
-const zhMiddles = [
-  { zh: '管理', py: 'guǎn lǐ', vi: 'quản lý' },
-  { zh: '操作', py: 'cāo zuò', vi: 'thao tác' },
-  { zh: '技术', py: 'jì shù', vi: 'kỹ thuật' },
-  { zh: '质量', py: 'zhì liàng', vi: 'chất lượng' },
-  { zh: '安全', py: 'ān quán', vi: 'an toàn' },
-  { zh: '生产', py: 'shēng chǎn', vi: 'sản xuất' },
-  { zh: '设备', py: 'shè bèi', vi: 'thiết bị' },
-  { zh: '维护', py: 'wéi hù', vi: 'bảo trì' },
-  { zh: '检查', py: 'jiǎn chá', vi: 'kiểm tra' },
-  { zh: '分析', py: 'fēn xī', vi: 'phân tích' },
-];
-
 let counterZh = 0;
 outerZh: for (const p of zhPrefixes) {
-  for (const m of zhMiddles) {
-    for (const s of zhSuffixes) {
-      if (zhEntries.length >= 10000) break outerZh;
-      const word = `${p.zh}${m.zh}${s.zh}`;
-      if (zhSeenWords.has(word)) continue;
-      zhSeenWords.add(word);
+  for (const s of zhSuffixes) {
+    if (zhEntries.length >= 3000) break outerZh;
+    const word = `${p.zh}${s.zh}`;
+    if (zhSeenWords.has(word)) continue;
+    zhSeenWords.add(word);
 
-      const py = `${p.py} ${m.py} ${s.py}`;
-      const vi = `${p.vi} ${m.vi} (${s.vi})`;
-      const pos = posList[counterZh % posList.length];
-      const hsk = hskLevels[counterZh % hskLevels.length];
-      const cat = zhCategories[counterZh % zhCategories.length];
-      counterZh++;
+    const py = `${p.py} ${s.py}`;
+    const vi = `${p.vi} (${s.vi})`;
+    const pos = posList[counterZh % posList.length];
+    const hsk = hskLevels[counterZh % hskLevels.length];
+    const cat = zhCategories[counterZh % zhCategories.length];
+    counterZh++;
 
-      zhEntries.push({
-        language: 'zh',
-        word,
-        simplified: word,
-        traditional: word,
-        pinyin: py,
-        partOfSpeech: pos,
-        meaningVi: vi,
-        meaningEn: `${p.vi} ${m.vi} ${s.vi}`,
-        hskLevel: hsk,
-        topic: cat.topic,
-        factoryDomain: cat.domain,
-        examples: [
-          {
-            sentenceZh: `请在${word}中仔细核对数据。`,
-            pinyin: `qǐng zài ${py} zhōng zǐ xì hé duì shù jù.`,
-            sentenceVi: `Xin hãy đối chiếu dữ liệu cẩn thận trong ${vi}.`,
-            sentenceEn: `Please carefully verify data in ${vi}.`,
-          },
-        ],
-        synonyms: [{ word: `${p.zh}规范`, pinyin: `${p.py} guī fàn`, meaningVi: `Quy chuẩn ${p.vi}` }],
-        antonyms: [{ word: `非${word}`, pinyin: `fēi ${py}`, meaningVi: `Không thuộc ${vi}` }],
-        relatedWords: [{ word: p.zh, pinyin: p.py, meaningVi: p.vi }],
-        mnemonic: `Tách nghĩa: [${p.zh} = ${p.vi}], [${m.zh} = ${m.vi}], kết hợp [${s.zh} = ${s.vi}].`,
-      });
-    }
+    zhEntries.push({
+      language: 'zh',
+      word,
+      simplified: word,
+      traditional: word,
+      pinyin: py,
+      partOfSpeech: pos,
+      meaningVi: vi,
+      meaningEn: `${p.vi} ${s.vi}`,
+      hskLevel: hsk,
+      topic: cat.topic,
+      factoryDomain: cat.domain,
+      examples: [
+        {
+          sentenceZh: `请在${word}中仔细核对数据。`,
+          pinyin: `qǐng zài ${py} zhōng zǐ xì hé duì shù jù.`,
+          sentenceVi: `Xin hãy đối chiếu dữ liệu cẩn thận trong ${vi}.`,
+          sentenceEn: `Please carefully verify data in ${vi}.`,
+        },
+      ],
+      synonyms: [{ word: `${p.zh}规范`, pinyin: `${p.py} guī fàn`, meaningVi: `Quy chuẩn ${p.vi}` }],
+      antonyms: [{ word: `非${word}`, pinyin: `fēi ${py}`, meaningVi: `Không thuộc ${vi}` }],
+      relatedWords: [{ word: p.zh, pinyin: p.py, meaningVi: p.vi }],
+      mnemonic: `Tách nghĩa: [${p.zh} = ${p.vi}] kết hợp [${s.zh} = ${s.vi}].`,
+    });
   }
 }
 
@@ -393,7 +378,7 @@ let counterEn = 0;
 outerEn: for (const mod of enModifiers) {
   for (const base of enBases) {
     for (const noun of enNouns) {
-      if (enEntries.length >= 10000) break outerEn;
+      if (enEntries.length >= 3000) break outerEn;
 
       const word = `${mod.pref} ${base.stem}-${noun.noun.toLowerCase()}`;
       if (enSeenWords.has(word)) continue;

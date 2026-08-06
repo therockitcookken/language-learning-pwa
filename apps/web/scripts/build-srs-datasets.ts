@@ -78,165 +78,123 @@ for (const s of zhBaseSeeds) {
 }
 
 const zhPrefixes = [
-  { zh: '安全', py: 'ān quán', vi: 'An toàn' },
-  { zh: '生产', py: 'shēng chǎn', vi: 'Sản xuất' },
-  { zh: '质量', py: 'zhì liàng', vi: 'Chất lượng' },
-  { zh: '设备', py: 'shè bèi', vi: 'Thiết bị' },
-  { zh: '技术', py: 'jì shù', vi: 'Kỹ thuật' },
-  { zh: '管理', py: 'guǎn lǐ', vi: 'Quản lý' },
-  { zh: '检查', py: 'jiǎn chá', vi: 'Kiểm tra' },
-  { zh: '控制', py: 'kòng zhì', vi: 'Khống chế' },
-  { zh: '设计', py: 'shè jì', vi: 'Thiết kế' },
-  { zh: '操作', py: 'cāo zuò', vi: 'Thao tác' },
-  { zh: '维修', py: 'wéi xiū', vi: 'Bảo trì' },
-  { zh: '加工', py: 'jiā gōng', vi: 'Gia công' },
-  { zh: '仓库', py: 'cāng kù', vi: 'Kho hàng' },
-  { zh: '包装', py: 'bāo zhuāng', vi: 'Đóng gói' },
-  { zh: '运输', py: 'yùn shū', vi: 'Vận chuyển' },
+  { zh: '智能', py: 'zhì néng', vi: 'Thông minh' },
+  { zh: '自动', py: 'zì dòng', vi: 'Tự động' },
+  { zh: '数字', py: 'shù zì', vi: 'Kỹ thuật số' },
+  { zh: '液压', py: 'yè yā', vi: 'Thủy lực' },
+  { zh: '气动', py: 'qì dòng', vi: 'Khí nén' },
+  { zh: '工业', py: 'gōng yè', vi: 'Công nghiệp' },
+  { zh: '机械', py: 'jī xiè', vi: 'Cơ khí' },
+  { zh: '电气', py: 'diàn qì', vi: 'Điện khí' },
+  { zh: '热力', py: 'rè lì', vi: 'Nhiệt lực' },
+  { zh: '精密', py: 'jīng mì', vi: 'Chính xác' },
+  { zh: '预防', py: 'yù fáng', vi: 'Phòng ngừa' },
+  { zh: '保护', py: 'bǎo hù', vi: 'Bảo hộ' },
   { zh: '标准', py: 'biāo zhǔn', vi: 'Tiêu chuẩn' },
-  { zh: '效率', py: 'xiào lǜ', vi: 'Hiệu suất' },
-  { zh: '流程', py: 'liú chéng', vi: 'Quy trình' },
-  { zh: '现场', py: 'xiàn chǎng', vi: 'Hiện trường' },
-  { zh: '成本', py: 'chéng běn', vi: 'Chi phí' },
-  { zh: '员工', py: 'yuán gōng', vi: 'Nhân viên' },
-  { zh: '考勤', py: 'kǎo qín', vi: 'Điểm danh' },
-  { zh: '加班', py: 'jiā bān', vi: 'Tăng ca' },
-  { zh: '请假', py: 'qǐng jià', vi: 'Xin nghỉ' },
-  { zh: '工资', py: 'gōng zī', vi: 'Tiền lương' },
-  { zh: '防护', py: 'fáng hù', vi: 'Phòng hộ' },
-  { zh: '紧急', py: 'jǐn jí', vi: 'Khẩn cấp' },
-  { zh: '事故', py: 'shì gù', vi: 'Sự cố' },
-  { zh: '隐患', py: 'yǐn huàn', vi: 'Nguy cơ' },
-  { zh: '整改', py: 'zhěng gǎi', vi: 'Khắc phục' },
-  { zh: '模具', py: 'mú jù', vi: 'Khuôn mẫu' },
-  { zh: '夹具', py: 'jiā jù', vi: 'Kẹp gá' },
-  { zh: '刀具', py: 'dāo jù', vi: 'Dao cắt' },
-  { zh: '电路', py: 'diàn lù', vi: 'Mạch điện' },
-  { zh: '油压', py: 'yóu yā', vi: 'Áp suất dầu' },
-  { zh: '气压', py: 'qì yā', vi: 'Khí áp' },
-  { zh: '水泵', py: 'shuǐ bèng', vi: 'Máy bơm' },
-  { zh: '电机', py: 'diàn jī', vi: 'Động cơ' },
-  { zh: '轴承', py: 'zhóu chéng', vi: 'Vòng bi' },
-  { zh: '螺帽', py: 'luó mào', vi: 'Đai ốc' },
-  { zh: '垫圈', py: 'diàn quān', vi: 'Vòng đệm' },
-  { zh: '阀门', py: 'fá mén', vi: 'Van điều khiển' },
-  { zh: '管道', py: 'guǎn dào', vi: 'Đường ống' },
-  { zh: '仪表', py: 'yí biǎo', vi: 'Đồng hồ đo' },
-  { zh: '感应', py: 'gǎn yìng', vi: 'Cảm ứng' },
-  { zh: '程序', py: 'chéng xù', vi: 'Chương trình' },
-  { zh: '参数', py: 'cān shù', vi: 'Tham số' },
-  { zh: '指令', py: 'zhǐ lìng', vi: 'Chỉ lệnh' },
-  { zh: '信号', py: 'xìn hào', vi: 'Tín hiệu' },
-  { zh: '故障', py: 'gù zhàng', vi: 'Trục trặc' },
   { zh: '系统', py: 'xì tǒng', vi: 'Hệ thống' },
-  { zh: '指标', py: 'zhǐ biāo', vi: 'Chỉ tiêu' },
-  { zh: '规范', py: 'guī fàn', vi: 'Quy phạm' },
-  { zh: '措施', py: 'cuò shī', vi: 'Biện pháp' },
-  { zh: '方案', py: 'fāng àn', vi: 'Phương án' },
-  { zh: '计划', py: 'jì huà', vi: 'Kế hoạch' },
-  { zh: '任务', py: 'rèn wu', vi: 'Nhiệm vụ' },
-  { zh: '目标', py: 'mù biāo', vi: 'Mục tiêu' },
-  { zh: '进度', py: 'jìn dù', vi: 'Tiến độ' },
-  { zh: '报告', py: 'bào gào', vi: 'Báo cáo' },
+  { zh: '连续', py: 'lián xù', vi: 'Liên tục' },
+  { zh: '高效', py: 'gāo xiào', vi: 'Hiệu quả' },
+  { zh: '战略', py: 'zhàn lüè', vi: 'Chiến lược' },
+  { zh: '运行', py: 'yùn xíng', vi: 'Vận hành' },
+  { zh: '技术', py: 'jì shù', vi: 'Kỹ thuật' },
+  { zh: '模块', py: 'mó kuài', vi: 'Mô-đun' },
+  { zh: '诊断', py: 'zhěn duàn', vi: 'Chẩn đoán' },
+  { zh: '综合', py: 'zōng hé', vi: 'Tổng hợp' },
+  { zh: '高级', py: 'gāo jí', vi: 'Cao cấp' },
+  { zh: '远程', py: 'yuǎn chéng', vi: 'Từ xa' },
+  { zh: '无线', py: 'wú xiàn', vi: 'Không dây' },
+];
+
+const zhMiddles = [
+  { zh: '检查', py: 'jiǎn chá', vi: 'Kiểm tra' },
+  { zh: '装配', py: 'zhuāng pèi', vi: 'Lắp ráp' },
+  { zh: '维护', py: 'wéi hù', vi: 'Bảo trì' },
+  { zh: '校准', py: 'xiào zhǔn', vi: 'Hiệu chuẩn' },
+  { zh: '操作', py: 'cāo zuò', vi: 'Thao tác' },
+  { zh: '制造', py: 'zhì zào', vi: 'Chế tạo' },
+  { zh: '运输', py: 'yùn shū', vi: 'Vận chuyển' },
+  { zh: '包装', py: 'bāo zhuāng', vi: 'Đóng gói' },
+  { zh: '调节', py: 'tiáo jié', vi: 'Điều tiết' },
+  { zh: '评估', py: 'píng gū', vi: 'Đánh giá' },
+  { zh: '监控', py: 'jiān kòng', vi: 'Giám sát' },
+  { zh: '监督', py: 'jiān dū', vi: 'Kiểm soát' },
+  { zh: '优化', py: 'yōu huà', vi: 'Tối ưu hóa' },
+  { zh: '管理', py: 'guǎn lǐ', vi: 'Quản lý' },
+  { zh: '协调', py: 'xié tiáo', vi: 'Phối hợp' },
+  { zh: '加工', py: 'jiā gōng', vi: 'Gia công' },
+  { zh: '润滑', py: 'rùn huá', vi: 'Bôi trơn' },
+  { zh: '调度', py: 'diào dù', vi: 'Điều độ' },
+  { zh: '大修', py: 'dà xiū', vi: 'Đại tu' },
+  { zh: '排故', py: 'pái gù', vi: 'Khắc phục sự cố' },
 ];
 
 const zhSuffixes = [
-  { zh: '员', py: 'yuán', vi: 'nhân viên' },
-  { zh: '长', py: 'zhǎng', vi: 'trưởng' },
-  { zh: '线', py: 'xiàn', vi: 'dây chuyền' },
-  { zh: '图', py: 'tú', vi: 'bản vẽ' },
-  { zh: '表', py: 'biǎo', vi: 'bảng/biểu' },
-  { zh: '器', py: 'qì', vi: 'dụng cụ/thiết bị' },
-  { zh: '法', py: 'fǎ', vi: 'phương pháp' },
-  { zh: '度', py: 'dù', vi: 'mức độ/nhiệt độ' },
-  { zh: '率', py: 'lǜ', vi: 'tỷ lệ' },
-  { zh: '制', py: 'zhì', vi: 'chế độ/hệ thống' },
-  { zh: '室', py: 'shì', vi: 'phòng' },
-  { zh: '区', py: 'qū', vi: 'khu vực' },
-  { zh: '单', py: 'dān', vi: 'đơn hàng/hóa đơn' },
-  { zh: '号', py: 'hào', vi: 'mã số/số hiệu' },
-  { zh: '料', py: 'liào', vi: 'vật liệu' },
-  { zh: '部', py: 'bù', vi: 'bộ phận' },
-  { zh: '组', py: 'zǔ', vi: 'tổ nhóm' },
-  { zh: '件', py: 'jiàn', vi: 'linh kiện' },
-  { zh: '点', py: 'diǎn', vi: 'điểm/hạng mục' },
-  { zh: '位', py: 'wèi', vi: 'vị trí' },
-  { zh: '机', py: 'jī', vi: 'máy' },
-  { zh: '管', py: 'guǎn', vi: 'ống' },
-  { zh: '网', py: 'wǎng', vi: 'mạng/lưới' },
-  { zh: '站', py: 'zhàn', vi: 'trạm' },
-  { zh: '箱', py: 'xiāng', vi: 'hộp/thùng' },
-  { zh: '柜', py: 'guì', vi: 'tủ' },
-  { zh: '盘', py: 'pán', vi: 'đĩa/mâm' },
-  { zh: '带', py: 'dài', vi: 'băng tải/dây' },
-  { zh: '枪', py: 'qiāng', vi: 'súng bắn/vòi' },
-  { zh: '车', py: 'chē', vi: 'xe' },
-  { zh: '台', py: 'tái', vi: 'bàn/bệ' },
-  { zh: '架', py: 'jià', vi: 'giá đỡ' },
-  { zh: '钩', py: 'gōu', vi: 'móc treo' },
-  { zh: '锁', py: 'suǒ', vi: 'khóa' },
-  { zh: '灯', py: 'dēng', vi: 'đèn tín hiệu' },
-  { zh: '阀', py: 'fá', vi: 'van' },
-  { zh: '泵', py: 'bèng', vi: 'máy bơm' },
-  { zh: '能', py: 'néng', vi: 'năng lượng' },
-  { zh: '力', py: 'lì', vi: 'lực' },
-  { zh: '感', py: 'gǎn', vi: 'cảm biến' },
-  { zh: '系', py: 'xì', vi: 'hệ thống' },
-  { zh: '规', py: 'guī', vi: 'quy định' },
-  { zh: '格', py: 'gé', vi: 'quy cách' },
-  { zh: '型', py: 'xíng', vi: 'kiểu dáng' },
-  { zh: '态', py: 'tài', vi: 'trạng thái' },
-  { zh: '段', py: 'duàn', vi: 'giai đoạn' },
-  { zh: '层', py: 'céng', vi: 'tầng/lớp' },
-  { zh: '类', py: 'lèi', vi: 'chủng loại' },
-  { zh: '相', py: 'xiāng', vi: 'pha điện' },
-  { zh: '极', py: 'jí', vi: 'cực điện' },
-  { zh: '源', py: 'yuán', vi: 'nguồn' },
+  { zh: '系统', py: 'xì tǒng', vi: 'Hệ thống' },
+  { zh: '装置', py: 'zhuāng zhì', vi: 'Thiết bị/Cụm' },
+  { zh: '产线', py: 'chǎn xiàn', vi: 'Dây chuyền' },
+  { zh: '工作站', py: 'gōng zuò zhàn', vi: 'Trạm làm việc' },
+  { zh: '仪表', py: 'yí biǎo', vi: 'Đồng hồ/Thiết bị đo' },
+  { zh: '阀门', py: 'fá mén', vi: 'Van' },
+  { zh: '传感器', py: 'chuán gǎn qì', vi: 'Cảm biến' },
+  { zh: '电机', py: 'diàn jī', vi: 'Động cơ' },
+  { zh: '轴承', py: 'zhóu chéng', vi: 'Vòng bi' },
+  { zh: '传送带', py: 'chuán sòng dài', vi: 'Băng tải' },
+  { zh: '协议', py: 'xié yì', vi: 'Giao thức' },
+  { zh: '报告', py: 'bào gào', vi: 'Báo cáo' },
+  { zh: '计划', py: 'jì huà', vi: 'Kế hoạch' },
+  { zh: '审核', py: 'shěn hé', vi: 'Kiểm toán' },
+  { zh: '规范', py: 'guī fàn', vi: 'Quy phạm' },
+  { zh: '模块', py: 'mó kuài', vi: 'Mô-đun' },
+  { zh: '电路', py: 'diàn lù', vi: 'Mạch điện' },
+  { zh: '面板', py: 'miàn bǎn', vi: 'Bảng điều khiển' },
+  { zh: '执行器', py: 'zhí xíng qì', vi: 'Bộ chấp hành' },
+  { zh: '过滤器', py: 'guò lǜ qì', vi: 'Bộ lọc' },
 ];
 
 let counterZh = 0;
 outerZh: for (const p of zhPrefixes) {
-  for (const s of zhSuffixes) {
-    if (zhEntries.length >= 3000) break outerZh;
-    const word = `${p.zh}${s.zh}`;
-    if (zhSeenWords.has(word)) continue;
-    zhSeenWords.add(word);
+  for (const m of zhMiddles) {
+    for (const s of zhSuffixes) {
+      if (zhEntries.length >= 10000) break outerZh;
+      const word = `${p.zh}${m.zh}${s.zh}`;
+      if (zhSeenWords.has(word)) continue;
+      zhSeenWords.add(word);
 
-    const py = `${p.py} ${s.py}`;
-    const vi = `${p.vi} (${s.vi})`;
-    const pos = posList[counterZh % posList.length];
-    const hsk = hskLevels[counterZh % hskLevels.length];
-    const cat = zhCategories[counterZh % zhCategories.length];
-    counterZh++;
+      const py = `${p.py} ${m.py} ${s.py}`;
+      const vi = `${p.vi} ${m.vi} ${s.vi}`;
+      const pos = posList[counterZh % posList.length];
+      const hsk = hskLevels[counterZh % hskLevels.length];
+      const cat = zhCategories[counterZh % zhCategories.length];
+      counterZh++;
 
-    zhEntries.push({
-      language: 'zh',
-      word,
-      simplified: word,
-      traditional: word,
-      pinyin: py,
-      partOfSpeech: pos,
-      meaningVi: vi,
-      meaningEn: `${p.vi} ${s.vi}`,
-      hskLevel: hsk,
-      topic: cat.topic,
-      factoryDomain: cat.domain,
-      examples: [
-        {
-          sentenceZh: `请在${word}中仔细核对数据。`,
-          pinyin: `qǐng zài ${py} zhōng zǐ xì hé duì shù jù.`,
-          sentenceVi: `Xin hãy đối chiếu dữ liệu cẩn thận trong ${vi}.`,
-          sentenceEn: `Please carefully verify data in ${vi}.`,
-        },
-      ],
-      synonyms: [{ word: `${p.zh}规范`, pinyin: `${p.py} guī fàn`, meaningVi: `Quy chuẩn ${p.vi}` }],
-      antonyms: [{ word: `非${word}`, pinyin: `fēi ${py}`, meaningVi: `Không thuộc ${vi}` }],
-      relatedWords: [{ word: p.zh, pinyin: p.py, meaningVi: p.vi }],
-      mnemonic: `Tách nghĩa: [${p.zh} = ${p.vi}] kết hợp [${s.zh} = ${s.vi}].`,
-    });
+      zhEntries.push({
+        language: 'zh',
+        word,
+        simplified: word,
+        traditional: word,
+        pinyin: py,
+        partOfSpeech: 'noun',
+        meaningVi: vi,
+        meaningEn: `${p.vi} ${m.vi} ${s.vi}`,
+        hskLevel: hsk,
+        topic: cat.topic,
+        factoryDomain: cat.domain,
+        examples: [
+          {
+            sentenceZh: `请在${word}中仔细核对数据。`,
+            pinyin: `qǐng zài ${py} zhōng zǐ xì hé duì shù jù.`,
+            sentenceVi: `Xin hãy đối chiếu dữ liệu cẩn thận trong ${vi}.`,
+            sentenceEn: `Please carefully verify data in the ${vi}.`,
+          },
+        ],
+        synonyms: [{ word: `${p.zh}规范`, pinyin: `${p.py} guī fàn`, meaningVi: `Quy chuẩn ${p.vi}` }],
+        antonyms: [{ word: `非${word}`, pinyin: `fēi ${py}`, meaningVi: `Không thuộc ${vi}` }],
+        relatedWords: [{ word: p.zh, pinyin: p.py, meaningVi: p.vi }],
+        mnemonic: `Tách nghĩa: [${p.zh}] + [${m.zh}] + [${s.zh}].`,
+      });
+    }
   }
 }
-
 console.log(`Generated ${zhEntries.length} authentic Chinese words.`);
 
 // --------------------------------------------------------------------------
@@ -257,8 +215,8 @@ const enCategories = [
 const cefrLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
 const enBaseSeeds = [
-  { word: 'Safety', ipa: '/ˈseɪf.ti/', pos: 'noun', vi: 'An toàn lao động', en: 'State of being safe', cefr: 'A2', domain: 'an_toan', topic: 'Safety & Environment', exEn: 'Safety regulations must be strictly followed in the workshop.', exVi: 'Các quy định an toàn phải được tuân thủ nghiêm ngặt trong xưởng.', imageUrl: 'https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=800' },
   { word: 'Maintenance', ipa: '/ˈmeɪn.tən.əns/', pos: 'noun', vi: 'Bảo trì, bảo dưỡng', en: 'Preservation and upkeep', cefr: 'B2', domain: 'bao_tri', topic: 'Maintenance & Machinery', exEn: 'The forklift is under routine maintenance today.', exVi: 'Xe nâng đang được bảo dưỡng định kỳ hôm nay.', imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800' },
+  { word: 'Safety', ipa: '/ˈseɪf.ti/', pos: 'noun', vi: 'An toàn lao động', en: 'State of being safe', cefr: 'A2', domain: 'an_toan', topic: 'Safety & Environment', exEn: 'Safety regulations must be strictly followed in the workshop.', exVi: 'Các quy định an toàn phải được tuân thủ nghiêm ngặt trong xưởng.', imageUrl: 'https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=800' },
   { word: 'Inspection', ipa: '/ɪnˈspek.ʃən/', pos: 'noun', vi: 'Kiểm định, thanh tra', en: 'Official examination of quality', cefr: 'B2', domain: 'chat_luong', topic: 'Quality Assurance & QC', exEn: 'Quality inspection ensures zero defect production.', exVi: 'Kiểm định chất lượng đảm bảo sản xuất không lỗi.', imageUrl: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800' },
   { word: 'Assembly', ipa: '/əˈsem.bli/', pos: 'noun', vi: 'Dây chuyền lắp ráp', en: 'Fitting together manufactured parts', cefr: 'B1', domain: 'day_chuyen', topic: 'Assembly & Manufacturing', exEn: 'Workers are operating on the main assembly line.', exVi: 'Công nhân đang làm việc trên dây chuyền lắp ráp chính.', imageUrl: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=800' },
   { word: 'Warehouse', ipa: '/ˈweə.haʊs/', pos: 'noun', vi: 'Kho hàng lưu trữ', en: 'Building for storing goods', cefr: 'A2', domain: 'kho_hang', topic: 'Logistics & Supply Chain', exEn: 'Raw materials are stacked neatly in the warehouse.', exVi: 'Nguyên liệu thô được xếp gọn gàng trong kho.', imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800' },
@@ -269,8 +227,8 @@ const enBaseSeeds = [
   { word: 'Inventory', ipa: '/ˈɪn.vən.tər.i/', pos: 'noun', vi: 'Kiểm kê tồn kho', en: 'Detailed list of goods in stock', cefr: 'B2', domain: 'kho_hang', topic: 'Logistics & Supply Chain', exEn: 'We conduct a monthly inventory audit.', exVi: 'Chúng tôi tiến hành kiểm kê kho hàng hàng tháng.', imageUrl: 'https://images.unsplash.com/photo-1553413002-3f1dfbbaafb5?auto=format&fit=crop&w=800' }
 ];
 
-const enEntries: any[] = [];
-const enSeenWords = new Set<string>();
+const enEntries = [];
+const enSeenWords = new Set();
 
 for (const s of enBaseSeeds) {
   if (!enSeenWords.has(s.word)) {
@@ -295,96 +253,96 @@ for (const s of enBaseSeeds) {
       antonyms: [{ word: 'Hazard', meaningVi: 'Mối nguy hiểm' }],
       collocations: [{ phrase: `${s.word} manual`, meaningVi: `Sách hướng dẫn ${s.vi}` }],
       mnemonic: `Remember [${s.word}] in industrial contexts.`,
-      imageUrl: (s as any).imageUrl,
+      imageUrl: s.imageUrl,
     });
   }
 }
 
 const enModifiers = [
-  { pref: 'Digital', vi: 'kỹ thuật số' },
-  { pref: 'Automated', vi: 'tự động' },
-  { pref: 'Hydraulic', vi: 'thủy lực' },
-  { pref: 'Pneumatic', vi: 'khí nén' },
-  { pref: 'Industrial', vi: 'công nghiệp' },
-  { pref: 'Mechanical', vi: 'cơ khí' },
-  { pref: 'Electrical', vi: 'điện tử' },
-  { pref: 'Thermal', vi: 'nhiệt' },
-  { pref: 'Precision', vi: 'chính xác' },
-  { pref: 'Preventive', vi: 'phòng ngừa' },
-  { pref: 'Protective', vi: 'bảo hộ' },
-  { pref: 'Standard', vi: 'tiêu chuẩn' },
-  { pref: 'Systematic', vi: 'hệ thống' },
-  { pref: 'Continuous', vi: 'liên tục' },
-  { pref: 'Efficient', vi: 'hiệu quả' },
-  { pref: 'Strategic', vi: 'chiến lược' },
-  { pref: 'Operational', vi: 'vận hành' },
-  { pref: 'Technical', vi: 'kỹ thuật' },
-  { pref: 'Modular', vi: 'mô-đun' },
-  { pref: 'Diagnostic', vi: 'chẩn đoán' },
-  { pref: 'Integrated', vi: 'tích hợp' },
-  { pref: 'Pneumatic', vi: 'khí ép' },
-  { pref: 'Acoustic', vi: 'âm thanh' },
-  { pref: 'Synthetic', vi: 'tổng hợp' },
-  { pref: 'Analytical', vi: 'phân tích' },
+  { pref: 'Digital', vi: 'Kỹ thuật số' },
+  { pref: 'Automated', vi: 'Tự động' },
+  { pref: 'Hydraulic', vi: 'Thủy lực' },
+  { pref: 'Pneumatic', vi: 'Khí nén' },
+  { pref: 'Industrial', vi: 'Công nghiệp' },
+  { pref: 'Mechanical', vi: 'Cơ khí' },
+  { pref: 'Electrical', vi: 'Điện khí' },
+  { pref: 'Thermal', vi: 'Nhiệt lực' },
+  { pref: 'Precision', vi: 'Chính xác' },
+  { pref: 'Preventive', vi: 'Phòng ngừa' },
+  { pref: 'Protective', vi: 'Bảo hộ' },
+  { pref: 'Standard', vi: 'Tiêu chuẩn' },
+  { pref: 'Systematic', vi: 'Hệ thống' },
+  { pref: 'Continuous', vi: 'Liên tục' },
+  { pref: 'Efficient', vi: 'Hiệu quả' },
+  { pref: 'Strategic', vi: 'Chiến lược' },
+  { pref: 'Operational', vi: 'Vận hành' },
+  { pref: 'Technical', vi: 'Kỹ thuật' },
+  { pref: 'Modular', vi: 'Mô-đun' },
+  { pref: 'Diagnostic', vi: 'Chẩn đoán' },
+  { pref: 'Integrated', vi: 'Tích hợp' },
+  { pref: 'Advanced', vi: 'Cao cấp' },
+  { pref: 'Smart', vi: 'Thông minh' },
+  { pref: 'Remote', vi: 'Từ xa' },
+  { pref: 'Wireless', vi: 'Không dây' },
 ];
 
 const enBases = [
-  { stem: 'inspect', pos: 'verb', vi: 'kiểm tra', ipa: '/ɪnˈspekt/' },
-  { stem: 'assemble', pos: 'verb', vi: 'lắp ráp', ipa: '/əˈsem.bəl/' },
-  { stem: 'maintain', pos: 'verb', vi: 'bảo trì', ipa: '/meɪnˈteɪn/' },
-  { stem: 'calibrate', pos: 'verb', vi: 'hiệu chuẩn', ipa: '/ˈkæl.ɪ.breɪt/' },
-  { stem: 'operate', pos: 'verb', vi: 'vận hành', ipa: '/ˈɒp.ər.eɪt/' },
-  { stem: 'manufacture', pos: 'verb', vi: 'chế tạo', ipa: '/ˌmæn.jəˈfæk.tʃər/' },
-  { stem: 'transport', pos: 'verb', vi: 'vận chuyển', ipa: '/ˈtræn.spɔːt/' },
-  { stem: 'package', pos: 'verb', vi: 'đóng gói', ipa: '/ˈpæk.ɪdʒ/' },
-  { stem: 'regulate', pos: 'verb', vi: 'điều chỉnh quy định', ipa: '/ˈreɡ.jə.leɪt/' },
-  { stem: 'evaluate', pos: 'verb', vi: 'đánh giá', ipa: '/ɪˈvæl.ju.eɪt/' },
-  { stem: 'automate', pos: 'verb', vi: 'tự động hóa', ipa: '/ˈɔː.tə.meɪt/' },
-  { stem: 'supervise', pos: 'verb', vi: 'giám sát', ipa: '/ˈsuː.pə.vaɪz/' },
-  { stem: 'optimize', pos: 'verb', vi: 'tối ưu hóa', ipa: '/ˈɒp.tɪ.maɪz/' },
-  { stem: 'standardize', pos: 'verb', vi: 'tiêu chuẩn hóa', ipa: '/ˈstæn.də.daɪz/' },
-  { stem: 'coordinate', pos: 'verb', vi: 'phối hợp', ipa: '/kəʊˈɔː.dɪ.neɪt/' },
-  { stem: 'fabricate', pos: 'verb', vi: 'gia công kim loại', ipa: '/ˈfæb.rɪ.keɪt/' },
-  { stem: 'lubricate', pos: 'verb', vi: 'tra dầu mỡ', ipa: '/ˈluː.brɪ.keɪt/' },
-  { stem: 'dispatch', pos: 'verb', vi: 'gửi hàng đi', ipa: '/dɪˈspætʃ/' },
-  { stem: 'overhaul', pos: 'verb', vi: 'đại tu thiết bị', ipa: '/ˈəʊ.və.hɔːl/' },
-  { stem: 'troubleshoot', pos: 'verb', vi: 'xử lý sự cố', ipa: '/ˈtrʌb.əl.ʃuːt/' },
+  { stem: 'Inspection', pos: 'noun', vi: 'Kiểm tra', ipa: '/ɪnˈspek.ʃən/' },
+  { stem: 'Assembly', pos: 'noun', vi: 'Lắp ráp', ipa: '/əˈsem.bli/' },
+  { stem: 'Maintenance', pos: 'noun', vi: 'Bảo trì', ipa: '/ˈmeɪn.tən.əns/' },
+  { stem: 'Calibration', pos: 'noun', vi: 'Hiệu chuẩn', ipa: '/ˌkæl.ɪˈbreɪ.ʃən/' },
+  { stem: 'Operation', pos: 'noun', vi: 'Thao tác', ipa: '/ˌɒp.ərˈeɪ.ʃən/' },
+  { stem: 'Manufacturing', pos: 'noun', vi: 'Chế tạo', ipa: '/ˌmæn.jəˈfæk.tʃər.ɪŋ/' },
+  { stem: 'Transportation', pos: 'noun', vi: 'Vận chuyển', ipa: '/ˌtræn.spɔːˈteɪ.ʃən/' },
+  { stem: 'Packaging', pos: 'noun', vi: 'Đóng gói', ipa: '/ˈpæk.ɪ.dʒɪŋ/' },
+  { stem: 'Regulation', pos: 'noun', vi: 'Điều tiết', ipa: '/ˌreɡ.jəˈleɪ.ʃən/' },
+  { stem: 'Evaluation', pos: 'noun', vi: 'Đánh giá', ipa: '/ɪˌvæl.juˈeɪ.ʃən/' },
+  { stem: 'Automation', pos: 'noun', vi: 'Tự động hóa', ipa: '/ˌɔː.təˈmeɪ.ʃən/' },
+  { stem: 'Supervision', pos: 'noun', vi: 'Kiểm soát', ipa: '/ˌsuː.pəˈvɪʒ.ən/' },
+  { stem: 'Optimization', pos: 'noun', vi: 'Tối ưu hóa', ipa: '/ˌɒp.tɪ.maɪˈzeɪ.ʃən/' },
+  { stem: 'Management', pos: 'noun', vi: 'Quản lý', ipa: '/ˈmæn.ɪdʒ.mənt/' },
+  { stem: 'Coordination', pos: 'noun', vi: 'Phối hợp', ipa: '/kəʊˌɔː.dɪˈneɪ.ʃən/' },
+  { stem: 'Fabrication', pos: 'noun', vi: 'Gia công', ipa: '/ˌfæb.rɪˈkeɪ.ʃən/' },
+  { stem: 'Lubrication', pos: 'noun', vi: 'Bôi trơn', ipa: '/ˌluː.brɪˈkeɪ.ʃən/' },
+  { stem: 'Dispatch', pos: 'noun', vi: 'Điều độ', ipa: '/dɪˈspætʃ/' },
+  { stem: 'Overhaul', pos: 'noun', vi: 'Đại tu', ipa: '/ˈəʊ.və.hɔːl/' },
+  { stem: 'Troubleshooting', pos: 'noun', vi: 'Khắc phục sự cố', ipa: '/ˈtrʌb.əlˌʃuː.tɪŋ/' },
 ];
 
 const enNouns = [
-  { noun: 'System', vi: 'hệ thống' },
-  { noun: 'Unit', vi: 'đơn vị/thiết bị' },
-  { noun: 'Line', vi: 'dây chuyền' },
-  { noun: 'Station', vi: 'trạm thao tác' },
-  { noun: 'Gauge', vi: 'đồng hồ đo' },
-  { noun: 'Valve', vi: 'van đóng mở' },
-  { noun: 'Sensor', vi: 'cảm biến' },
-  { noun: 'Motor', vi: 'động cơ' },
-  { noun: 'Bearing', vi: 'vòng bi/bạc đạn' },
-  { noun: 'Conveyor', vi: 'băng tải' },
-  { noun: 'Protocol', vi: 'giao thức' },
-  { noun: 'Report', vi: 'báo cáo' },
-  { noun: 'Schedule', vi: 'lịch trình' },
-  { noun: 'Audit', vi: 'kiểm toán/đánh giá' },
-  { noun: 'Standard', vi: 'tiêu chuẩn' },
-  { noun: 'Module', vi: 'mô-đun' },
-  { noun: 'Circuit', vi: 'mạch điện' },
-  { noun: 'Panel', vi: 'bảng điều khiển' },
-  { noun: 'Actuator', vi: 'bộ chấp hành' },
-  { noun: 'Filter', vi: 'bộ lọc' },
+  { noun: 'System', vi: 'Hệ thống' },
+  { noun: 'Unit', vi: 'Thiết bị/Cụm' },
+  { noun: 'Line', vi: 'Dây chuyền' },
+  { noun: 'Station', vi: 'Trạm làm việc' },
+  { noun: 'Gauge', vi: 'Đồng hồ/Thiết bị đo' },
+  { noun: 'Valve', vi: 'Van' },
+  { noun: 'Sensor', vi: 'Cảm biến' },
+  { noun: 'Motor', vi: 'Động cơ' },
+  { noun: 'Bearing', vi: 'Vòng bi' },
+  { noun: 'Conveyor', vi: 'Băng tải' },
+  { noun: 'Protocol', vi: 'Giao thức' },
+  { noun: 'Report', vi: 'Báo cáo' },
+  { noun: 'Schedule', vi: 'Kế hoạch' },
+  { noun: 'Audit', vi: 'Kiểm toán' },
+  { noun: 'Standard', vi: 'Quy phạm' },
+  { noun: 'Module', vi: 'Mô-đun' },
+  { noun: 'Circuit', vi: 'Mạch điện' },
+  { noun: 'Panel', vi: 'Bảng điều khiển' },
+  { noun: 'Actuator', vi: 'Bộ chấp hành' },
+  { noun: 'Filter', vi: 'Bộ lọc' },
 ];
 
 let counterEn = 0;
 outerEn: for (const mod of enModifiers) {
   for (const base of enBases) {
     for (const noun of enNouns) {
-      if (enEntries.length >= 3000) break outerEn;
+      if (enEntries.length >= 10000) break outerEn;
 
-      const word = `${mod.pref} ${base.stem}-${noun.noun.toLowerCase()}`;
+      const word = `${mod.pref} ${base.stem} ${noun.noun}`;
       if (enSeenWords.has(word)) continue;
       enSeenWords.add(word);
 
-      const vi = `${base.vi} ${noun.vi} (${mod.vi})`;
+      const vi = `${noun.vi} ${base.vi} ${mod.vi}`;
       const pos = posList[counterEn % posList.length];
       const cefr = cefrLevels[counterEn % cefrLevels.length];
       const cat = enCategories[counterEn % enCategories.length];
@@ -393,8 +351,8 @@ outerEn: for (const mod of enModifiers) {
       enEntries.push({
         language: 'en',
         word,
-        ipa: `/${mod.pref.toLowerCase()}.${base.stem}.${noun.noun.toLowerCase()}/`,
-        partOfSpeech: pos,
+        ipa: `${base.ipa}`,
+        partOfSpeech: 'noun',
         meaningVi: vi,
         meaningEn: `${mod.pref} ${base.stem} ${noun.noun}`,
         cefrLevel: cefr,
@@ -403,18 +361,17 @@ outerEn: for (const mod of enModifiers) {
         examples: [
           {
             sentenceEn: `The engineering team activated the ${word.toLowerCase()} during routine operations.`,
-            sentenceVi: `Đội ngũ kỹ thuật đã kích hoạt ${vi} trong quá trình vận hành thông thường.`,
+            sentenceVi: `Đội ngũ kỹ thuật đã kích hoạt ${vi.toLowerCase()} trong quá trình vận hành thông thường.`,
           },
         ],
         synonyms: [{ word: `${mod.pref} mechanism`, meaningVi: `Cơ chế ${mod.vi}` }],
         antonyms: [{ word: `Manual ${noun.noun.toLowerCase()}`, meaningVi: `${noun.vi} thủ công` }],
-        collocations: [{ phrase: `Operate ${word.toLowerCase()}`, meaningVi: `Vận hành ${vi}` }],
+        collocations: [{ phrase: `Operate ${word.toLowerCase()}`, meaningVi: `Vận hành ${vi.toLowerCase()}` }],
         mnemonic: `Visualized as: ${mod.pref} + ${base.stem} + ${noun.noun}.`,
       });
     }
   }
 }
-
 console.log(`Generated ${enEntries.length} authentic English words.`);
 
 // --------------------------------------------------------------------------

@@ -87,6 +87,7 @@ export async function GET(req: Request) {
         cefrLevel: c.vocabulary?.cefrLevel || null,
         partOfSpeech: c.vocabulary?.partOfSpeech || 'noun',
         meaningEn: c.vocabulary?.meaningEn || '',
+        imageUrl: c.imageUrl || null,
         examples: c.vocabulary?.examples || [],
         synonyms: usageNotesObj.synonyms || [],
         antonyms: usageNotesObj.antonyms || [],

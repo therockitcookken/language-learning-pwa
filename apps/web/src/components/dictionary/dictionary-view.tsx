@@ -451,7 +451,7 @@ export function DictionaryView() {
         <>
           {/* Grid Spacious View */}
           {viewMode === 'grid_spacious' && (
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
               {filteredAndSortedItems.map((item) => {
                 const isZh = item.language === 'zh';
                 const isSaved = Boolean(savedIds[item.id]);

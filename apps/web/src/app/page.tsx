@@ -71,44 +71,44 @@ function HomePageContent() {
               {activeTab === 'dashboard' && (
                 <div className="space-y-4">
                   {/* Hero Brand Block Banner */}
-                  <div className="relative overflow-hidden bg-slate-950/60 border-2 border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl min-h-[350px] flex items-center">
+                  <div className="relative overflow-hidden bg-slate-950/60 border-2 border-slate-700/60 rounded-2xl p-4 sm:p-8 shadow-2xl backdrop-blur-xl min-h-[250px] sm:min-h-[350px] flex items-center">
                     <HeroScene />
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-500/10 via-indigo-500/10 to-transparent rounded-full blur-3xl -z-0 pointer-events-none" />
-                    <div className="relative z-10 space-y-4 max-w-2xl pointer-events-auto">
-                      <span className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-indigo-500/15 text-orange-300 border border-orange-500/50 shadow-md backdrop-blur-md">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                        Ứng dụng PWA Học tiếng Trung & Tiếng Anh Công Xưởng
+                    <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-bl from-orange-500/10 via-indigo-500/10 to-transparent rounded-full blur-3xl -z-0 pointer-events-none" />
+                    <div className="relative z-10 space-y-3 sm:space-y-4 max-w-2xl pointer-events-auto">
+                      <span className="inline-flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[11px] font-black uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-gradient-to-r from-orange-500/15 via-amber-500/15 to-indigo-500/15 text-orange-300 border border-orange-500/50 shadow-md backdrop-blur-md">
+                        <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
+                        PWA Học Tiếng Trung & Anh Công Xưởng
                       </span>
-                      <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight tracking-tight drop-shadow-md font-sans">
+                      <h2 className="text-xl sm:text-4xl font-black text-white leading-snug sm:leading-tight tracking-tight drop-shadow-md font-sans">
                         Làm Chủ Ngôn Ngữ Nhà Máy – Nâng Cao Tay Nghề & Lương Thưởng!
                       </h2>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
+                      <p className="text-[11px] sm:text-sm text-slate-300 leading-relaxed font-medium">
                         Thiết kế tối ưu cho công nhân, kỹ thuật viên, quản lý chuyền & nhân viên bảo trì. Học giao tiếp an toàn, thao tác máy CNC, băng chuyền & báo cáo QC thực tế.
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-3 pt-2">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
                         <AnimatedButton
                           soundType="click"
                           onClick={() => setActiveTab('dictionary')}
-                          className="px-6 py-3 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white font-black text-xs rounded-xl shadow-lg shadow-orange-500/25 flex items-center gap-2"
+                          className="px-4 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-white font-black text-[11px] sm:text-xs rounded-xl shadow-lg shadow-orange-500/25 flex items-center gap-2"
                         >
-                          <BookOpen className="w-4 h-4 text-amber-200" /> Tra Từ Điển
+                          <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-200" /> Tra Từ Điển
                         </AnimatedButton>
                         <AnimatedButton
                           soundType="click"
                           onClick={() => setActiveTab('quiz')}
-                          className="px-6 py-3 bg-slate-800/80 text-slate-200 font-extrabold text-xs rounded-xl border-2 border-slate-600/60 flex items-center gap-2 backdrop-blur-xl shadow-md hover:border-orange-500/60"
+                          className="px-4 py-2.5 sm:px-6 sm:py-3 bg-slate-800/80 text-slate-200 font-extrabold text-[11px] sm:text-xs rounded-xl border-2 border-slate-600/60 flex items-center gap-2 backdrop-blur-xl shadow-md hover:border-orange-500/60"
                         >
-                          <HelpCircle className="w-4 h-4 text-orange-400" /> Kiểm Tra An Toàn
+                          <HelpCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" /> Kiểm Tra An Toàn
                         </AnimatedButton>
                         
                         {/* Dev XP Add Button */}
                         <AnimatedButton
                           soundType="click"
                           onClick={() => progress.addXp(50)}
-                          className="px-4 py-3 bg-indigo-900/60 text-indigo-300 font-extrabold text-xs rounded-xl border-2 border-indigo-500/40 flex items-center gap-2 backdrop-blur-xl shadow-md hover:border-indigo-400"
+                          className="px-3 py-2.5 sm:px-4 sm:py-3 bg-indigo-900/60 text-indigo-300 font-extrabold text-[11px] sm:text-xs rounded-xl border-2 border-indigo-500/40 flex items-center gap-2 backdrop-blur-xl shadow-md hover:border-indigo-400"
                         >
-                          <Zap className="w-4 h-4" /> Nhận 50 XP (Test)
+                          <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Nhận 50 XP
                         </AnimatedButton>
                       </div>
                     </div>
@@ -140,45 +140,45 @@ function HomePageContent() {
                         Thời gian thực
                       </span>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      <div className="bg-slate-950/60 p-4 rounded-xl border-2 border-emerald-500/40 text-center shadow-lg relative overflow-hidden group hover:border-emerald-500/80 transition-colors">
-                        <div className="absolute top-0 right-0 p-2 text-emerald-500/20 group-hover:text-emerald-500/50 transition-colors">
-                          <Award className="w-6 h-6" />
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
+                      <div className="bg-slate-950/60 p-3 sm:p-4 rounded-xl border-2 border-emerald-500/40 text-center shadow-lg relative overflow-hidden group hover:border-emerald-500/80 transition-colors">
+                        <div className="absolute top-0 right-0 p-1 sm:p-2 text-emerald-500/20 group-hover:text-emerald-500/50 transition-colors">
+                          <Award className="w-4 h-4 sm:w-6 sm:h-6" />
                         </div>
-                        <span className="text-2xl font-black text-emerald-400 block font-sans">
+                        <span className="text-xl sm:text-2xl font-black text-emerald-400 block font-sans">
                           <NumberCounter value={92} format={(v) => `${v}%`} />
                         </span>
-                        <span className="text-xs font-extrabold text-slate-300 block mt-1">Chính xác Flashcard</span>
+                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-300 block mt-1">Chính xác Flashcard</span>
                       </div>
 
-                      <div className="bg-slate-950/60 p-4 rounded-xl border-2 border-orange-500/40 text-center shadow-lg relative overflow-hidden group hover:border-orange-500/80 transition-colors">
-                        <div className="absolute top-0 right-0 p-2 text-orange-500/20 group-hover:text-orange-500/50 transition-colors">
-                          <HelpCircle className="w-6 h-6" />
+                      <div className="bg-slate-950/60 p-3 sm:p-4 rounded-xl border-2 border-orange-500/40 text-center shadow-lg relative overflow-hidden group hover:border-orange-500/80 transition-colors">
+                        <div className="absolute top-0 right-0 p-1 sm:p-2 text-orange-500/20 group-hover:text-orange-500/50 transition-colors">
+                          <HelpCircle className="w-4 h-4 sm:w-6 sm:h-6" />
                         </div>
-                        <span className="text-2xl font-black text-orange-400 block font-sans">
+                        <span className="text-xl sm:text-2xl font-black text-orange-400 block font-sans">
                           <NumberCounter value={8} format={(v) => `${v}/10`} />
                         </span>
-                        <span className="text-xs font-extrabold text-slate-300 block mt-1">Bài Quiz hoàn thành</span>
+                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-300 block mt-1">Bài Quiz hoàn thành</span>
                       </div>
 
-                      <div className="bg-slate-950/60 p-4 rounded-xl border-2 border-indigo-500/40 text-center shadow-lg relative overflow-hidden group hover:border-indigo-500/80 transition-colors">
-                        <div className="absolute top-0 right-0 p-2 text-indigo-500/20 group-hover:text-indigo-500/50 transition-colors">
-                          <BookOpen className="w-6 h-6" />
+                      <div className="bg-slate-950/60 p-3 sm:p-4 rounded-xl border-2 border-indigo-500/40 text-center shadow-lg relative overflow-hidden group hover:border-indigo-500/80 transition-colors">
+                        <div className="absolute top-0 right-0 p-1 sm:p-2 text-indigo-500/20 group-hover:text-indigo-500/50 transition-colors">
+                          <BookOpen className="w-4 h-4 sm:w-6 sm:h-6" />
                         </div>
-                        <span className="text-2xl font-black text-indigo-400 block font-sans">
+                        <span className="text-xl sm:text-2xl font-black text-indigo-400 block font-sans">
                           <NumberCounter value={1050} format={(v) => v.toLocaleString()} />
                         </span>
-                        <span className="text-xs font-extrabold text-slate-300 block mt-1">Từ vựng đã thuộc</span>
+                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-300 block mt-1">Từ vựng đã thuộc</span>
                       </div>
 
-                      <div className="bg-slate-950/60 p-4 rounded-xl border-2 border-amber-500/40 text-center shadow-lg relative overflow-hidden group hover:border-amber-500/80 transition-colors">
-                        <div className="absolute top-0 right-0 p-2 text-amber-500/20 group-hover:text-amber-500/50 transition-colors">
-                          <Layers className="w-6 h-6" />
+                      <div className="bg-slate-950/60 p-3 sm:p-4 rounded-xl border-2 border-amber-500/40 text-center shadow-lg relative overflow-hidden group hover:border-amber-500/80 transition-colors">
+                        <div className="absolute top-0 right-0 p-1 sm:p-2 text-amber-500/20 group-hover:text-amber-500/50 transition-colors">
+                          <Layers className="w-4 h-4 sm:w-6 sm:h-6" />
                         </div>
-                        <span className="text-2xl font-black text-amber-400 block font-sans">
+                        <span className="text-xl sm:text-2xl font-black text-amber-400 block font-sans">
                           <NumberCounter value={5} format={(v) => `${v} Ngày`} />
                         </span>
-                        <span className="text-xs font-extrabold text-slate-300 block mt-1">Chuỗi ngày học liên tục</span>
+                        <span className="text-[10px] sm:text-xs font-extrabold text-slate-300 block mt-1">Chuỗi ngày học liên tục</span>
                       </div>
                     </div>
                   </div>

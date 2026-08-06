@@ -42,6 +42,7 @@ export interface FlashcardItem {
   cefrLevel?: string;
   partOfSpeech?: string;
   meaningEn?: string;
+  imageUrl?: string;
   examples?: Array<{
     sentenceZh?: string;
     sentenceEn?: string;
@@ -307,8 +308,15 @@ export function FlashcardDeckPlayer({
               </AnimatedButton>
             </div>
             
-            <div className="text-center space-y-4">
-              <span className="text-[10px] text-slate-400 font-black uppercase">Mặt trước</span>
+            <div className="text-center space-y-4 flex-1 flex flex-col items-center justify-center">
+              <span className="text-[10px] text-slate-400 font-black uppercase mb-2">Mặt trước</span>
+              {currentCard.imageUrl && !isReverseMode && (
+                <div className="w-32 h-32 md:w-40 md:h-40 mb-4 rounded-2xl overflow-hidden border-2 border-slate-700/50 shadow-inner mx-auto relative group">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={currentCard.imageUrl} alt={currentCard.frontText} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-50" />
+                </div>
+              )}
               <h2 className="text-4xl sm:text-5xl font-black text-white">{isReverseMode ? currentCard.backText : currentCard.frontText}</h2>
               {currentCard.pinyinOrIpa && !isReverseMode && (
                 <p className="text-xl font-black text-orange-400">{currentCard.pinyinOrIpa}</p>
@@ -381,6 +389,16 @@ export function FlashcardDeckPlayer({
         </AnimatedButton>
         <AnimatedButton soundType="none" onClick={() => handleRating('easy')} className="py-3.5 px-4 bg-emerald-950/80 border-2 border-emerald-500/50 text-emerald-300 rounded-2xl font-black text-xs shadow-lg hover:border-emerald-500 flex flex-col items-center">
           <span>4: Rất dễ (Easy)</span>
+        </AnimatedButton>
+      </div>
+
+      {/* Manual Navigation Controls */}
+      <div className="flex items-center justify-between pt-2">
+        <AnimatedButton soundType="click" onClick={prevCard} className="px-5 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold shadow-md border border-slate-700 flex items-center gap-2">
+          « Từ Trước
+        </AnimatedButton>
+        <AnimatedButton soundType="click" onClick={nextCard} className="px-5 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-bold shadow-md border border-slate-700 flex items-center gap-2">
+          Từ Kế »
         </AnimatedButton>
       </div>
     </div>

@@ -96,6 +96,7 @@ async function main() {
           topic: vocab.topic,
           factoryDomain: vocab.factoryDomain,
           mnemonic: item.mnemonic || `Ghi nhớ từ: ${vocab.word}`,
+          imageUrl: item.imageUrl || null,
         },
       });
 
@@ -152,6 +153,7 @@ async function main() {
           topic: vocab.topic,
           factoryDomain: vocab.factoryDomain,
           mnemonic: item.mnemonic || `Remember: ${vocab.word}`,
+          imageUrl: item.imageUrl || null,
         },
       });
 

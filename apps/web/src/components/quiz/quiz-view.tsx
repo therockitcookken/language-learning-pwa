@@ -831,8 +831,8 @@ export function QuizView() {
           </div>
 
           {/* Mode Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3 shadow-lg">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-3 shadow-lg">
               <div className="p-3 rounded-2xl bg-orange-950/50 border border-orange-500/30 text-orange-400 w-fit">
                 <Sparkles className="w-5 h-5" />
               </div>
@@ -848,7 +848,7 @@ export function QuizView() {
               </button>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3 shadow-lg">
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-3 shadow-lg">
               <div className="p-3 rounded-2xl bg-amber-950/50 border border-amber-500/30 text-amber-400 w-fit">
                 <Mic className="w-5 h-5" />
               </div>
@@ -867,7 +867,7 @@ export function QuizView() {
               </button>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3 shadow-lg">
+            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-3 shadow-lg">
               <div className="p-3 rounded-2xl bg-indigo-950/50 border border-indigo-500/30 text-indigo-400 w-fit">
                 <Lightbulb className="w-5 h-5" />
               </div>
@@ -1037,7 +1037,7 @@ export function QuizView() {
 
           {/* Grid of Exercises with Pagination */}
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="h-44 bg-slate-900 border border-slate-800 rounded-2xl animate-pulse p-6" />
               ))}
@@ -1049,7 +1049,7 @@ export function QuizView() {
               <p className="text-xs text-slate-400">Vui lòng điều chỉnh lại bộ lọc cấp độ hoặc dạng bài.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
               {exercises.map((ex, idx) => (
                 <div
                   key={ex.id || idx}

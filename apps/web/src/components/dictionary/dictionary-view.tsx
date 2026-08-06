@@ -298,10 +298,10 @@ export function DictionaryView() {
               {query || domain || hsk || cefr
                 ? `${paginationInfo.total.toLocaleString()} Từ Vựng`
                 : activeWorkspace === 'zh'
-                ? '10,000 Từ Vựng Tiếng Trung'
+                ? `${paginationInfo.total.toLocaleString()} Từ Vựng Tiếng Trung`
                 : activeWorkspace === 'en'
-                ? '10,000 Từ Vựng Tiếng Anh'
-                : '20,000 Từ Vựng Song Ngữ'}
+                ? `${paginationInfo.total.toLocaleString()} Từ Vựng Tiếng Anh`
+                : `${paginationInfo.total.toLocaleString()} Từ Vựng Song Ngữ`}
             </span>
           </p>
         </div>
@@ -335,15 +335,7 @@ export function DictionaryView() {
 
       {/* Dictionary Stats Bar */}
       <DictionaryStats
-        total={
-          query || domain || hsk || cefr
-            ? paginationInfo.total
-            : activeWorkspace === 'zh'
-            ? Math.max(paginationInfo.total, 10000)
-            : activeWorkspace === 'en'
-            ? Math.max(paginationInfo.total, 10000)
-            : Math.max(paginationInfo.total, 20000)
-        }
+        total={paginationInfo.total}
         learnedCount={
           activeWorkspace === 'zh'
             ? 3500
@@ -365,9 +357,9 @@ export function DictionaryView() {
           setHsk('');
           setCefr('');
         }}
-        zhCount={10000}
-        enCount={10000}
-        bilingualCount={20000}
+        zhCount={activeWorkspace === 'zh' ? paginationInfo.total : undefined}
+        enCount={activeWorkspace === 'en' ? paginationInfo.total : undefined}
+        bilingualCount={activeWorkspace === 'bilingual' ? paginationInfo.total : undefined}
       />
 
       {/* 2. Search Command Center */}
@@ -420,15 +412,7 @@ export function DictionaryView() {
           setAdvancedFilters((prev) => ({ ...prev, [field]: Array.isArray(prev[field]) ? [] : false }))
         }
         onResetAll={handleResetAllFilters}
-        totalResults={
-          query || domain || hsk || cefr
-            ? paginationInfo.total
-            : activeWorkspace === 'zh'
-            ? Math.max(paginationInfo.total, 10000)
-            : activeWorkspace === 'en'
-            ? Math.max(paginationInfo.total, 10000)
-            : Math.max(paginationInfo.total, 20000)
-        }
+        totalResults={paginationInfo.total}
       />
 
       {/* 5. Results Toolbar (Sort & View Modes & Quick Study) */}

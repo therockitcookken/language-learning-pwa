@@ -3,7 +3,7 @@ import { db as prisma } from '@/lib/db/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Next.js 15+ dynamic params handling

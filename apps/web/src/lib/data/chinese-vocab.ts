@@ -310,40 +310,5 @@ export function generateFullChineseVocab(): ChineseVocabSeed[] {
     { s: '急救箱', t: '急救箱', p: 'jí jiù xiāng', pn: 'ji2 jiu4 xiang1', vi: 'Hộp sơ cứu', en: 'First aid kit', domain: 'an_toan', topic: 'Safety' },
   ];
 
-  let count = baseList.length;
-  let idx = 0;
-  while (count < 2000) {
-    const template = factoryTermsTemplates[idx % factoryTermsTemplates.length];
-    const lvl = levels[idx % levels.length];
-    const suffixNum = Math.floor(count / factoryTermsTemplates.length) + 1;
-    const isUnique = suffixNum === 1;
-
-    baseList.push({
-      simplified: isUnique ? template.s : `${template.s}${suffixNum}`,
-      traditional: isUnique ? template.t : `${template.t}${suffixNum}`,
-      word: template.p,
-      pinyin: template.p,
-      pinyinNumeric: template.pn,
-      partOfSpeech: 'noun',
-      meaningVi: isUnique ? template.vi : `${template.vi} (Mẫu ${suffixNum})`,
-      meaningEn: isUnique ? template.en : `${template.en} (Type ${suffixNum})`,
-      hskLevel: lvl,
-      topic: template.topic,
-      factoryDomain: template.domain,
-      usageNotes: `Thuật ngữ chuyên ngành ${template.topic} dùng trong môi trường sản xuất công nghiệp.`,
-      examples: [
-        {
-          sentenceZh: `请检查${template.s}的状态。`,
-          pinyin: `Qǐng jiǎnchá ${template.p} de zhuàngtài.`,
-          sentenceVi: `Xin hãy kiểm tra trạng thái của ${template.vi}.`,
-          sentenceEn: `Please check the status of the ${template.en}.`,
-          factoryContext: `Kiểm tra ${template.topic}`,
-        },
-      ],
-    });
-    count++;
-    idx++;
-  }
-
   return baseList;
 }

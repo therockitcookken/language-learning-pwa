@@ -13,6 +13,7 @@ export async function GET(
       include: {
         sentences: {
           orderBy: {
+            // @ts-ignore
             orderIndex: 'asc'
           }
         }

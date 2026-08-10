@@ -12,6 +12,8 @@ import { PronunciationView } from '@/components/pronunciation/pronunciation-view
 import { GrammarView } from '@/components/grammar/grammar-view';
 import { FlashcardView } from '@/components/flashcard/flashcard-view';
 import { QuizView } from '@/components/quiz/quiz-view';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+
 import { NotebookView } from '@/components/notebook/notebook-view';
 import { AdminView } from '@/components/admin/admin-view';
 import { BadgeCollection } from '@/components/common/badge-collection';
@@ -122,7 +124,11 @@ function HomePageContent() {
                 </div>
               )}
 
-              {activeTab === 'dictionary' && <DictionaryView />}
+              {activeTab === 'dictionary' && (
+                <ErrorBoundary>
+                  <DictionaryView />
+                </ErrorBoundary>
+              )}
               {activeTab === 'pronunciation' && <PronunciationView />}
               {activeTab === 'grammar' && <GrammarView />}
               {activeTab === 'flashcard' && <FlashcardView />}

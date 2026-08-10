@@ -31,7 +31,9 @@ export function ChineseVocabularyCard({
     if (item.usageNotes) notes = JSON.parse(item.usageNotes);
   } catch (e) {}
 
-  const validCollocations = (notes.collocations || []).filter((c: string) => !c.includes('+ 第一') && !c.endsWith('第一'));
+  const validCollocations = (notes.collocations || [])
+    .map((c: any) => typeof c === 'string' ? c : (c.word || ''))
+    .filter((c: string) => c && typeof c === 'string' && !c.includes('+ 第一') && !c.endsWith('第一'));
 
   const getHskBadge = (level?: string) => {
     switch (level) {

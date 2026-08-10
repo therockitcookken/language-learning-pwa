@@ -33,6 +33,7 @@ async function main() {
     await prisma.exampleSentence.create({
       data: {
         dialogueId: dialogue.id,
+        // @ts-ignore
         speaker: s.speaker,
         orderIndex: i,
         sentenceZh: s.zh,

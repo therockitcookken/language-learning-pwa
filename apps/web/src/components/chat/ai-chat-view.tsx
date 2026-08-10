@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export function AiChatView() {
   // @ts-ignore
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    // @ts-ignore
     api: '/api/v1/chat',
     initialMessages: [
       {

@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import zlib from 'zlib';
-
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +15,12 @@ const EN_10K_PATH = path.join(DATASET_DIR, 'en-10k.json');
 
 const CEDICT_URL = 'https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz';
 const ENGLISH_20K_URL = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/20k.txt';
+
+// STRICT REGEX FOR EXACTLY 2 CHINESE HANZI CHARACTERS ONLY
+const CHINESE_2CHAR_REGEX = /^[\u4e00-\u9fa5]{2}$/;
+
+// STRICT REGEX FOR CLEAN ENGLISH WORDS ONLY (Letters only)
+const ENGLISH_WORD_REGEX = /^[a-zA-Z]{2,15}$/;
 
 if (!fs.existsSync(DATASET_DIR)) {
   fs.mkdirSync(DATASET_DIR, { recursive: true });
@@ -57,10 +62,10 @@ async function buildChineseDataset() {
   const dictPath = path.join(process.cwd(), 'cedict.txt');
   await downloadGzipped(CEDICT_URL, dictPath);
 
-  console.log('Parsing CC-CEDICT...');
+  console.log('Parsing CC-CEDICT with strict 2-Hanzi regex...');
   const lines = fs.readFileSync(dictPath, 'utf-8').split('\n');
   const entries = [];
-  const seen = new Set();
+  const seen = new Set<string>();
 
   for (const line of lines) {
     if (line.startsWith('#') || line.trim() === '') continue;
@@ -72,13 +77,15 @@ async function buildChineseDataset() {
 
     const [, trad, simp, pinyin, meanings] = match;
 
-    // STRICTLY 2 CHARACTERS (Chinese 2-character words only)
-    if (simp.length !== 2) continue;
+    // MUST BE STRICTLY 2 CHINESE HANZI CHARACTERS ONLY (No 3C, no numbers, no punctuation, no 6-character compounds)
+    if (!CHINESE_2CHAR_REGEX.test(simp)) continue;
     
     if (seen.has(simp)) continue;
     seen.add(simp);
 
-    const engMeaning = meanings.split('/')[0];
+    const engMeaning = meanings.split('/')[0].trim();
+    if (!engMeaning || engMeaning.length === 0) continue;
+
     const hsk = hskLevels[Math.floor(Math.random() * hskLevels.length)];
 
     entries.push({
@@ -119,26 +126,31 @@ async function buildChineseDataset() {
 async function buildEnglishDataset() {
   console.log('Downloading English 20k word list...');
   const text = await downloadText(ENGLISH_20K_URL);
-  const words = text.split('\n').filter(w => w.trim().length > 0 && !w.includes("'"));
+  const words = text.split('\n').filter(w => w.trim().length > 0);
   
   const entries = [];
-  const seen = new Set();
+  const seen = new Set<string>();
   const cefrLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
   for (const w of words) {
-    const cleanWord = w.trim();
+    const cleanWord = w.trim().toLowerCase();
+    
+    // MUST BE CLEAN ENGLISH ALPHABETICAL WORD ONLY
+    if (!ENGLISH_WORD_REGEX.test(cleanWord)) continue;
+
     if (seen.has(cleanWord)) continue;
     seen.add(cleanWord);
 
+    const capitalizedWord = cleanWord.charAt(0).toUpperCase() + cleanWord.slice(1);
     const cefr = cefrLevels[Math.floor(Math.random() * cefrLevels.length)];
 
     entries.push({
       language: 'en',
-      word: cleanWord,
+      word: capitalizedWord,
       ipa: `/${cleanWord}/`,
       partOfSpeech: 'noun',
-      meaningVi: cleanWord,
-      meaningEn: cleanWord,
+      meaningVi: capitalizedWord,
+      meaningEn: capitalizedWord,
       cefrLevel: cefr,
       topic: 'General',
       factoryDomain: 'chung',

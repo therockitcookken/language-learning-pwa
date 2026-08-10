@@ -6,6 +6,7 @@ import { Send, Bot, User, Sparkles, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function AiChatView() {
+  // @ts-ignore
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     api: '/api/v1/chat',
     initialMessages: [

@@ -23,7 +23,7 @@ async function main() {
   console.log('2. Reading Chinese JSON dataset...');
   const zhRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/zh-3k.json'), 'utf8');
   const zhData = JSON.parse(zhRaw.replace(/^\uFEFF/, '')); // Handle BOM just in case
-  const zhRecords = zhData.data.map(item => ({
+  const zhRecords = zhData.data.map((item: any) => ({
     language: 'zh',
     word: item.word || '',
     simplified: item.simplified || item.word || '',
@@ -51,7 +51,7 @@ async function main() {
   console.log('3. Reading English JSON dataset...');
   const enRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/en-3k.json'), 'utf8');
   const enData = JSON.parse(enRaw.replace(/^\uFEFF/, '')); // Handle BOM
-  const enRecords = enData.data.map(item => ({
+  const enRecords = enData.data.map((item: any) => ({
     language: 'en',
     word: item.word || '',
     ipa: item.ipa || '',
@@ -75,7 +75,7 @@ async function main() {
 
   console.log('4. Generating Flashcards for all entries...');
   const allVocab = await prisma.vocabularyEntry.findMany();
-  const flashcardRecords = allVocab.map(v => ({
+  const flashcardRecords = allVocab.map((v: any) => ({
     vocabularyId: v.id,
     frontText: v.language === 'zh' ? v.simplified || v.word : v.word,
     backText: v.meaningVi || v.meaningEn || 'N/A',

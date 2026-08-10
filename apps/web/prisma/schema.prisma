@@ -151,6 +151,8 @@ model ExampleSentence {
   id           String          @id @default(uuid())
   entryId      String?
   dialogueId   String?
+  speaker      String?
+  orderIndex   Int             @default(0)
   sentenceZh   String?
   pinyin       String?
   sentenceEn   String?

@@ -9,6 +9,7 @@ import {
   FileCode,
   Layers,
   HelpCircle,
+  MessageCircle,
   MapPin,
   BarChart3,
   Bookmark,
@@ -30,6 +31,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
 
   const mainMenuItems = [
     { id: 'dashboard', label: 'Trang chủ & Bản đồ 2D', icon: Home, category: 'CHÍNH' },
+    { id: 'dialogue', label: 'Hội thoại theo chủ đề', icon: MessageCircle, category: 'CHÍNH' },
     { id: 'dictionary', label: t.dictionary, icon: BookOpen, category: 'HỌC TỪ VỰNG' },
     { id: 'pronunciation', label: t.pronunciation, icon: Volume2, category: 'HỌC TỪ VỰNG' },
     { id: 'grammar', label: t.grammar, icon: FileCode, category: 'HỌC TỪ VỰNG' },

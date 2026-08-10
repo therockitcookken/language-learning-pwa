@@ -3,6 +3,7 @@
 import React from 'react';
 import { Volume2, Bookmark, Share2, Check, ExternalLink, Sparkles } from 'lucide-react';
 import { VocabularyItem } from './dictionary-types';
+import { WordCard3DIcon } from './word-card-3d-icon';
 
 interface EnglishVocabularyCardProps {
   item: VocabularyItem;
@@ -40,7 +41,9 @@ export function EnglishVocabularyCard({
           : 'bg-slate-900/60 border-slate-800/80 hover:border-blue-500/30 hover:bg-slate-900/80 hover:-translate-y-1 shadow-lg'
       }`}
     >
-      <div>
+      <WordCard3DIcon word={item.word} color="#0ea5e9" isChinese={false} />
+
+      <div className="relative z-10">
         {/* Top Bar */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="flex items-start gap-3 flex-1 min-w-0">

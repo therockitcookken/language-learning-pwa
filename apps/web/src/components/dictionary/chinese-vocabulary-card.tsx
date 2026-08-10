@@ -3,6 +3,7 @@
 import React from 'react';
 import { Volume2, Bookmark, Share2, Sparkles } from 'lucide-react';
 import { VocabularyItem } from './dictionary-types';
+import { WordCard3DIcon } from './word-card-3d-icon';
 
 interface ChineseVocabularyCardProps {
   item: VocabularyItem;
@@ -55,7 +56,9 @@ export function ChineseVocabularyCard({
           : 'bg-slate-900/50 border-slate-800/60 hover:border-orange-500/40 hover:bg-slate-900/80 hover:-translate-y-1 shadow-lg'
       }`}
     >
-      <div>
+      <WordCard3DIcon word={item.word} color="#f97316" isChinese={true} />
+      
+      <div className="relative z-10">
         {/* Top bar: Selection Checkbox & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="flex items-start gap-3 flex-1 min-w-0">

@@ -18,11 +18,14 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.39",
+    "@ai-sdk/react": "^4.0.61",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "^6.3.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.7.0",
+    "ai": "^7.0.58",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.43.0",

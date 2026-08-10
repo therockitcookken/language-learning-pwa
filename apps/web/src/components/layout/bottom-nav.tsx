@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useI18n } from '@/lib/i18n/i18n-context';
-import { Home, BookOpen, Volume2, Layers, HelpCircle, Shield, MessageCircle } from 'lucide-react';
+import { Home, BookOpen, Volume2, Layers, HelpCircle, Shield, MessageCircle, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
@@ -16,6 +16,7 @@ export function BottomNav({ activeTab, setActiveTab }: BottomNavProps) {
   const mobileItems = [
     { id: 'dashboard', label: 'Trang chủ', icon: Home },
     { id: 'dialogue', label: 'Hội thoại', icon: MessageCircle },
+    { id: 'aichat', label: 'AI', icon: Bot },
     { id: 'dictionary', label: 'Từ điển', icon: BookOpen },
     { id: 'pronunciation', label: 'Phát âm', icon: Volume2 },
     { id: 'flashcard', label: 'Flashcard', icon: Layers },

@@ -13,6 +13,7 @@ import { GrammarView } from '@/components/grammar/grammar-view';
 import { FlashcardView } from '@/components/flashcard/flashcard-view';
 import { QuizView } from '@/components/quiz/quiz-view';
 import { DialogueView } from '@/components/dialogue/dialogue-view';
+import { AiChatView } from '@/components/chat/ai-chat-view';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 import { NotebookView } from '@/components/notebook/notebook-view';
@@ -135,6 +136,7 @@ function HomePageContent() {
               {activeTab === 'flashcard' && <FlashcardView />}
               {activeTab === 'quiz' && <QuizView />}
               {activeTab === 'dialogue' && <DialogueView />}
+              {activeTab === 'aichat' && <AiChatView />}
               {activeTab === 'learningPath' && <FactoryMap2D onSelectZone={handleSelectZoneFromMap} />}
               {activeTab === 'notebook' && <NotebookView />}
               {activeTab === 'progress' && (

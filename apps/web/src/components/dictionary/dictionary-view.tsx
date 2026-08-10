@@ -33,6 +33,8 @@ import { BulkActionBar } from './bulk-action-bar';
 import { DictionarySkeleton } from './dictionary-skeleton';
 import { DictionaryEmptyState } from './dictionary-empty-state';
 
+import { Dictionary3DInteractive } from './dictionary-3d-interactive';
+
 export function DictionaryView() {
   const { t } = useI18n();
 
@@ -361,6 +363,9 @@ export function DictionaryView() {
         enCount={activeWorkspace === 'en' ? paginationInfo.total : undefined}
         bilingualCount={activeWorkspace === 'bilingual' ? paginationInfo.total : undefined}
       />
+
+      {/* 3D Interactive Three.js Vocabulary Canvas */}
+      <Dictionary3DInteractive />
 
       {/* 2. Search Command Center */}
       <SearchCommandCenter

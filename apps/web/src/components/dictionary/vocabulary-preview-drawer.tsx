@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { X, Volume2, Bookmark, Share2, ChevronLeft, ChevronRight, Check, Sparkles, BookOpen, Layers } from 'lucide-react';
+import { X, Volume2, Bookmark, ChevronLeft, ChevronRight, Sparkles, BookOpen } from 'lucide-react';
 import { VocabularyItem } from './dictionary-types';
 
 interface VocabularyPreviewDrawerProps {
@@ -49,19 +49,19 @@ export function VocabularyPreviewDrawer({
   const validCollocations = (notes.collocations || []).filter((c: string) => !c.includes('+ 第一') && !c.endsWith('第一'));
 
   return (
-    <div className="fixed inset-0 z-50 bg-canvas-ink/80 backdrop-blur-sm flex justify-end">
-      <div className="bg-pure-surface border-l border-whisper-border w-full max-w-lg h-full flex flex-col justify-between p-6 overflow-y-auto shadow-2xl animate-in slide-in-from-right relative">
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex justify-end">
+      <div className="bg-slate-900 border-l border-slate-800 w-full max-w-lg h-full flex flex-col justify-between p-6 overflow-y-auto shadow-2xl animate-in slide-in-from-right relative">
         {/* Drawer Top Controls */}
-        <div className="space-y-4 border-b border-whisper-border pb-4">
+        <div className="space-y-4 border-b border-slate-800 pb-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-mono text-xs text-muted-steel">
-              <BookOpen className="w-4 h-4 text-safety-orange" />
-              <span>DETAILED VOCABULARY DRAWER</span>
+            <div className="flex items-center gap-2 font-mono text-xs text-orange-400">
+              <BookOpen className="w-4 h-4 text-orange-500" />
+              <span>CHI TIẾT TỪ VỰNG DRAWER</span>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="p-1 text-muted-steel hover:text-safety-orange transition-colors"
+              className="p-1 text-slate-400 hover:text-orange-400 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -73,7 +73,7 @@ export function VocabularyPreviewDrawer({
                 type="button"
                 disabled={!hasPrev}
                 onClick={onPrev}
-                className="px-3 py-1.5 bg-canvas-ink border border-whisper-border hover:border-muted-steel disabled:opacity-40 text-xs font-mono text-titanium-white rounded flex items-center gap-1 cursor-pointer disabled:cursor-not-allowed"
+                className="px-3 py-1.5 bg-slate-950 border border-slate-800 hover:border-slate-700 disabled:opacity-40 text-xs font-mono text-white rounded-xl flex items-center gap-1 cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-4 h-4" /> TRƯỚC
               </button>
@@ -81,7 +81,7 @@ export function VocabularyPreviewDrawer({
                 type="button"
                 disabled={!hasNext}
                 onClick={onNext}
-                className="px-3 py-1.5 bg-canvas-ink border border-whisper-border hover:border-muted-steel disabled:opacity-40 text-xs font-mono text-titanium-white rounded flex items-center gap-1 cursor-pointer disabled:cursor-not-allowed"
+                className="px-3 py-1.5 bg-slate-950 border border-slate-800 hover:border-slate-700 disabled:opacity-40 text-xs font-mono text-white rounded-xl flex items-center gap-1 cursor-pointer disabled:cursor-not-allowed"
               >
                 SAU <ChevronRight className="w-4 h-4" />
               </button>
@@ -91,15 +91,15 @@ export function VocabularyPreviewDrawer({
               <button
                 type="button"
                 onClick={() => onSpeak(item.simplified || item.word, isZh ? 'zh-CN' : 'en-US')}
-                className="p-2 bg-safety-orange text-canvas-ink rounded font-mono text-xs font-bold flex items-center gap-1"
+                className="px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-mono text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
               >
-                <Volume2 className="w-4 h-4" /> NÓI
+                <Volume2 className="w-4 h-4" /> PHÁT ÂM
               </button>
               <button
                 type="button"
                 onClick={() => onToggleFavorite(item)}
-                className={`p-2 border rounded ${
-                  isSaved ? 'bg-titanium-white border-titanium-white text-canvas-ink' : 'bg-canvas-ink border-whisper-border text-muted-steel'
+                className={`p-2 border rounded-xl transition-all cursor-pointer ${
+                  isSaved ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'bg-slate-950 border-slate-800 text-slate-400'
                 }`}
               >
                 <Bookmark className="w-4 h-4" />
@@ -111,93 +111,100 @@ export function VocabularyPreviewDrawer({
         {/* Drawer Body Content */}
         <div className="space-y-6 py-4 flex-1 overflow-y-auto">
           {/* Main Word Header */}
-          <div className="space-y-2 bg-canvas-ink p-5 border border-whisper-border rounded-[4px]">
+          <div className="space-y-2 bg-slate-950 p-5 border border-slate-800 rounded-2xl">
             <div className="flex items-center gap-2">
-              <h2 className="text-4xl font-sans font-black text-titanium-white">{item.simplified || item.word}</h2>
+              <h2 className="text-4xl font-black text-white">{item.simplified || item.word}</h2>
               {item.hskLevel && (
-                <span className="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded font-mono text-xs font-bold uppercase">
+                <span className="bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-0.5 rounded-full font-mono text-xs font-bold uppercase">
                   {item.hskLevel}
                 </span>
               )}
               {item.cefrLevel && (
-                <span className="bg-blue-500/20 text-blue-400 border border-blue-500/40 px-2 py-0.5 rounded font-mono text-xs font-bold uppercase">
-                  TOEIC {item.cefrLevel}
+                <span className="bg-blue-500/20 text-blue-400 border border-blue-500/40 px-2.5 py-0.5 rounded-full font-mono text-xs font-bold uppercase">
+                  {item.cefrLevel}
                 </span>
               )}
             </div>
 
-            <p className="text-base font-mono font-bold text-safety-orange">{item.pinyin || item.ipa}</p>
-            {item.partOfSpeech && (
-              <span className="inline-block text-[10px] font-mono tracking-widest text-muted-steel border border-whisper-border px-2 py-0.5 uppercase bg-pure-surface rounded">
-                LOẠI TỪ: {item.partOfSpeech}
-              </span>
-            )}
-          </div>
+            <p className="text-sm font-extrabold text-orange-400 font-mono">
+              {isZh ? item.pinyin : item.ipa || `/${item.word}/`}
+            </p>
 
-          {/* Vietnamese & English Meanings */}
-          <div className="space-y-3 bg-pure-surface p-4 border border-whisper-border rounded">
-            <div>
-              <div className="text-[10px] font-mono text-muted-steel uppercase tracking-wider mb-1">NGHĨA TIẾNG VIỆT</div>
-              <p className="text-base font-sans font-bold text-titanium-white">{item.meaningVi}</p>
+            <div className="pt-3 border-t border-slate-800/80">
+              <div className="text-[10px] font-mono text-amber-400 font-black uppercase tracking-wider mb-1">NGHĨA TIẾNG VIỆT</div>
+              <p className="text-base font-extrabold text-white leading-relaxed">{item.meaningVi}</p>
             </div>
+
             {item.meaningEn && !item.meaningEn.includes('Practical Chinese (') && (
-              <div className="pt-2 border-t border-whisper-border">
-                <div className="text-[10px] font-mono text-muted-steel uppercase tracking-wider mb-1">ENGLISH MEANING</div>
-                <p className="text-sm font-sans text-muted-steel">{item.meaningEn}</p>
+              <div className="pt-2 border-t border-slate-800/80">
+                <div className="text-[10px] font-mono text-sky-400 font-black uppercase tracking-wider mb-1">ENGLISH MEANING</div>
+                <p className="text-sm font-medium text-slate-300">{item.meaningEn}</p>
               </div>
             )}
           </div>
 
-          {/* Chinese Radical & Stroke Analysis */}
-          {isZh && (
-            <div className="bg-canvas-ink p-4 border border-whisper-border rounded space-y-3">
-              <div className="text-xs font-mono font-bold text-titanium-white uppercase flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-safety-orange" /> PHÂN TÍCH CHỮ HÁN & NÉT
-              </div>
-              <div className="grid grid-cols-3 gap-2 text-xs font-mono text-muted-steel">
-                <div className="bg-pure-surface p-2 border border-whisper-border rounded">
-                  <span>BỘ THỦ</span>
-                  <div className="text-sm font-bold text-titanium-white mt-1">宀 (Roof)</div>
+          {/* Synonyms & Antonyms */}
+          <div className="space-y-3">
+            {notes.synonyms && notes.synonyms.length > 0 && (
+              <div className="bg-emerald-950/30 border border-emerald-500/40 p-4 rounded-2xl space-y-2">
+                <div className="text-xs font-bold text-emerald-400 uppercase flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4" /> TỪ ĐỒNG NGHĨA (SYNONYMS)
                 </div>
-                <div className="bg-pure-surface p-2 border border-whisper-border rounded">
-                  <span>CẤU TRÚC</span>
-                  <div className="text-sm font-bold text-titanium-white mt-1">Trên-Dưới</div>
-                </div>
-                <div className="bg-pure-surface p-2 border border-whisper-border rounded">
-                  <span>SỐ NÉT</span>
-                  <div className="text-sm font-bold text-titanium-white mt-1">6 Nét</div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Example Sentences */}
-          {item.examples && item.examples.length > 0 && (
-            <div className="space-y-3">
-              <div className="text-xs font-mono font-bold text-titanium-white uppercase">CÂU VÍ DỤ THỰC TẾ</div>
-              <div className="space-y-2">
-                {item.examples.map((ex, idx) => (
-                  <div key={ex.id || idx} className="bg-canvas-ink p-3 border border-whisper-border rounded space-y-1 text-xs font-mono">
-                    <p className="font-bold text-titanium-white">{ex.sentenceZh || ex.sentenceEn}</p>
-                    {ex.pinyin && <p className="text-safety-orange text-[11px]">{ex.pinyin}</p>}
-                    <p className="text-muted-steel">{ex.sentenceVi}</p>
+                {notes.synonyms.map((s: any, idx: number) => (
+                  <div key={idx} className="flex items-center justify-between text-xs text-white bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                    <div>
+                      <span className="font-extrabold text-emerald-300 mr-2">{s.word}</span>
+                      <span className="text-slate-400 text-[11px] mr-2">({s.pinyin || s.ipa})</span>
+                      <span className="text-slate-300 font-medium">{s.meaningVi}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onSpeak(s.word, isZh ? 'zh-CN' : 'en-US')}
+                      className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-400 hover:text-white"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+
+            {notes.antonyms && notes.antonyms.length > 0 && (
+              <div className="bg-rose-950/30 border border-rose-500/40 p-4 rounded-2xl space-y-2">
+                <div className="text-xs font-bold text-rose-400 uppercase flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4" /> TỪ TRÁI NGHĨA (ANTONYMS)
+                </div>
+                {notes.antonyms.map((a: any, idx: number) => (
+                  <div key={idx} className="flex items-center justify-between text-xs text-white bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                    <div>
+                      <span className="font-extrabold text-rose-300 mr-2">{a.word}</span>
+                      <span className="text-slate-400 text-[11px] mr-2">({a.pinyin || a.ipa})</span>
+                      <span className="text-slate-300 font-medium">{a.meaningVi}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onSpeak(a.word, isZh ? 'zh-CN' : 'en-US')}
+                      className="p-1.5 rounded-lg bg-slate-900 border border-slate-700 text-rose-400 hover:text-white"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Collocations */}
           {validCollocations.length > 0 && (
-            <div className="bg-canvas-ink p-3 border-l-2 border-safety-orange text-xs font-mono rounded-r">
-              <div className="text-[10px] text-muted-steel uppercase">COLLOCATIONS THƯỜNG GẶP</div>
-              <div className="font-bold text-titanium-white mt-1">{validCollocations.join(', ')}</div>
+            <div className="bg-slate-950 p-4 border-l-4 border-orange-500 text-xs rounded-r-2xl border border-slate-800">
+              <div className="text-[10px] text-slate-400 font-black uppercase">COLLOCATIONS THƯỜNG GẶP</div>
+              <div className="font-bold text-white mt-1">{validCollocations.join(', ')}</div>
             </div>
           )}
         </div>
 
         {/* Drawer Footer */}
-        <div className="border-t border-whisper-border pt-4 text-center text-xs font-mono text-muted-steel">
+        <div className="border-t border-slate-800 pt-4 text-center text-xs font-mono text-slate-400">
           Dùng phím mũi tên ← → trên bàn phím để chuyển từ vựng kế tiếp
         </div>
       </div>

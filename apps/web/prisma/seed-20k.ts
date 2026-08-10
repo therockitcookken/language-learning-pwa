@@ -21,7 +21,7 @@ async function main() {
   console.log('Database cleared.');
 
   console.log('2. Reading Chinese JSON dataset...');
-  const zhRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/zh-3k.json'), 'utf8');
+  const zhRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/zh-10k.json'), 'utf8');
   const zhData = JSON.parse(zhRaw.replace(/^\uFEFF/, '')); // Handle BOM just in case
   const zhRecords = zhData.data.map((item: any) => ({
     language: 'zh',
@@ -49,7 +49,7 @@ async function main() {
   }
 
   console.log('3. Reading English JSON dataset...');
-  const enRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/en-3k.json'), 'utf8');
+  const enRaw = fs.readFileSync(path.resolve('src/lib/data/datasets/en-10k.json'), 'utf8');
   const enData = JSON.parse(enRaw.replace(/^\uFEFF/, '')); // Handle BOM
   const enRecords = enData.data.map((item: any) => ({
     language: 'en',

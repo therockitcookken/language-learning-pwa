@@ -17,7 +17,7 @@ Hãy luôn trả lời một cách lịch sự, dễ hiểu, ngắn gọn và t�
     });
 
     // Trả về stream object cho frontend
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Lỗi khi gọi AI API:', error);
     return new Response(JSON.stringify({ error: 'Đã có lỗi xảy ra khi gọi AI API.' }), {

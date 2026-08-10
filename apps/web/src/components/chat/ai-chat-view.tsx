@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { useChat } from '@ai-sdk/react';
+import { useChat } from 'ai/react';
 import { Send, Bot, User, Sparkles, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function AiChatView() {
-  // @ts-ignore
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
-    // @ts-ignore
     api: '/api/v1/chat',
     initialMessages: [
       {
@@ -67,7 +65,7 @@ export function AiChatView() {
                     ? 'bg-slate-800/80 border-2 border-slate-700/80 text-slate-200 rounded-tl-sm' 
                     : 'bg-indigo-600/30 border-2 border-indigo-500/30 text-slate-100 rounded-tr-sm text-right'
                 }`}>
-                  {(m as any).content}
+                  {m.content}
                 </div>
               </motion.div>
             );
@@ -107,12 +105,11 @@ export function AiChatView() {
             value={input}
             onChange={handleInputChange}
             placeholder="Hỏi AI về từ vựng, ngữ pháp..."
-            rows={input.split('\\n').length > 1 ? Math.min(input.split('\\n').length, 4) : 1}
+            rows={input.split('\n').length > 1 ? Math.min(input.split('\n').length, 4) : 1}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                // @ts-ignore
-                handleSubmit(e);
+                handleSubmit(e as any);
               }
             }}
           />

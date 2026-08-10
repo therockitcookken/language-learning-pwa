@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Difficulty } from '@prisma/client';
 import fs from 'fs';
 import path from 'path';
 
@@ -66,7 +66,7 @@ async function main() {
       meaningVi: item.meaningVi || '',
       meaningEn: item.meaningEn || item.meaningVi || '',
       hskLevel: item.hskLevel || 'HSK1',
-      difficulty: item.hskLevel === 'HSK1' || item.hskLevel === 'HSK2' ? 'BEGINNER' : item.hskLevel === 'HSK3' || item.hskLevel === 'HSK4' ? 'INTERMEDIATE' : 'ADVANCED',
+      difficulty: (item.hskLevel === 'HSK1' || item.hskLevel === 'HSK2' ? Difficulty.BEGINNER : item.hskLevel === 'HSK3' || item.hskLevel === 'HSK4' ? Difficulty.INTERMEDIATE : Difficulty.ADVANCED) as Difficulty,
       factoryDomain: item.factoryDomain || 'general',
       topic: item.topic || 'General',
     }));
@@ -94,7 +94,7 @@ async function main() {
       meaningVi: item.meaningVi || '',
       meaningEn: item.meaningEn || item.word,
       cefrLevel: item.cefrLevel || 'A2',
-      difficulty: item.cefrLevel === 'A1' || item.cefrLevel === 'A2' ? 'BEGINNER' : 'INTERMEDIATE',
+      difficulty: (item.cefrLevel === 'A1' || item.cefrLevel === 'A2' ? Difficulty.BEGINNER : Difficulty.INTERMEDIATE) as Difficulty,
       factoryDomain: item.factoryDomain || 'general',
       topic: item.topic || 'General',
     }));

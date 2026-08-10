@@ -45,9 +45,14 @@ async function main() {
   await prisma.vocabularyEntry.deleteMany({});
   await prisma.quiz.deleteMany({});
 
-  // 3. Read Chinese JSON dataset
-  const zhPath = path.resolve('src/lib/data/datasets/zh-3k.json');
-  const enPath = path.resolve('src/lib/data/datasets/en-3k.json');
+  // 3. Read Chinese & English JSON datasets (20k entries)
+  const zhPath20k = path.resolve('src/lib/data/datasets/zh-20k.json');
+  const zhPath3k = path.resolve('src/lib/data/datasets/zh-3k.json');
+  const zhPath = fs.existsSync(zhPath20k) ? zhPath20k : zhPath3k;
+
+  const enPath20k = path.resolve('src/lib/data/datasets/en-20k.json');
+  const enPath3k = path.resolve('src/lib/data/datasets/en-3k.json');
+  const enPath = fs.existsSync(enPath20k) ? enPath20k : enPath3k;
 
   if (fs.existsSync(zhPath)) {
     console.log('Ingesting authentic Chinese dataset...');

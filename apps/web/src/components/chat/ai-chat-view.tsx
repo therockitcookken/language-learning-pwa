@@ -67,7 +67,7 @@ export function AiChatView() {
                     ? 'bg-slate-800/80 border-2 border-slate-700/80 text-slate-200 rounded-tl-sm' 
                     : 'bg-indigo-600/30 border-2 border-indigo-500/30 text-slate-100 rounded-tr-sm text-right'
                 }`}>
-                  {m.content}
+                  {(m as any).content}
                 </div>
               </motion.div>
             );

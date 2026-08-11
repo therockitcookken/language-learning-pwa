@@ -1,6 +1,11 @@
 {
   "dependencies": {
     "cedict-json": "^1.2.0",
-    "google-translate-api-x": "^10.7.3"
+    "cmudict": "^1.0.2",
+    "google-translate-api-x": "^10.7.3",
+    "pinyin-pro": "^3.28.2"
+  },
+  "devDependencies": {
+    "natural": "^8.1.1"
   }
 }

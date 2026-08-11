@@ -24,19 +24,14 @@ export async function GET(req: Request) {
     }
 
     if (factoryDomain) {
-      whereClause.factoryDomain = factoryDomain;
-    }
-
-    if (hsk) {
-      whereClause.hskLevel = hsk;
-    }
-
-    if (cefr) {
-      whereClause.cefrLevel = cefr;
+      whereClause.OR = [
+        { topic: { contains: factoryDomain } },
+        { factoryDomain: { contains: factoryDomain } }
+      ];
     }
 
     if (topic) {
-      whereClause.topic = topic;
+      whereClause.topic = { contains: topic };
     }
 
     if (norm) {

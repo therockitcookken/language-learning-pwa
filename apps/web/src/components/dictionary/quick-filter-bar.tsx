@@ -66,22 +66,26 @@ export function QuickFilterBar({
             <SlidersHorizontal className="w-4 h-4 text-orange-400" /> BỘ LỌC NÂNG CAO
           </button>
 
-          {/* Domain Badges */}
-          <div className="hidden lg:flex items-center gap-1 bg-slate-900/60 backdrop-blur-2xl border border-slate-800/60 p-1.5 rounded-2xl shadow-lg">
-            {domains.map((d) => (
-              <button
-                key={d.id}
-                type="button"
-                onClick={() => onDomainChange(d.id)}
-                className={`px-3 py-1.5 rounded-xl text-[11px] font-black transition-all cursor-pointer ${
-                  domain === d.id
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-md'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
-              >
-                {d.label}
-              </button>
-            ))}
+          {/* Topic Dropdown Select for Chinese & English */}
+          <div className="text-xs font-extrabold text-slate-300 flex items-center gap-2 bg-slate-900/70 backdrop-blur-2xl px-3.5 py-2 border border-slate-800/60 rounded-2xl shadow-lg">
+            <span className="text-slate-400 flex items-center gap-1">
+              <Cpu className="w-3.5 h-3.5 text-orange-400" /> CHỦ ĐỀ:
+            </span>
+            <select
+              value={domain}
+              onChange={(e) => onDomainChange(e.target.value)}
+              className="bg-slate-950 text-slate-200 border border-slate-700/60 rounded-xl px-2.5 py-1 text-xs font-bold focus:outline-none focus:border-orange-500 cursor-pointer shadow-sm"
+            >
+              <option value="" className="bg-slate-950">🌐 TẤT CẢ CHỦ ĐỀ</option>
+              <option value="Giao tiếp công xưởng" className="bg-slate-950">🏭 Giao tiếp công xưởng & Sản xuất</option>
+              <option value="An toàn lao động" className="bg-slate-950">👝 An toàn lao động & PPE</option>
+              <option value="Quản lý chất lượng" className="bg-slate-950">🔬 Quản lý chất lượng (QC/QA)</option>
+              <option value="Bảo trì & Cơ điện" className="bg-slate-950">🔧 Bảo trì & Cơ điện (Maintenance)</option>
+              <option value="Kho hàng & Vận chuyển" className="bg-slate-950">📦 Kho hàng & Logistics</option>
+              <option value="Nhân sự & Tiền lương" className="bg-slate-950">💼 Nhân sự & Tiền lương (HR)</option>
+              <option value="Giao tiếp đời sống" className="bg-slate-950">☕ Giao tiếp đời sống hàng ngày</option>
+              <option value="Từ vựng chung" className="bg-slate-950">📚 Từ vựng tổng hợp chung</option>
+            </select>
           </div>
         </div>
 

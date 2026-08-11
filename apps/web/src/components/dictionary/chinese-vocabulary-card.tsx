@@ -32,6 +32,9 @@ export function ChineseVocabularyCard({
     if (item.usageNotes) notes = JSON.parse(item.usageNotes);
   } catch (e) {}
 
+  const synonymsList = (notes.synonyms && notes.synonyms.length > 0) ? notes.synonyms : (item.synonyms || []);
+  const antonymsList = (notes.antonyms && notes.antonyms.length > 0) ? notes.antonyms : (item.antonyms || []);
+
   const validCollocations = (notes.collocations || [])
     .map((c: any) => typeof c === 'string' ? c : (c.word || ''))
     .filter((c: string) => c && typeof c === 'string' && !c.includes('+ 第一') && !c.endsWith('第一'));
@@ -168,12 +171,12 @@ export function ChineseVocabularyCard({
 
         {/* Synonyms & Antonyms */}
         <div className="space-y-2 mt-3.5">
-          {notes.synonyms && notes.synonyms.length > 0 && (
+          {synonymsList && synonymsList.length > 0 && (
             <div className="text-[11px] bg-emerald-950/30 border border-emerald-500/40 p-3 rounded-2xl shadow-inner">
               <div className="text-emerald-400 font-black flex items-center gap-1.5 mb-1.5 uppercase tracking-wider text-[10px]">
                 <Sparkles className="w-3 h-3 text-emerald-400" /> TỪ ĐỒNG NGHĨA (SYNONYM)
               </div>
-              {notes.synonyms.map((s: any, idx: number) => (
+              {synonymsList.map((s: any, idx: number) => (
                 <div key={`${item.id}-syn-${s.word}-${idx}`} className="flex flex-wrap items-center justify-between gap-1.5 text-white py-0.5">
                   <div className="flex flex-wrap items-center gap-1.5">
                     <span className="font-extrabold text-emerald-300">{s.word}</span>
@@ -184,7 +187,7 @@ export function ChineseVocabularyCard({
                   <button
                     type="button"
                     onClick={() => onSpeak(s.word, 'zh-CN')}
-                    className="p-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400 hover:text-white transition-colors"
+                    className="p-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400 hover:text-white transition-colors cursor-pointer"
                   >
                     <Volume2 className="w-3 h-3" />
                   </button>
@@ -193,12 +196,12 @@ export function ChineseVocabularyCard({
             </div>
           )}
 
-          {notes.antonyms && notes.antonyms.length > 0 && (
+          {antonymsList && antonymsList.length > 0 && (
             <div className="text-[11px] bg-rose-950/30 border border-rose-500/40 p-3 rounded-2xl shadow-inner">
               <div className="text-rose-400 font-black flex items-center gap-1.5 mb-1.5 uppercase tracking-wider text-[10px]">
                 <Sparkles className="w-3 h-3 text-rose-400" /> TỪ TRÁI NGHĨA (ANTONYM)
               </div>
-              {notes.antonyms.map((a: any, idx: number) => (
+              {antonymsList.map((a: any, idx: number) => (
                 <div key={`${item.id}-ant-${a.word}-${idx}`} className="flex flex-wrap items-center justify-between gap-1.5 text-white py-0.5">
                   <div className="flex flex-wrap items-center gap-1.5">
                     <span className="font-extrabold text-rose-300">{a.word}</span>
@@ -209,7 +212,7 @@ export function ChineseVocabularyCard({
                   <button
                     type="button"
                     onClick={() => onSpeak(a.word, 'zh-CN')}
-                    className="p-1 rounded-lg bg-slate-950 border border-slate-800 text-rose-400 hover:text-white transition-colors"
+                    className="p-1 rounded-lg bg-slate-950 border border-slate-800 text-rose-400 hover:text-white transition-colors cursor-pointer"
                   >
                     <Volume2 className="w-3 h-3" />
                   </button>

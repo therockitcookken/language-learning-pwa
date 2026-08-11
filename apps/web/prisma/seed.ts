@@ -74,6 +74,10 @@ async function main() {
       difficulty: (item.hskLevel === 'HSK1' || item.hskLevel === 'HSK2' ? Difficulty.BEGINNER : item.hskLevel === 'HSK3' || item.hskLevel === 'HSK4' ? Difficulty.INTERMEDIATE : Difficulty.ADVANCED) as Difficulty,
       factoryDomain: item.factoryDomain || 'general',
       topic: item.topic || 'General',
+      usageNotes: item.usageNotes || JSON.stringify({
+        synonyms: item.synonyms || [],
+        antonyms: item.antonyms || [],
+      }),
     }));
 
     const zhChunks = chunkArray(zhRecords, 500);
@@ -102,6 +106,10 @@ async function main() {
       difficulty: (item.cefrLevel === 'A1' || item.cefrLevel === 'A2' ? Difficulty.BEGINNER : Difficulty.INTERMEDIATE) as Difficulty,
       factoryDomain: item.factoryDomain || 'general',
       topic: item.topic || 'General',
+      usageNotes: item.usageNotes || JSON.stringify({
+        synonyms: item.synonyms || [],
+        antonyms: item.antonyms || [],
+      }),
     }));
 
     const enChunks = chunkArray(enRecords, 500);

@@ -59,6 +59,8 @@ export interface VocabularyItem {
   topic?: string;
   factoryDomain?: string;
   usageNotes?: string;
+  synonyms?: Array<{ word: string; pinyin?: string; ipa?: string; meaningVi?: string }>;
+  antonyms?: Array<{ word: string; pinyin?: string; ipa?: string; meaningVi?: string }>;
   imageUrl?: string | null;
   examples?: Array<{
     id: string;

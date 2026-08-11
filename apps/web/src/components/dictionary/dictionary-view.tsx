@@ -364,9 +364,6 @@ export function DictionaryView() {
         bilingualCount={activeWorkspace === 'bilingual' ? paginationInfo.total : undefined}
       />
 
-      {/* 3D Interactive Three.js Vocabulary Canvas */}
-      <Dictionary3DInteractive />
-
       {/* 2. Search Command Center */}
       <SearchCommandCenter
         query={query}

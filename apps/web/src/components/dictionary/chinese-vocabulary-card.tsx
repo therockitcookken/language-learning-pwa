@@ -3,7 +3,6 @@
 import React from 'react';
 import { Volume2, Bookmark, Share2, Sparkles } from 'lucide-react';
 import { VocabularyItem } from './dictionary-types';
-import { WordCard3DIcon } from './word-card-3d-icon';
 
 interface ChineseVocabularyCardProps {
   item: VocabularyItem;
@@ -59,8 +58,6 @@ export function ChineseVocabularyCard({
           : 'bg-slate-900/50 border-slate-800/60 hover:border-orange-500/40 hover:bg-slate-900/80 hover:-translate-y-1 shadow-lg'
       }`}
     >
-      <WordCard3DIcon word={item.word} color="#f97316" isChinese={true} />
-      
       <div className="relative z-10">
         {/* Top bar: Selection Checkbox & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -155,16 +152,16 @@ export function ChineseVocabularyCard({
         </div>
 
         {/* Vietnamese & English meanings */}
-        <div className="space-y-2 pt-4 mt-4 border-t border-slate-800/60">
-          <div className="flex items-start gap-2.5">
-            <span className="text-[10px] text-amber-400 font-black border border-amber-500/30 px-2 py-0.5 bg-amber-500/10 rounded-md shadow-sm">VN</span>
-            <p className="text-sm font-extrabold text-white leading-relaxed">{item.meaningVi}</p>
+        <div className="space-y-2 pt-3 mt-3 border-t border-slate-800/60">
+          <div className="flex items-start gap-2.5 bg-amber-500/10 border border-amber-500/30 p-3 rounded-2xl shadow-inner">
+            <span className="text-[10px] text-amber-300 font-black border border-amber-500/40 px-2 py-0.5 bg-amber-500/20 rounded-md shadow-sm shrink-0">🇻🇳 NGHĨA VIỆT</span>
+            <p className="text-sm font-extrabold text-amber-100 leading-relaxed">{item.meaningVi}</p>
           </div>
 
           {item.meaningEn && !item.meaningEn.includes('Practical Chinese (') && (
-            <div className="flex items-start gap-2.5">
-              <span className="text-[10px] text-sky-400 font-black border border-sky-500/30 px-2 py-0.5 bg-sky-500/10 rounded-md shadow-sm">EN</span>
-              <p className="text-sm font-medium text-slate-300 leading-relaxed">{item.meaningEn}</p>
+            <div className="flex items-start gap-2.5 px-1">
+              <span className="text-[10px] text-sky-400 font-black border border-sky-500/30 px-2 py-0.5 bg-sky-500/10 rounded-md shadow-sm shrink-0">EN</span>
+              <p className="text-xs font-medium text-slate-300 leading-relaxed">{item.meaningEn}</p>
             </div>
           )}
         </div>

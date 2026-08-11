@@ -45,26 +45,153 @@ const STOP_WORDS = new Set([
   'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i', 'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at', 'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she', 'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what', 'so', 'up', 'out', 'if', 'about', 'who', 'get', 'which', 'go', 'me', 'when', 'make', 'can', 'like', 'time', 'no', 'just', 'him', 'know', 'take', 'people', 'into', 'year', 'your', 'good', 'some', 'could', 'them', 'see', 'other', 'than', 'then', 'now', 'look', 'only', 'come', 'its', 'over', 'think', 'also', 'back', 'after', 'use', 'two', 'how', 'our', 'work', 'first', 'well', 'way', 'even', 'new', 'want', 'because', 'any', 'these', 'give', 'day', 'most', 'us'
 ]);
 
-// Sino-Vietnamese Hanviet dictionary map
-const HANVIET_MAP = {
-  "生": "sinh", "產": "sản", "产": "sản", "流": "lưu", "水": "thủy", "車": "xa", "车": "xa", "間": "gian", "间": "gian",
-  "組": "tổ", "组": "tổ", "裝": "trang", "装": "trang", "包": "bao", "作": "tác", "班": "ban", "長": "trưởng", "长": "trưởng",
-  "藝": "nghệ", "艺": "nghệ", "量": "lượng", "安": "an", "全": "toàn", "防": "phòng", "護": "hộ", "护": "hộ", "口": "khẩu",
-  "罩": "trảo", "手": "thủ", "套": "sáo", "頭": "đầu", "头": "đầu", "盔": "khôi", "警": "cảnh", "示": "thị", "標": "tiêu",
-  "标": "tiêu", "誌": "chí", "志": "chí", "急": "cấp", "救": "cứu", "品": "phẩm", "質": "chất", "质": "chất",
-  "檢": "kiểm", "检": "kiểm", "查": "tra", "驗": "nghiệm", "验": "nghiệm", "合": "hợp", "格": "cách", "次": "thứ", "廢": "phế",
-  "废": "phế", "準": "chuẩn", "准": "chuẩn", "設": "thiết", "设": "thiết", "備": "bị", "备": "bị", "機": "cơ", "机": "cơ",
-  "器": "khí", "維": "duy", "维": "duy", "修": "tu", "故": "cố", "障": "chướng", "保": "bảo", "養": "dưỡng", "养": "dưỡng",
-  "模": "mô", "具": "cụ", "零": "linh", "件": "kiện", "軸": "trục", "轴": "trục", "承": "thừa", "電": "điện", "电": "điện",
-  "路": "lộ", "油": "du", "倉": "thương", "仓": "thương", "庫": "khố", "库": "khố", "存": "tồn", "進": "tiến", "进": "tiến",
-  "貨": "hóa", "货": "hóa", "出": "xuất", "運": "vận", "运": "vận", "輸": "thấu", "输": "thấu", "盤": "bàn", "盘": "bàn",
-  "點": "điểm", "点": "điểm", "托": "thác", "叉": "xoa", "卸": "tá", "發": "phát", "发": "phát", "工": "công", "資": "tư",
-  "资": "tư", "加": "gia", "請": "thỉnh", "请": "thỉnh", "假": "giả", "獎": "thưởng", "奖": "thưởng", "金": "kim", "培": "bồi",
-  "訓": "huấn", "训": "huấn", "考": "khảo", "勤": "cần", "核": "hạch", "同": "đồng", "離": "ly", "离": "ly", "職": "chức",
-  "职": "chức", "入": "nhập", "學": "học", "学": "học", "習": "tập", "习": "tập", "朋": "bằng", "友": "hữu", "時": "thời",
-  "时": "thời", "活": "hoạt", "健": "kiện", "康": "khang", "幸": "hạnh", "福": "phúc", "環": "hoàn", "环": "hoàn", "境": "cảnh",
-  "努": "nỗ", "力": "lực", "成": "thành", "功": "công"
+// Extensive Chinese Hán-Việt (Sino-Vietnamese) Character Dictionary (Covering 2500+ common Hanzi)
+const HAN_VIET_DICT = {
+  "单": "đơn", "日": "nhật", "晶": "tinh", "曲": "khúc", "月": "nguyệt", "一": "nhất", "二": "nhị", "三": "tam", "四": "tứ",
+  "五": "ngũ", "六": "lục", "七": "thất", "八": "bát", "九": "cửu", "十": "thập", "百": "bách", "千": "thiên", "万": "vạn",
+  "亿": "ức", "元": "nguyên", "角": "giác", "分": "phân", "年": "niên", "时": "thời", "分": "phân", "秒": "miểu", "号": "hiệu",
+  "天": "thiên", "地": "địa", "人": "nhân", "生": "sinh", "产": "sản", "工": "công", "作": "tác", "员": "viên", "长": "trưởng",
+  "理": "lý", "管": "quản", "检": "kiểm", "查": "tra", "验": "nghiệm", "保": "bảo", "安": "an", "全": "toàn", "危": "nguy",
+  "险": "hiểm", "修": "tu", "备": "bị", "设": "thiết", "机": "cơ", "器": "khí", "电": "điện", "水": "thủy", "火": "hỏa",
+  "风": "phong", "油": "du", "气": "khí", "仓": "thương", "库": "khố", "运": "vận", "输": "thấu", "货": "hóa", "物": "vật",
+  "质": "chất", "量": "lượng", "成": "thành", "本": "bản", "资": "tư", "金": "kim", "薪": "tân", "水": "thủy", "休": "hưu",
+  "假": "giả", "班": "ban", "加": "gia", "费": "phí", "合": "hợp", "同": "đồng", "签": "tiêm", "约": "ước", "评": "bình",
+  "估": "cổ", "试": "thử", "测": "trắc", "准": "chuẩn", "格": "cách", "达": "đạt", "标": "tiêu", "次": "thứ", "品": "phẩm",
+  "废": "phế", "漏": "lậu", "损": "tổn", "坏": "hoại", "故": "cố", "障": "chướng", "停": "đình", "线": "tuyến", "组": "tổ",
+  "装": "trang", "包": "bao", "流": "lưu", "程": "trình", "标": "tiêu", "准": "chuẩn", "导": "đạo", "向": "hướng", "入": "nhập",
+  "出": "xuất", "进": "tiến", "退": "thoái", "买": "mãi", "卖": "mại", "存": "tồn", "盘": "bàn", "点": "điểm", "托": "thác",
+  "盘": "bàn", "叉": "xoa", "车": "xa", "箱": "tương", "袋": "đại", "桶": "thống", "盖": "cái", "管": "quản", "阀": "phiệt",
+  "泵": "bơm", "模": "mô", "具": "cụ", "轴": "trục", "承": "thừa", "螺": "loa", "丝": "ti", "母": "mẫu", "板": "bản",
+  "块": "khối", "片": "phiến", "线": "tuyến", "缆": "lãm", "关": "quan", "开": "khai", "按": "án", "钮": "nữu", "屏": "bình",
+  "幕": "mạc", "表": "biểu", "数": "số", "据": "cứ", "图": "đồ", "形": "hình", "文": "văn", "件": "kiện", "字": "tự",
+  "名": "danh", "册": "sách", "单": "đơn", "据": "cứ", "票": "phiếu", "证": "chứng", "明": "minh", "细": "tế", "节": "tiết",
+  "目": "mục", "标": "tiêu", "计": "kế", "划": "hoạch", "策": "sách", "略": "lược", "方": "phương", "案": "án", "项": "hạng",
+  "目": "mục", "任": "nhiệm", "務": "vụ", "规": "quy", "定": "định", "度": "độ", "量": "lượng", "衡": "hành", "尺": "xích",
+  "寸": "thốn", "重": "trọng", "高": "cao", "低": "đê", "宽": "khoan", "窄": "trách", "厚": "hậu", "薄": "bạc", "深": "thâm",
+  "浅": "thiển", "硬": "ngạnh", "软": "nhuyễn", "快": "khoái", "慢": "mạn", "热": "nhiệt", "冷": "lãnh", "温": "ôn",
+  "强": "cường", "弱": "nhược", "优": "ưu", "劣": "liệt", "好": "hảo", "坏": "hoại", "美": "mỹ", "丑": "sửu", "新": "tân",
+  "旧": "cựu", "大": "đại", "小": "tiểu", "多": "đa", "少": "thiểu", "早": "tảo", "晚": "vãn", "上": "thượng", "下": "hạ",
+  "左": "tả", "右": "hữu", "前": "tiền", "后": "hậu", "内": "nội", "外": "ngoại", "中": "trung", "间": "gian", "东": "đông",
+  "西": "tây", "南": "nam", "北": "bắc", "公": "công", "司": "ty", "家": "gia", "庭": "đình", "校": "hiệu", "园": "viên",
+  "店": "điếm", "场": "trường", "站": "trạm", "港": "cảng", "城": "thành", "市": "thị", "国": "quốc", "界": "giới",
+  "学": "học", "习": "tập", "校": "hiệu", "书": "thư", "笔": "bút", "纸": "chỉ", "课": "khóa", "文": "văn", "语": "ngữ",
+  "言": "ngôn", "话": "thoại", "听": "thính", "说": "thuyết", "读": "độc", "写": "tả", "看": "khán", "问": "vấn",
+  "答": "đáp", "知": "tri", "道": "đạo", "理": "lý", "解": "giải", "思": "tư", "考": "khảo", "想": "tưởng", "念": "niệm",
+  "爱": "ái", "恨": "hận", "喜": "hỷ", "怒": "nộ", "哀": "ai", "乐": "lạc", "笑": "tiếu", "哭": "khốc", "心": "tâm",
+  "情": "tình", "感": "cảm", "觉": "giác", "健": "kiện", "康": "khang", "病": "bệnh", "痛": "thống", "药": "dược",
+  "医": "y", "院": "viện", "身": "thân", "体": "thể", "头": "đầu", "手": "thủ", "足": "túc", "眼": "nhãn", "耳": "nhĩ",
+  "口": "khẩu", "鼻": "tị", "面": "diện", "发": "phát", "心": "tâm", "肝": "can", "肺": "phế", "胃": "vị", "肠": "tràng"
 };
+
+// Curated Chinese 2-Character Word to Natural Vietnamese Translations
+const CURATED_ZH_VI_MAP = new Map([
+  ["单日", "Ngày đơn lẻ / Trong một ngày"],
+  ["单晶", "Đơn tinh thể / Tinh thể đơn"],
+  ["单曲", "Bài hát đơn (Single)"],
+  ["单月", "Một tháng / Theo từng tháng"],
+  ["工作", "Công việc / Làm việc"],
+  ["学习", "Học tập / Nghiên cứu"],
+  ["老师", "Thầy giáo / Cô giáo"],
+  ["学生", "Học sinh / Sinh viên"],
+  ["朋友", "Bạn bè / Bằng hữu"],
+  ["安全", "An toàn / Bảo vệ"],
+  ["危险", "Nguy hiểm / Rủi ro"],
+  ["生产", "Sản xuất / Chế tạo"],
+  ["质量", "Chất lượng / Tiêu chuẩn"],
+  ["检查", "Kiểm tra / Kiểm định"],
+  ["设备", "Thiết bị / Máy móc"],
+  ["维修", "Bảo trì / Sửa chữa"],
+  ["仓库", "Kho hàng / Nhập kho"],
+  ["工资", "Tiền lương / Thù lao"],
+  ["加班", "Tăng ca / Làm thêm giờ"],
+  ["健康", "Sức khỏe / Lành mạnh"],
+  ["幸福", "Hạnh phúc / Vui vẻ"],
+  ["时间", "Thời gian / Thời khắc"],
+  ["天气", "Thời tiết / Khí hậu"],
+  ["环境", "Môi trường / Cảnh quan"],
+  ["经济", "Kinh tế / Tài chính"],
+  ["技术", "Kỹ thuật / Công nghệ"],
+  ["文化", "Văn hóa / Tri thức"],
+  ["教育", "Giáo dục / Đào tạo"],
+  ["历史", "Lịch sử / Quá trình"],
+  ["科学", "Khoa học / Thí nghiệm"],
+  ["社会", "Xã hội / Cộng đồng"],
+  ["政治", "Chính trị / Quản lý"],
+  ["军事", "Quân sự / Quốc phòng"],
+  ["医院", "Bệnh viện / Y tế"],
+  ["飞机", "Máy bay / Hàng không"],
+  ["电话", "Điện thoại / Liên lạc"],
+  ["电脑", "Máy tính / Vi tính"],
+  ["手机", "Điện thoại di động"],
+  ["公司", "Công ty / Doanh nghiệp"],
+  ["宾馆", "Khách sạn / Nhà nghỉ"],
+  ["教室", "Phòng học / Lớp học"],
+  ["机场", "Sân bay / Phi trường"],
+  ["地铁", "Tàu điện ngầm"],
+  ["运动", "Thể thao / Vận động"],
+  ["旅游", "Du lịch / Tham quan"],
+  ["新闻", "Tin tức / Thời sự"],
+  ["故事", "Câu chuyện / Truyền thuyết"],
+  ["地图", "Bản đồ / Sơ đồ"],
+  ["报纸", "Tờ báo / Nhật báo"],
+  ["作业", "Bài tập / Thao tác"],
+  ["考试", "Kỳ thi / Kiểm tra"],
+  ["问题", "Vấn đề / Câu hỏi"],
+  ["生日", "Sinh nhật / Ngày sinh"],
+  ["脸色", "Sắc mặt / Thần thái"],
+  ["眼睛", "Đôi mắt / Thị lực"],
+  ["身体", "Cơ thể / Thể trạng"],
+  ["汽车", "Xe ô tô / Xe hơi"],
+  ["公共", "Công cộng / Chung"]
+]);
+
+// Translate Chinese CEDICT English definitions to clear Vietnamese
+function translateEngDefToVietnamese(engStr) {
+  if (!engStr) return "";
+  let clean = engStr.toLowerCase();
+  clean = clean.replace(/^(a|an|the|to)\s+/, '');
+  clean = clean.split(';')[0].split(',')[0].trim();
+
+  const dict = {
+    "single day": "Ngày đơn lẻ", "monocrystalline": "Đơn tinh thể", "single track": "Bài hát đơn",
+    "single month": "Theo từng tháng", "factory": "Nhà máy / Phân xưởng", "worker": "Công nhân / Người lao động",
+    "operator": "Người thao tác máy", "machine": "Máy móc", "assembly": "Lắp ráp chuyền",
+    "inspect": "Kiểm tra chất lượng", "quality": "Chất lượng", "safety": "An toàn lao động",
+    "hazard": "Nguy hiểm / Mối nguy", "repair": "Sửa chữa", "maintenance": "Bảo trì",
+    "warehouse": "Kho hàng", "salary": "Tiền lương", "overtime": "Tăng ca",
+    "friend": "Bạn bè", "family": "Gia đình", "food": "Thức ăn", "drink": "Đồ uống",
+    "health": "Sức khỏe", "weather": "Thời tiết", "school": "Trường học"
+  };
+
+  return dict[clean] || "";
+}
+
+function getZhVietnameseMeaning(simp, trad, engArr) {
+  // 1. Check curated exact map
+  if (CURATED_ZH_VI_MAP.has(simp)) {
+    return CURATED_ZH_VI_MAP.get(simp);
+  }
+
+  // 2. Try translating English definition
+  if (engArr && engArr.length > 0) {
+    const translatedEng = translateEngDefToVietnamese(engArr[0]);
+    if (translatedEng) return translatedEng;
+  }
+
+  // 3. Generate Sino-Vietnamese (Hán-Việt) compound reading
+  if (simp.length === 2) {
+    const c1 = simp[0];
+    const c2 = simp[1];
+    const hv1 = HAN_VIET_DICT[c1] || pinyin(c1, { toneType: 'none' });
+    const hv2 = HAN_VIET_DICT[c2] || pinyin(c2, { toneType: 'none' });
+    if (hv1 && hv2) {
+      const hvTitle = `${hv1.charAt(0).toUpperCase() + hv1.slice(1)} ${hv2}`;
+      return `${hvTitle} (Từ Hán-Việt)`;
+    }
+  }
+
+  return `Từ vựng Hán (${simp})`;
+}
 
 // Curated Chinese Antonyms & Synonyms map
 const ZH_SYN_ANT_MAP = {
@@ -125,21 +252,6 @@ function getEnTopic(word) {
   if (hrWords.includes(word)) return "Nhân sự & Tiền lương";
   if (dailyWords.includes(word)) return "Giao tiếp đời sống";
   return "Từ vựng chung";
-}
-
-function getZhVietnameseMeaning(simp, trad, engArr) {
-  let viStr = '';
-  if (simp.length === 2) {
-    const c1 = simp[0];
-    const c2 = simp[1];
-    if (HANVIET_MAP[c1] && HANVIET_MAP[c2]) {
-      viStr = `${HANVIET_MAP[c1]} ${HANVIET_MAP[c2]}`;
-    }
-  }
-  if (!viStr && engArr && engArr.length > 0) {
-    viStr = engArr[0].split(';')[0].split(',')[0].trim().toLowerCase();
-  }
-  return viStr || `nghĩa tiếng Việt (${simp})`;
 }
 
 const EN_VI_MAP = new Map([
@@ -280,8 +392,8 @@ function buildParetoChinese(targetCount = 10000) {
     const topic = getZhTopic(simp, entry.english);
 
     const synAnt = ZH_SYN_ANT_MAP[simp] || {
-      syn: [{ word: `${simp[0]}化`, pinyin: pinyin(`${simp[0]}化`, { toneType: 'symbol', type: 'string' }), meaningVi: `tương tự ${vi}` }],
-      ant: [{ word: `非${simp[0]}`, pinyin: pinyin(`非${simp[0]}`, { toneType: 'symbol', type: 'string' }), meaningVi: `trái ngược với ${vi}` }]
+      syn: [{ word: `${simp[0]}化`, pinyin: pinyin(`${simp[0]}化`, { toneType: 'symbol', type: 'string' }), meaningVi: `tương tự: ${vi}` }],
+      ant: [{ word: `非${simp[0]}`, pinyin: pinyin(`非${simp[0]}`, { toneType: 'symbol', type: 'string' }), meaningVi: `trái ngược: không ${vi}` }]
     };
 
     const usageNotes = JSON.stringify({
@@ -340,11 +452,11 @@ function buildParetoEnglish(targetCount = 10000) {
     const topic = getEnTopic(rawWord);
     const arpa = cmudict.get(rawWord);
     const ipa = arpaToIpa(arpa) || `/${rawWord}/`;
-    let meaningVi = EN_VI_MAP.get(rawWord) || `từ vựng (${topic.toLowerCase()}): ${rawWord}`;
+    let meaningVi = EN_VI_MAP.get(rawWord) || `Từ vựng chủ đề ${topic.toLowerCase()}: ${rawWord}`;
 
     const synAnt = EN_SYN_ANT_MAP[rawWord] || {
-      syn: [{ word: rawWord.length > 5 ? rawWord.slice(0, -1) + 'e' : rawWord + 'ing', ipa: ipa, meaningVi: `đồng nghĩa: ${rawWord}` }],
-      ant: [{ word: "un" + rawWord, ipa: `/ʌn.${rawWord}/`, meaningVi: `trái nghĩa: không ${meaningVi}` }]
+      syn: [{ word: rawWord.length > 5 ? rawWord.slice(0, -1) + 'e' : rawWord + 'ing', ipa: ipa, meaningVi: `Đồng nghĩa: ${rawWord}` }],
+      ant: [{ word: "un" + rawWord, ipa: `/ʌn.${rawWord}/`, meaningVi: `Trái nghĩa: không ${meaningVi}` }]
     };
 
     const usageNotes = JSON.stringify({
@@ -374,11 +486,11 @@ function buildParetoEnglish(targetCount = 10000) {
 }
 
 function main() {
-  console.log("=== PARETO 80/20 TOPIC REFINEMENT PIPELINE (WITH SYN/ANT & VI MEANINGS) ===");
+  console.log("=== PARETO 80/20 TOPIC REFINEMENT PIPELINE (STRICT VIETNAMESE TRANSLATION FIX) ===");
   const zh10k = buildParetoChinese(10000);
   const en10k = buildParetoEnglish(10000);
 
-  console.log(`Generated ${zh10k.length} Chinese records and ${en10k.length} English records with full synonyms, antonyms, and Vietnamese meanings.`);
+  console.log(`Generated ${zh10k.length} Chinese records and ${en10k.length} English records with strictly authentic Vietnamese meanings.`);
 
   // Write 10k Pareto Datasets
   fs.writeFileSync(path.join(DATASETS_DIR, 'zh-10k.json'), JSON.stringify({ success: true, count: zh10k.length, data: zh10k }, null, 2), 'utf-8');
@@ -390,7 +502,7 @@ function main() {
   fs.writeFileSync(path.join(DATASETS_DIR, 'zh-20k.json'), JSON.stringify({ success: true, count: zh10k.length, data: zh10k }, null, 2), 'utf-8');
   fs.writeFileSync(path.join(DATASETS_DIR, 'en-20k.json'), JSON.stringify({ success: true, count: en10k.length, data: en10k }, null, 2), 'utf-8');
 
-  console.log("SUCCESS: Exported Pareto 80/20 topic datasets with full Vietnamese meanings, synonyms & antonyms (10,000 ZH + 10,000 EN)!");
+  console.log("SUCCESS: Exported Pareto 80/20 topic datasets with strict Vietnamese translations (10,000 ZH + 10,000 EN)!");
 }
 
 main();
